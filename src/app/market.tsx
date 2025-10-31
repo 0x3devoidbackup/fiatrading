@@ -494,7 +494,7 @@ export default function AIAgentMarketplace() {
                     <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
                         <div className="flex items-center gap-2 cursor-pointer" onClick={() => setPage('marketplace')}>
                             <Code className="w-6 h-6 text-purple-400" />
-                            <span className="text-xl font-bold text-white">AgentMarket</span>
+                            <span className="text-xs font-bold text-white">AgentMarket</span>
                         </div>
                         <div className="flex items-center gap-4">
                             {wallet && (
