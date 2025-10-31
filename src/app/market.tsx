@@ -188,14 +188,14 @@ export default function AIAgentMarketplace() {
                             <span className="lg:text-2xl font-extrabold text-white">AgentMarket</span>
                         </div>
                         <button
-                            onClick={() => {
-                                if (wallet) {
-                                    setPage('marketplace');
-                                } else {
-                                    connectWallet();
-                                    setPage('marketplace');
-                                }
-                            }}
+                            // onClick={() => {
+                            //     if (wallet) {
+                            //         setPage('marketplace');
+                            //     } else {
+                            //         connectWallet();
+                            //         setPage('marketplace');
+                            //     }
+                            // }}
                             className="cursor-pointer px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg font-semibold hover:scale-105 transition-transform text-sm"
                         >
                             LAUNCH APP
@@ -218,27 +218,27 @@ export default function AIAgentMarketplace() {
                         </p>
                         <div className="flex gap-4 justify-center">
                             <button
-                                onClick={() => {
-                                    if (wallet) {
-                                        setPage('marketplace');
-                                    } else {
-                                        connectWallet();
-                                        setPage('marketplace');
-                                    }
-                                }}
+                                // onClick={() => {
+                                //     if (wallet) {
+                                //         setPage('marketplace');
+                                //     } else {
+                                //         connectWallet();
+                                //         setPage('marketplace');
+                                //     }
+                                // }}
                                 className="cursor-pointer px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-sm rounded-xl font-semibold hover:scale-105 transition-transform shadow-xl shadow-purple-500/50"
                             >
                                 Explore Marketplace
                             </button>
                             <button
-                                onClick={() => {
-                                    if (wallet) {
-                                        setPage('list');
-                                    } else {
-                                        connectWallet();
-                                        setPage('list');
-                                    }
-                                }}
+                                // onClick={() => {
+                                //     if (wallet) {
+                                //         setPage('list');
+                                //     } else {
+                                //         connectWallet();
+                                //         setPage('list');
+                                //     }
+                                // }}
                                 className="cursor-pointer px-4 py-2 bg-slate-800 text-white text-sm rounded-xl font-semibold hover:bg-slate-700 transition-colors border border-purple-500/30"
                             >
                                 List Your Agent
@@ -309,7 +309,7 @@ export default function AIAgentMarketplace() {
                 {/* Footer */}
                 <footer className="border-t border-purple-500/20 mt-20">
                     <div className="max-w-7xl mx-auto px-6 py-8 text-center text-gray-400">
-                        <p>© 2025 AgentMarket. Built on Base Chain with ❤️</p>
+                        <p>© 2025 AgentMarket. Built on Base Chain</p>
                     </div>
                 </footer>
             </div>
