@@ -578,7 +578,7 @@ export default function AIAgentMarketplace() {
                                     placeholder="0x..."
                                     className="w-full px-4 py-3 bg-slate-900 text-white rounded-lg border border-slate-700 focus:border-purple-500 focus:outline-none"
                                 />
-                                <p className="text-xs text-gray-500 mt-1">Your deployed agent's contract address for verification</p>
+                                <p className="text-xs text-gray-500 mt-1">Your deployed agents contract address for verification</p>
                             </div>
 
                             <div>
@@ -617,7 +617,7 @@ export default function AIAgentMarketplace() {
                                     <div>
                                         <h4 className="text-sm font-semibold text-white mb-1">Ownership Verification</h4>
                                         <p className="text-xs text-gray-400">
-                                            We'll verify your contract address ownership via wallet signature. GitHub proof is optional but increases buyer confidence.
+                                            We will verify your contract address ownership via wallet signature. GitHub proof is optional but increases buyer confidence.
                                         </p>
                                     </div>
                                 </div>
@@ -627,13 +627,13 @@ export default function AIAgentMarketplace() {
                                 <button
                                     type="button"
                                     onClick={() => setPage('marketplace')}
-                                    className="flex-1 px-6 py-3 bg-slate-700 text-white rounded-lg font-medium hover:bg-slate-600 transition-colors"
+                                    className="flex-1 px-4 py-3 bg-slate-700 text-white rounded-lg font-medium hover:bg-slate-600 transition-colors text-sm cursor-pointer"
                                 >
                                     Cancel
                                 </button>
                                 <button
                                     type="submit"
-                                    className="flex-1 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg font-semibold hover:scale-[1.02] transition-transform"
+                                    className="cursor-pointer flex-1 px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg font-semibold hover:scale-[1.02] transition-transform"
                                 >
                                     List Agent
                                 </button>
