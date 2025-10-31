@@ -513,7 +513,7 @@ export default function AIAgentMarketplace() {
                         <p className="text-gray-400">Fill in the details below to list your AI agent on the marketplace</p>
                     </div>
 
-                    <form onSubmit={handleListingSubmit} className="bg-slate-800 rounded-xl p-8 border border-slate-700">
+                    <form onSubmit={handleListingSubmit} className="bg-slate-800 rounded-xl p-3 border border-slate-700">
                         <div className="space-y-6">
                             <div>
                                 <label className="block text-sm font-medium text-gray-300 mb-2">Agent Name *</label>
