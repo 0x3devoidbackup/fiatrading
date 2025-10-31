@@ -113,7 +113,7 @@ export default function AIAgentMarketplace() {
 
     const connectWallet = () => {
         // Simulate wallet connection
-        const mockAddress = '0x' + Math.random().toString(16).slice(2, 10) + '...' + Math.random().toString(16).slice(2, 6);
+        const mockAddress = '0x' + Math.random().toString(16).slice(2, 5) + '...' + Math.random().toString(16).slice(2, 6);
         setWallet(mockAddress);
         setUserProfile({
             address: mockAddress,
