@@ -248,7 +248,7 @@ export default function AIAgentMarketplace() {
                 </div>
 
                 {/* Features Grid */}
-                <div className="max-w-7xl mx-auto px-6 py-20">
+                <div className="max-w-7xl mx-auto px-4 py-10">
                     <div className="grid md:grid-cols-3 gap-8">
                         <div className="bg-slate-800/50 backdrop-blur p-8 rounded-2xl border border-purple-500/20 hover:border-purple-500/50 transition-colors">
                             <div className="w-14 h-14 bg-purple-600/20 rounded-xl flex items-center justify-center mb-6">
