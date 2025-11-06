@@ -327,7 +327,7 @@ const App = () => {
             ].map(tab => (
               <button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id as any)}
+                onClick={() => setActiveTab(tab.id as "dashboard" | "grants" | "apply" | "stake")}
                 className={`px-6 py-4 font-bold transition-all flex items-center gap-2 relative ${
                   activeTab === tab.id
                     ? 'text-purple-600'
