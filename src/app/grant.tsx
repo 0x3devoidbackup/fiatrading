@@ -191,12 +191,12 @@ const App = () => {
                     <div className="flex items-center gap-2">
                       <div className="w-3 h-3 rounded-full bg-green-500"></div>
                       <span className="text-sm font-semibold text-gray-700">
-                        {grant.votesFor.toLocaleString()} grant
+                        {grant.votesFor.toLocaleString()} $GRANT
                       </span>
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="text-sm font-semibold text-gray-700">
-                        {maxVotes.toLocaleString()} grant
+                        {maxVotes.toLocaleString()} $GRANT
                       </span>
                       <div className="w-3 h-3 rounded-full bg-red-500"></div>
                     </div>
@@ -356,7 +356,7 @@ const App = () => {
               </div>
               <div>
                 <h1 className="text-3xl font-extrabold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-                  Grant
+                  GRANT
                 </h1>
                 <p className="text-xs text-gray-500 font-bold">Community Governed Grants</p>
               </div>
