@@ -749,7 +749,7 @@ const App = () => {
                   <input
                     type="number"
                     placeholder="0"
-                    className="w-full px-4 py-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none text-2xl font-bold transition-all"
+                    className="w-full px-3 py-2 border-2 text-black border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none text-2xl font-bold transition-all"
                   />
                   <div className="flex gap-2 mt-3">
                     {[25, 50, 75, 100].map(pct => (
@@ -784,7 +784,7 @@ const App = () => {
                   </ul>
                 </div>
 
-                <button className="w-full py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-xl font-bold hover:shadow-lg hover:scale-105 transition-all text-lg flex items-center justify-center gap-2">
+                <button className="w-full py-3 text-sm bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-xl font-bold hover:shadow-lg hover:scale-105 transition-all text-lg flex items-center justify-center gap-2">
                   <Lock className="w-5 h-5" />
                   Stake Tokens
                 </button>
