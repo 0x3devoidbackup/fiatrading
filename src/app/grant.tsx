@@ -360,7 +360,7 @@ const App = () => {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50">
       {/* Header */}
       <header className="bg-white border-b border-gray-200 sticky top-0 z-40 backdrop-blur-lg bg-opacity-80">
-        <div className="max-w-7xl mx-auto px-6 py-4">
+        <div className="max-w-7xl mx-auto px-2 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-gradient-to-br from-purple-600 via-blue-600 to-purple-700 rounded-2xl flex items-center justify-center shadow-lg">
@@ -398,7 +398,7 @@ const App = () => {
       {/* Navigation */}
       <nav className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex justify-between gap-2">
+          <div className="flex justify-start lg:justify-center gap-2">
             {[
               { id: 'dashboard', label: 'Dashboard', icon: TrendingUp },
               { id: 'grants', label: 'Grants', icon: Award },
@@ -628,9 +628,8 @@ const App = () => {
                   </div>
 
                   {/* SOCIALS */}
-                  {/* Social Links */}
                   <div className='mt-5'>
-                    <label className="block text-sm font-semibold mb-2">
+                    <label className="block text-sm text-black font-semibold mb-2">
                       SOCIAL LINKS
                     </label>
 
