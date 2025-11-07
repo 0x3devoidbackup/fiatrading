@@ -191,12 +191,12 @@ const App = () => {
                     <div className="flex items-center gap-2">
                       <div className="w-3 h-3 rounded-full bg-green-500"></div>
                       <span className="text-sm font-semibold text-gray-700">
-                        {grant.votesFor.toLocaleString()} votes
+                        {grant.votesFor.toLocaleString()} grant
                       </span>
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="text-sm font-semibold text-gray-700">
-                        {maxVotes.toLocaleString()} votes
+                        {maxVotes.toLocaleString()} grant
                       </span>
                       <div className="w-3 h-3 rounded-full bg-red-500"></div>
                     </div>
@@ -223,7 +223,7 @@ const App = () => {
                     className="flex-1 cursor-pointer py-2 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-xl font-bold hover:shadow-lg hover:scale-105 transition-all flex items-center justify-center gap-2"
                   >
                     <Check className="w-5 h-5" />
-                    Grant
+                    Vote
                   </button>
                  
                 </div>
@@ -270,7 +270,7 @@ const App = () => {
               <div className="flex gap-3">
                 <button
                   onClick={() => { setShowVoteModal(false); setVoteAmount(''); }}
-                  className="flex-1 py-2 bg-gray-100 text-gray-700 rounded-xl font-bold hover:bg-gray-200 transition-all"
+                  className="flex-1 cursor-pointer py-2 bg-gray-100 text-gray-700 rounded-xl font-bold hover:bg-gray-200 transition-all"
                 >
                   Cancel
                 </button>
@@ -280,12 +280,12 @@ const App = () => {
                     setShowVoteModal(false);
                     setVoteAmount('');
                   }}
-                  className={`flex-1 py-2 text-white rounded-xl font-bold hover:shadow-lg transition-all ${voteType === 'for'
+                  className={`flex-1 cursor-pointer py-2 text-white rounded-xl font-bold hover:shadow-lg transition-all ${voteType === 'for'
                     ? 'bg-gradient-to-r from-green-500 to-green-600'
                     : 'bg-gradient-to-r from-red-500 to-red-600'
                     }`}
                 >
-                  Confirm Grant
+                  Confirm Votes
                 </button>
               </div>
             </div>
@@ -355,8 +355,8 @@ const App = () => {
                 <Coins className="w-7 h-7 text-white" />
               </div>
               <div>
-                <h1 className="text-2xl font-extrabold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-                  GrantDAO
+                <h1 className="text-3xl font-extrabold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                  Grant
                 </h1>
                 <p className="text-xs text-gray-500 font-bold">Community Governed Grants</p>
               </div>
