@@ -24,16 +24,24 @@ interface Staker {
   rank: number;
 }
 
+
+
 const App = () => {
   const [activeTab, setActiveTab] = useState<'dashboard' | 'grants' | 'apply' | 'stake'>('dashboard');
-  
+  const [socials, setSocials] = useState({
+    twitter: "",
+    telegram: "",
+    website: "",
+    farcaster: ""
+  });
+
   // Mock data
-  const treasuryBalance = 125000;
+  const treasuryBalance = 100000;
   const availableForGrants = treasuryBalance * 0.5;
   const totalStaked = 850000;
   const userBalance = 5000;
   const userStaked = 2500;
-  const taxRate = { buy: 5, sell: 5 };
+  const taxRate = { buy: 3, sell: 3 };
 
   const [grants, setGrants] = useState<Grant[]>([
     {
@@ -57,7 +65,7 @@ const App = () => {
       requestedAmount: 25000,
       votesFor: 89000,
       votesAgainst: 156000,
-      status: 'voting',
+      status: 'completed',
       depositRequired: 1750,
       createdAt: '2024-10-28',
       endsIn: '2d 8h'
@@ -72,6 +80,30 @@ const App = () => {
       votesAgainst: 0,
       status: 'pending',
       depositRequired: 700,
+      createdAt: '2024-11-05'
+    },
+    {
+      id: 4,
+      applicant: '0x1a2b...4c5d',
+      projectName: 'Game Dao',
+      description: 'Comprehensive Web3 education platform with on-chain credentials and verifiable achievements',
+      requestedAmount: 10000,
+      votesFor: 1000,
+      votesAgainst: 70,
+      status: 'approved',
+      depositRequired: 70000,
+      createdAt: '2024-11-05'
+    },
+    {
+      id: 4,
+      applicant: '0x1a2b...4c5d',
+      projectName: 'Game Dao',
+      description: 'Comprehensive Web3 education platform with on-chain credentials and verifiable achievements',
+      requestedAmount: 2000,
+      votesFor: 1000,
+      votesAgainst: 70,
+      status: 'rejected',
+      depositRequired: 70000,
       createdAt: '2024-11-05'
     }
   ]);
@@ -127,13 +159,12 @@ const App = () => {
                 <p className="text-sm text-gray-500 font-mono">{grant.applicant}</p>
               </div>
               <div className="flex flex-col items-end gap-2">
-                <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide ${
-                  grant.status === 'voting' ? 'bg-blue-50 text-blue-700 ring-1 ring-blue-200' :
+                <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide ${grant.status === 'voting' ? 'bg-blue-50 text-blue-700 ring-1 ring-blue-200' :
                   grant.status === 'approved' ? 'bg-green-50 text-green-700 ring-1 ring-green-200' :
-                  grant.status === 'rejected' ? 'bg-red-50 text-red-700 ring-1 ring-red-200' :
-                  grant.status === 'completed' ? 'bg-purple-50 text-purple-700 ring-1 ring-purple-200' :
-                  'bg-yellow-50 text-yellow-700 ring-1 ring-yellow-200'
-                }`}>
+                    grant.status === 'rejected' ? 'bg-red-50 text-red-700 ring-1 ring-red-200' :
+                      grant.status === 'completed' ? 'bg-purple-50 text-purple-700 ring-1 ring-purple-200' :
+                        'bg-yellow-50 text-yellow-700 ring-1 ring-yellow-200'
+                  }`}>
                   {grant.status}
                 </span>
                 {grant.endsIn && (
@@ -177,11 +208,11 @@ const App = () => {
                     </div>
                   </div>
                   <div className="relative h-2 bg-gray-100 rounded-full overflow-hidden">
-                    <div 
+                    <div
                       className="absolute left-0 top-0 h-full bg-gradient-to-r from-green-500 to-green-600 transition-all duration-500"
                       style={{ width: `${forPercentage}%` }}
                     />
-                    <div 
+                    <div
                       className="absolute right-0 top-0 h-full bg-gradient-to-l from-red-500 to-red-600 transition-all duration-500"
                       style={{ width: `${100 - forPercentage}%` }}
                     />
@@ -195,14 +226,14 @@ const App = () => {
                 <div className="flex gap-3">
                   <button
                     onClick={() => { setVoteType('for'); setShowVoteModal(true); }}
-                    className="flex-1 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-xl font-bold hover:shadow-lg hover:scale-105 transition-all flex items-center justify-center gap-2"
+                    className="flex-1 py-2 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-xl font-bold hover:shadow-lg hover:scale-105 transition-all flex items-center justify-center gap-2"
                   >
                     <Check className="w-5 h-5" />
                     Vote For
                   </button>
                   <button
                     onClick={() => { setVoteType('against'); setShowVoteModal(true); }}
-                    className="flex-1 py-3 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-xl font-bold hover:shadow-lg hover:scale-105 transition-all flex items-center justify-center gap-2"
+                    className="flex-1 py-2 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-xl font-bold hover:shadow-lg hover:scale-105 transition-all flex items-center justify-center gap-2"
                   >
                     <X className="w-5 h-5" />
                     Vote Against
@@ -223,7 +254,7 @@ const App = () => {
               <p className="text-gray-600 mb-6">
                 Enter the amount of tokens you want to vote with. These tokens will be burned.
               </p>
-              
+
               <div className="mb-6">
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
                   Vote Amount
@@ -261,11 +292,10 @@ const App = () => {
                     setShowVoteModal(false);
                     setVoteAmount('');
                   }}
-                  className={`flex-1 py-3 text-white rounded-xl font-bold hover:shadow-lg transition-all ${
-                    voteType === 'for' 
-                      ? 'bg-gradient-to-r from-green-500 to-green-600' 
-                      : 'bg-gradient-to-r from-red-500 to-red-600'
-                  }`}
+                  className={`flex-1 py-3 text-white rounded-xl font-bold hover:shadow-lg transition-all ${voteType === 'for'
+                    ? 'bg-gradient-to-r from-green-500 to-green-600'
+                    : 'bg-gradient-to-r from-red-500 to-red-600'
+                    }`}
                 >
                   Confirm Vote
                 </button>
@@ -274,6 +304,55 @@ const App = () => {
           </div>
         )}
       </>
+    );
+  };
+
+  const checklistItems: string[] = [
+    "I confirm that all information provided is accurate.",
+    "I understand that false details may lead to disqualification.",
+    "I agree to the platform’s Privacy Policy.",
+
+  ];
+
+  const ChecklistAgreement: React.FC = () => {
+    const [checked, setChecked] = useState<boolean[]>(
+      checklistItems.map(() => false)
+    );
+
+    const toggleCheck = (index: number): void => {
+      setChecked((prev) => {
+        const updated = [...prev];
+        updated[index] = !updated[index];
+        return updated;
+      });
+    };
+
+    const allChecked: boolean = checked.every(Boolean);
+
+    return (
+      <div className="p-4 text-gray-600 space-y-1">
+
+        {checklistItems.map((item, i) => (
+          <label key={i} className="flex items-start space-x-2 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={checked[i]}
+              onChange={() => toggleCheck(i)}
+              className="mt-1"
+            />
+            <span>{item}</span>
+          </label>
+        ))}
+
+        {/* <button
+          disabled={!allChecked}
+          onClick={onContinue}
+          className={`w-full py-2 rounded-lg mt-4 ${allChecked ? "bg-green-600" : "bg-gray-500 cursor-not-allowed"
+            }`}
+        >
+          Continue
+        </button> */}
+      </div>
     );
   };
 
@@ -288,13 +367,13 @@ const App = () => {
                 <Coins className="w-7 h-7 text-white" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                <h1 className="text-2xl font-extrabold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                   GrantDAO
                 </h1>
-                <p className="text-xs text-gray-500 font-medium">Community Governed Grants</p>
+                <p className="text-xs text-gray-500 font-bold">Community Governed Grants</p>
               </div>
             </div>
-            
+
             <div className="flex items-center gap-6">
               <div className="hidden md:flex items-center gap-6">
                 <div className="text-right">
@@ -307,7 +386,7 @@ const App = () => {
                   <div className="text-lg font-bold text-purple-600">{userStaked.toLocaleString()}</div>
                 </div>
               </div>
-              <button className="px-6 py-2.5 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-xl font-bold hover:shadow-lg hover:scale-105 transition-all flex items-center gap-2">
+              <button className="px-6 py-2.5 cursor-pointer bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-xl font-bold hover:shadow-lg hover:scale-105 transition-all flex items-center gap-2">
                 <Wallet className="w-4 h-4" />
                 Connect
               </button>
@@ -329,11 +408,10 @@ const App = () => {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as "dashboard" | "grants" | "apply" | "stake")}
-                className={`px-6 py-4 font-bold transition-all flex items-center gap-2 relative ${
-                  activeTab === tab.id
-                    ? 'text-purple-600'
-                    : 'text-gray-500 hover:text-gray-900'
-                }`}
+                className={`cursor-pointer px-6 py-4 font-bold transition-all flex items-center gap-2 relative ${activeTab === tab.id
+                  ? 'text-purple-600'
+                  : 'text-gray-500 hover:text-gray-900'
+                  }`}
               >
                 <tab.icon className="w-4 h-4" />
                 {tab.label}
@@ -347,7 +425,7 @@ const App = () => {
       </nav>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-6 py-8">
+      <main className="max-w-5xl mx-auto px-6 py-8">
         {activeTab === 'dashboard' && (
           <div className="space-y-8">
             {/* Stats Grid */}
@@ -360,7 +438,7 @@ const App = () => {
                     <div className="text-3xl font-bold">${treasuryBalance.toLocaleString()}</div>
                   </div>
                 </div>
-                <div className="text-xs opacity-75">5% buy / 5% sell tax → Treasury</div>
+                <div className="text-xs opacity-75">3% buy / 3% sell tax → Treasury</div>
               </div>
 
               <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
@@ -424,17 +502,16 @@ const App = () => {
               </h2>
               <div className="space-y-3">
                 {topStakers.map(staker => (
-                  <div 
-                    key={staker.address} 
+                  <div
+                    key={staker.address}
                     className="flex items-center justify-between p-5 bg-gradient-to-r from-gray-50 to-purple-50 rounded-xl border border-gray-100 hover:shadow-md transition-all"
                   >
                     <div className="flex items-center gap-4">
-                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center font-bold text-lg shadow-sm ${
-                        staker.rank === 1 ? 'bg-gradient-to-br from-yellow-400 to-yellow-600 text-white' :
+                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center font-bold text-lg shadow-sm ${staker.rank === 1 ? 'bg-gradient-to-br from-yellow-400 to-yellow-600 text-white' :
                         staker.rank === 2 ? 'bg-gradient-to-br from-gray-300 to-gray-500 text-white' :
-                        staker.rank === 3 ? 'bg-gradient-to-br from-orange-400 to-orange-600 text-white' :
-                        'bg-gradient-to-br from-purple-100 to-purple-200 text-purple-700'
-                      }`}>
+                          staker.rank === 3 ? 'bg-gradient-to-br from-orange-400 to-orange-600 text-white' :
+                            'bg-gradient-to-br from-purple-100 to-purple-200 text-purple-700'
+                        }`}>
                         #{staker.rank}
                       </div>
                       <div>
@@ -465,9 +542,9 @@ const App = () => {
               </div>
               <button
                 onClick={() => setActiveTab('apply')}
-                className="px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-xl font-bold hover:shadow-lg hover:scale-105 transition-all flex items-center gap-2"
+                className="px-4 cursor-pointer py-2 bg-gradient-to-r text-xs from-purple-600 to-blue-600 text-white rounded-xl font-bold hover:shadow-lg hover:scale-105 transition-all flex items-center gap-2"
               >
-                <ExternalLink className="w-5 h-5" />
+                <ExternalLink className="w-3 h-3" />
                 Submit Application
               </button>
             </div>
@@ -485,73 +562,174 @@ const App = () => {
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
               <h2 className="text-3xl font-bold text-gray-900 mb-2">Apply for Grant</h2>
               <p className="text-gray-600 mb-8">Submit your project for community consideration</p>
-              
-              <div className="space-y-6">
-                <div>
-                  <label className="block text-sm font-bold text-gray-900 mb-2">
-                    Project Name
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none transition-all"
-                    placeholder="Enter your project name"
-                  />
-                </div>
 
-                <div>
-                  <label className="block text-sm font-bold text-gray-900 mb-2">
-                    Project Description
-                  </label>
-                  <textarea
-                    rows={5}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none transition-all resize-none"
-                    placeholder="Describe your project, goals, and how the grant will be used..."
-                  />
-                </div>
+              <form>
+                <div className="space-y-6">
+                  <div>
+                    <label className="block text-sm font-bold text-gray-900 mb-2">
+                      Project Name <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      className="w-full bg-transparent border border-[#2c2f36] focus:border-[#0AFF5E] outline-none rounded-xl px-4 py-2 placeholder-gray-500 text-sm"
+                      placeholder="Enter your project name"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-bold text-gray-900 mb-2">
+                      Token CA <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      className="w-full bg-transparent border border-[#2c2f36] focus:border-[#0AFF5E] outline-none rounded-xl px-4 py-2 placeholder-gray-500 text-sm"
+                      placeholder="Enter your token contract address"
+                      required
+                    />
+                  </div>
 
-                <div>
-                  <label className="block text-sm font-bold text-gray-900 mb-2">
-                    Requested Amount (USD)
-                  </label>
-                  <input
-                    type="number"
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none transition-all"
-                    placeholder="0"
-                  />
-                  <p className="text-sm text-gray-500 mt-2">
-                    Maximum available: ${availableForGrants.toLocaleString()}
-                  </p>
-                </div>
+                  <div>
+                    <label className="block text-sm font-bold text-gray-900 mb-2">
+                      Project Description <span className="text-red-500">*</span>
+                    </label>
+                    <textarea
+                      rows={5}
+                      className="w-full bg-transparent border border-[#2c2f36] focus:border-[#0AFF5E] outline-none rounded-xl px-4 py-2 placeholder-gray-500 text-sm"
+                      placeholder="Tell us about your project..."
+                      required
+                    />
+                  </div>
 
-                <div className="bg-gradient-to-br from-blue-50 to-purple-50 border-2 border-purple-200 rounded-2xl p-6">
-                  <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
-                    <Award className="w-5 h-5 text-purple-600" />
-                    Grant Requirements
-                  </h3>
-                  <ul className="space-y-2 text-sm text-gray-700">
-                    <li className="flex items-start gap-2">
-                      <div className="w-1.5 h-1.5 rounded-full bg-purple-600 mt-1.5 flex-shrink-0"></div>
-                      Application requires token burn to submit
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <div className="w-1.5 h-1.5 rounded-full bg-purple-600 mt-1.5 flex-shrink-0"></div>
-                      Community votes using tokens (all votes burned)
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <div className="w-1.5 h-1.5 rounded-full bg-purple-600 mt-1.5 flex-shrink-0"></div>
-                      If approved, deposit 7% of token supply before receiving grant
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <div className="w-1.5 h-1.5 rounded-full bg-purple-600 mt-1.5 flex-shrink-0"></div>
-                      Portion of 7% deposit airdropped to top 20 stakers
-                    </li>
-                  </ul>
-                </div>
+                  <div>
+                    <label className="block text-sm font-bold text-gray-900 mb-2">
+                      Purpose of Grant <span className="text-red-500">*</span>
+                    </label>
+                    <textarea
+                      rows={5}
+                      className="w-full bg-transparent border border-[#2c2f36] focus:border-[#0AFF5E] outline-none rounded-xl px-4 py-2 placeholder-gray-500 text-sm"
+                      placeholder="What will the grant be used for..."
+                      required
+                    />
+                  </div>
 
-                <button className="w-full py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-xl font-bold hover:shadow-lg hover:scale-105 transition-all text-lg">
-                  Submit Application
-                </button>
-              </div>
+                  <div>
+                    <label className="block text-sm font-bold text-gray-900 mb-2">
+                      Requested Amount (USD)  <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="number"
+                      className="w-full bg-transparent border border-[#2c2f36] focus:border-[#0AFF5E] outline-none rounded-xl px-4 py-2 placeholder-gray-500 text-sm"
+                      placeholder="0"
+                      required
+                    />
+                    <p className="text-sm text-gray-500 mt-2">
+                      Maximum available: $10,000
+                    </p>
+                  </div>
+
+                  {/* SOCIALS */}
+                  {/* Social Links */}
+                  <div className='mt-5'>
+                    <label className="block text-sm font-semibold mb-2">
+                      SOCIAL LINKS
+                    </label>
+
+                    <div className="grid sm:grid-cols-2 gap-6">
+                      {/* Twitter */}
+                      <div>
+                        <label className="text-xs text-gray-400 mb-1 block">
+                          Twitter / X  <span className="text-red-500">*</span>
+                        </label>
+                        <input
+                          type="url"
+                          placeholder="x.com/username"
+                          value={socials.twitter}
+                          onChange={(e) =>
+                            setSocials({ ...socials, twitter: e.target.value })
+                          }
+                          required
+                          className="w-full bg-transparent border border-[#2c2f36] focus:border-[#0AFF5E] outline-none rounded-xl px-4 py-2 placeholder-gray-500 text-sm"
+                        />
+                      </div>
+
+                      {/* Telegram */}
+                      <div>
+                        <label className="text-xs text-gray-400 mb-1 block">Telegram  <span className="text-red-500">*</span></label>
+                        <input
+                          type="url"
+                          placeholder="t.me/username"
+                          value={socials.telegram}
+                          required
+                          onChange={(e) =>
+                            setSocials({ ...socials, telegram: e.target.value })
+                          }
+                          className="w-full bg-transparent border border-[#2c2f36] focus:border-[#0AFF5E] outline-none rounded-xl px-4 py-2 placeholder-gray-500 text-sm"
+                        />
+                      </div>
+
+                      {/* Website */}
+                      <div>
+                        <label className="text-xs text-gray-400 mb-1 block">Website</label>
+                        <input
+                          type="url"
+                          placeholder="example.com"
+                          value={socials.website}
+                          onChange={(e) =>
+                            setSocials({ ...socials, website: e.target.value })
+                          }
+                          className="w-full bg-transparent border border-[#2c2f36] focus:border-[#0AFF5E] outline-none rounded-xl px-4 py-2 placeholder-gray-500 text-sm"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-xs text-gray-400 mb-1 block">Farcaster</label>
+                        <input
+                          type="url"
+                          placeholder="@farcaster"
+                          value={socials.farcaster}
+                          onChange={(e) =>
+                            setSocials({ ...socials, farcaster: e.target.value })
+                          }
+                          className="w-full bg-transparent border border-[#2c2f36] focus:border-[#0AFF5E] outline-none rounded-xl px-4 py-2 placeholder-gray-500 text-sm"
+                        />
+                      </div>
+
+
+                    </div>
+                  </div>
+                  <ChecklistAgreement />
+
+
+                  <div className="bg-gradient-to-br from-blue-50 to-purple-50 border-2 border-purple-200 rounded-2xl p-6">
+                    <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
+                      <Award className="w-5 h-5 text-purple-600" />
+                      Grant Requirements
+                    </h3>
+                    <ul className="space-y-2 text-sm text-gray-700">
+                      {/* <li className="flex items-start gap-2">
+                        <div className="w-1.5 h-1.5 rounded-full bg-purple-600 mt-1.5 flex-shrink-0"></div>
+                        Application requires token burn to submit
+                      </li> */}
+                      <li className="flex items-start gap-2">
+                        <div className="w-1.5 h-1.5 rounded-full bg-purple-600 mt-1.5 flex-shrink-0"></div>
+                        Community votes using tokens (all votes burned)
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <div className="w-1.5 h-1.5 rounded-full bg-purple-600 mt-1.5 flex-shrink-0"></div>
+                        If approved, deposit 7% of token supply before receiving grant
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <div className="w-1.5 h-1.5 rounded-full bg-purple-600 mt-1.5 flex-shrink-0"></div>
+                        Portion of 7% deposit airdropped to top 20 stakers
+                      </li>
+                    </ul>
+                  </div>
+
+
+                  <button className="w-full py-4 cursor-pointer bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-xl font-bold hover:shadow-lg hover:scale-105 transition-all text-sm">
+                    Submit Application
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         )}
@@ -561,7 +739,7 @@ const App = () => {
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
               <h2 className="text-3xl font-bold text-gray-900 mb-2">Stake Your Tokens</h2>
               <p className="text-gray-600 mb-8">Become a top staker and earn airdrop rewards</p>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div className="bg-gradient-to-br from-blue-50 to-purple-50 p-6 rounded-2xl border border-purple-100">
                   <div className="text-sm font-semibold text-purple-600 mb-1">Available Balance</div>

@@ -5,6 +5,34 @@
   --foreground: #171717;
 }
 
+:root {
+
+  --font-color-light: '#ffdda2';
+  --cover-color: 'light-dark(rgb(30, 30, 31), rgb(231, 231, 233))';
+  --bg-color: rgb(2, 2, 3);
+  --dynamic-badge-color: #a8aab0;
+  --dynamic-badge-primary-color: #4ac79b;
+  --dynamical-badge-primary-color: #30a67b;
+  --dynamic-base-1: #0c0e13;
+  --dynamic-base-2: #1b1d22;
+  --dynamic-base-3: #24272e;
+  --dynamic-base-4: #282b33;
+  --dynamic-font-family-primary: "DM Sans", sans-serif;
+  --dynamic-font-family-numbers: "Roboto Mono", monospace, sans-serif;
+}
+
+
+body {
+  font-family: var(--dynamic-font-family-primary);
+  margin: 0;
+  padding: 0;
+  background: var(--background);
+  color: var(--foreground);
+  box-sizing: border-box;
+}
+
+
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -19,8 +47,8 @@
   }
 }
 
-body {
+/* body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
-}
+} */

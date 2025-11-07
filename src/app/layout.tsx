@@ -8,8 +8,13 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Ai Agent Marketplace",
-  description: "A Marketplace for AI Agents",
+  title: "GrantDao",
+  description: "A Community Governed Grants",
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1.0,
 };
 
 export default function RootLayout({
