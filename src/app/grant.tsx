@@ -374,7 +374,7 @@ const App = () => {
                   <div className="text-lg font-bold text-purple-600">{userStaked.toLocaleString()}</div>
                 </div>
               </div>
-              <button className="px-6 py-2.5 cursor-pointer bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-xl font-bold hover:shadow-lg hover:scale-105 transition-all flex items-center gap-2">
+              <button className="px-4 py-2 cursor-pointer bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-xl font-bold hover:shadow-lg hover:scale-105 transition-all flex items-center gap-2">
                 <Wallet className="w-4 h-4" />
                 Connect
               </button>
