@@ -398,7 +398,7 @@ const App = () => {
       {/* Navigation */}
       <nav className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex justify-start lg:justify-center gap-2">
+          <div className="flex justify-start lg:justify-center">
             {[
               { id: 'dashboard', label: 'Dashboard', icon: TrendingUp },
               { id: 'grants', label: 'Grants', icon: Award },
