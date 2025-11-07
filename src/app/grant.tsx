@@ -11,7 +11,6 @@ interface Grant {
   description: string;
   requestedAmount: number;
   votesFor: number;
-  votesAgainst: number;
   status: GrantStatus;
   depositRequired: number;
   createdAt: string;
@@ -28,6 +27,7 @@ interface Staker {
 
 const App = () => {
   const [activeTab, setActiveTab] = useState<'dashboard' | 'grants' | 'apply' | 'stake'>('dashboard');
+  const [maxVotes, setMaxVotes] = useState<number>(20000000)
   const [socials, setSocials] = useState({
     twitter: "",
     telegram: "",
@@ -50,8 +50,7 @@ const App = () => {
       projectName: 'DeFi Aggregator Protocol',
       description: 'Building a cross-chain DeFi aggregator to optimize yields across multiple protocols with advanced routing algorithms',
       requestedAmount: 15000,
-      votesFor: 125000,
-      votesAgainst: 45000,
+      votesFor: 12005000,
       status: 'voting',
       depositRequired: 1050,
       createdAt: '2024-11-01',
@@ -64,7 +63,6 @@ const App = () => {
       description: 'Community-driven NFT marketplace with zero platform fees and advanced trading features',
       requestedAmount: 25000,
       votesFor: 89000,
-      votesAgainst: 156000,
       status: 'completed',
       depositRequired: 1750,
       createdAt: '2024-10-28',
@@ -77,7 +75,6 @@ const App = () => {
       description: 'Comprehensive Web3 education platform with on-chain credentials and verifiable achievements',
       requestedAmount: 10000,
       votesFor: 0,
-      votesAgainst: 0,
       status: 'pending',
       depositRequired: 700,
       createdAt: '2024-11-05'
@@ -89,7 +86,6 @@ const App = () => {
       description: 'Comprehensive Web3 education platform with on-chain credentials and verifiable achievements',
       requestedAmount: 10000,
       votesFor: 1000,
-      votesAgainst: 70,
       status: 'approved',
       depositRequired: 70000,
       createdAt: '2024-11-05'
@@ -101,7 +97,6 @@ const App = () => {
       description: 'Comprehensive Web3 education platform with on-chain credentials and verifiable achievements',
       requestedAmount: 2000,
       votesFor: 1000,
-      votesAgainst: 70,
       status: 'rejected',
       depositRequired: 70000,
       createdAt: '2024-11-05'
@@ -143,8 +138,8 @@ const App = () => {
   };
 
   const GrantCard = ({ grant }: { grant: Grant }) => {
-    const totalVotes = grant.votesFor + grant.votesAgainst;
-    const forPercentage = totalVotes > 0 ? (grant.votesFor / totalVotes) * 100 : 0;
+    const totalVotes = grant.votesFor;
+    const forPercentage = totalVotes > 0 ? (grant.votesFor / maxVotes) * 100 : 0;
     const [voteAmount, setVoteAmount] = useState('');
     const [showVoteModal, setShowVoteModal] = useState(false);
     const [voteType, setVoteType] = useState<'for' | 'against'>('for');
@@ -202,7 +197,7 @@ const App = () => {
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="text-sm font-semibold text-gray-700">
-                        {grant.votesAgainst.toLocaleString()} votes
+                        {maxVotes.toLocaleString()} votes
                       </span>
                       <div className="w-3 h-3 rounded-full bg-red-500"></div>
                     </div>
@@ -226,18 +221,12 @@ const App = () => {
                 <div className="flex gap-3">
                   <button
                     onClick={() => { setVoteType('for'); setShowVoteModal(true); }}
-                    className="flex-1 py-2 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-xl font-bold hover:shadow-lg hover:scale-105 transition-all flex items-center justify-center gap-2"
+                    className="flex-1 cursor-pointer py-2 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-xl font-bold hover:shadow-lg hover:scale-105 transition-all flex items-center justify-center gap-2"
                   >
                     <Check className="w-5 h-5" />
-                    Vote For
+                    Grant
                   </button>
-                  <button
-                    onClick={() => { setVoteType('against'); setShowVoteModal(true); }}
-                    className="flex-1 py-2 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-xl font-bold hover:shadow-lg hover:scale-105 transition-all flex items-center justify-center gap-2"
-                  >
-                    <X className="w-5 h-5" />
-                    Vote Against
-                  </button>
+                 
                 </div>
               </>
             )}
@@ -257,14 +246,14 @@ const App = () => {
 
               <div className="mb-6">
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Vote Amount
+                  Vote Amount (Max 2M)
                 </label>
                 <input
                   type="number"
                   value={voteAmount}
                   onChange={(e) => setVoteAmount(e.target.value)}
                   placeholder="0"
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none text-lg"
+                  className="w-full px-4 py-2 border-2 text-black border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none text-lg"
                 />
                 <p className="text-sm text-gray-500 mt-2">
                   Available: {userBalance.toLocaleString()} tokens
@@ -282,7 +271,7 @@ const App = () => {
               <div className="flex gap-3">
                 <button
                   onClick={() => { setShowVoteModal(false); setVoteAmount(''); }}
-                  className="flex-1 py-3 bg-gray-100 text-gray-700 rounded-xl font-bold hover:bg-gray-200 transition-all"
+                  className="flex-1 py-2 bg-gray-100 text-gray-700 rounded-xl font-bold hover:bg-gray-200 transition-all"
                 >
                   Cancel
                 </button>
@@ -292,12 +281,12 @@ const App = () => {
                     setShowVoteModal(false);
                     setVoteAmount('');
                   }}
-                  className={`flex-1 py-3 text-white rounded-xl font-bold hover:shadow-lg transition-all ${voteType === 'for'
+                  className={`flex-1 py-2 text-white rounded-xl font-bold hover:shadow-lg transition-all ${voteType === 'for'
                     ? 'bg-gradient-to-r from-green-500 to-green-600'
                     : 'bg-gradient-to-r from-red-500 to-red-600'
                     }`}
                 >
-                  Confirm Vote
+                  Confirm Grant
                 </button>
               </div>
             </div>
@@ -425,7 +414,7 @@ const App = () => {
       </nav>
 
       {/* Main Content */}
-      <main className="max-w-5xl mx-auto px-3 py-8">
+      <main className="max-w-4xl mx-auto px-3 py-8">
         {activeTab === 'dashboard' && (
           <div className="space-y-8">
             {/* Stats Grid */}
