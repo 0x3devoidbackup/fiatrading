@@ -128,7 +128,6 @@ const App = () => {
         return {
           ...grant,
           votesFor: support ? grant.votesFor + voteAmount : grant.votesFor,
-          votesAgainst: !support ? grant.votesAgainst + voteAmount : grant.votesAgainst
         };
       }
       return grant;
