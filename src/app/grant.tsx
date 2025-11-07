@@ -330,7 +330,7 @@ const App = () => {
     const allChecked: boolean = checked.every(Boolean);
 
     return (
-      <div className="p-4 text-gray-600 space-y-1">
+      <div className=" text-gray-600 space-y-1 text-xs">
 
         {checklistItems.map((item, i) => (
           <label key={i} className="flex items-start space-x-2 cursor-pointer">
@@ -398,7 +398,7 @@ const App = () => {
       {/* Navigation */}
       <nav className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex gap-2">
+          <div className="flex justify-between gap-2">
             {[
               { id: 'dashboard', label: 'Dashboard', icon: TrendingUp },
               { id: 'grants', label: 'Grants', icon: Award },
@@ -408,7 +408,7 @@ const App = () => {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as "dashboard" | "grants" | "apply" | "stake")}
-                className={`cursor-pointer px-6 py-4 font-bold transition-all flex items-center gap-2 relative ${activeTab === tab.id
+                className={`cursor-pointer px-4 py-4 font-bold text-xs lg:text-sm transition-all flex items-center gap-2 relative ${activeTab === tab.id
                   ? 'text-purple-600'
                   : 'text-gray-500 hover:text-gray-900'
                   }`}
@@ -425,7 +425,7 @@ const App = () => {
       </nav>
 
       {/* Main Content */}
-      <main className="max-w-5xl mx-auto px-6 py-8">
+      <main className="max-w-5xl mx-auto px-3 py-8">
         {activeTab === 'dashboard' && (
           <div className="space-y-8">
             {/* Stats Grid */}
@@ -538,14 +538,14 @@ const App = () => {
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-3xl font-bold text-gray-900 mb-2">Grant Applications</h2>
-                <p className="text-gray-600">Vote on proposals using your tokens (tokens will be burned)</p>
+                <p className="text-gray-600 text-xs">Vote on proposals using your tokens (tokens will be burned)</p>
               </div>
               <button
                 onClick={() => setActiveTab('apply')}
                 className="px-4 cursor-pointer py-2 bg-gradient-to-r text-xs from-purple-600 to-blue-600 text-white rounded-xl font-bold hover:shadow-lg hover:scale-105 transition-all flex items-center gap-2"
               >
                 <ExternalLink className="w-3 h-3" />
-                Submit Application
+                Apply
               </button>
             </div>
 
@@ -559,7 +559,7 @@ const App = () => {
 
         {activeTab === 'apply' && (
           <div className="max-w-3xl mx-auto">
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4">
               <h2 className="text-3xl font-bold text-gray-900 mb-2">Apply for Grant</h2>
               <p className="text-gray-600 mb-8">Submit your project for community consideration</p>
 
