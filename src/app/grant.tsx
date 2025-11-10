@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { ArrowUpRight, Coins, TrendingUp, Users, Award, Flame, Wallet, Check, X, Clock, ExternalLink, Lock, Trophy } from 'lucide-react';
 import { ConnectWalletButton } from "@/utils/connectWallet"
-import { applyGrants, getGrants, TopStakers, formatNumber, getTotalStaked, FormattedGrant, fetchUserTokenBalance, voteOnGrant } from '@/utils/blockFunctions';
+import { applyGrants, getGrants, TopStakers, formatNumber, getTotalStaked, FormattedGrant, fetchSevenPercentage, voteOnGrant } from '@/utils/blockFunctions';
 import { useWallet } from '@/context/walletContext'
 import StakeTokens from './stake';
 import { notifyInfo, notifySuccess } from '@/utils/notify';
@@ -17,14 +17,14 @@ const App = () => {
   const { isConnected, connectWallet, address, signer } = useWallet();
 
   const [activeTab, setActiveTab] = useState<'dashboard' | 'grants' | 'apply' | 'stake'>('dashboard');
- 
+
   // Form state
   const [projectName, setProjectName] = useState('');
   const [tokenCA, setTokenCA] = useState('');
   const [description, setDescription] = useState('');
   const [purpose, setPurpose] = useState('');
   const [requestedAmount, setRequestedAmount] = useState('');
-  const [depositRequired, setDepositRequired] = useState('');
+  // const [depositRequired, setDepositRequired] = useState('');
   const [socials, setSocials] = useState({
     twitter: '',
     telegram: '',
@@ -44,7 +44,7 @@ const App = () => {
   // Mock data
   const treasuryBalance = 100000;
   const availableForGrants = treasuryBalance * 0.5;
-  const [totalStaked, settotalStaked] = useState(0) ;
+  const [totalStaked, settotalStaked] = useState(0);
 
 
 
@@ -81,7 +81,7 @@ const App = () => {
 
 
 
-  
+
 
   const checklistItems: string[] = [
     "I confirm that all information provided is accurate.",
@@ -159,12 +159,9 @@ const App = () => {
       setError('Valid requested amount is required');
       return;
     }
-    if (!depositRequired || parseFloat(depositRequired) <= 0) {
-      setError('Valid deposit amount is required');
-      return;
-    }
-    if (!socials.twitter.trim() || !socials.telegram.trim()) {
-      setError('Twitter and Telegram are required');
+
+    if (!socials.twitter.trim() || !socials.telegram.trim() || !socials.website.trim() || !socials.farcaster.trim()) {
+      setError('Twitter, Website , farcaster and Telegram are required');
       return;
     }
 
@@ -175,6 +172,12 @@ const App = () => {
 
     try {
       setIsSubmitting(true);
+      const depositRequired = await fetchSevenPercentage(tokenCA);
+      if (!depositRequired) {
+        setError('Please provide a valid token contract address');
+        return;
+      }
+
 
       const result = await applyGrants(
         signer,
@@ -183,7 +186,7 @@ const App = () => {
         description,
         purpose,
         parseFloat(requestedAmount),
-        parseFloat(depositRequired),
+        parseFloat(String(depositRequired)),
         socials.website,
         socials.twitter,
         socials.telegram,
@@ -198,7 +201,6 @@ const App = () => {
       setDescription('');
       setPurpose('');
       setRequestedAmount('');
-      setDepositRequired('');
       setSocials({
         twitter: '',
         telegram: '',
@@ -513,25 +515,7 @@ const App = () => {
                     </p>
                   </div>
 
-                  {/* Deposit Required */}
-                  <div>
-                    <label className="block text-sm font-bold text-gray-900 mb-2">
-                      7% Deposit Required (Tokens) <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="number"
-                      step="0.01"
-                      value={depositRequired}
-                      onChange={(e) => setDepositRequired(e.target.value)}
-                      className="w-full bg-transparent border border-[#2c2f36] focus:border-[#0AFF5E] outline-none rounded-xl px-4 py-2 placeholder-gray-500 text-sm"
-                      placeholder="Calculate 7% of your total token supply"
-                      required
-                      disabled={isSubmitting}
-                    />
-                    <p className="text-sm text-gray-500 mt-2">
-                      This should be 7% of your total token supply
-                    </p>
-                  </div>
+
 
                   {/* SOCIALS */}
                   <div className='mt-5'>
@@ -578,7 +562,7 @@ const App = () => {
 
                       {/* Website */}
                       <div>
-                        <label className="text-xs text-gray-400 mb-1 block">Website</label>
+                        <label className="text-xs text-gray-400 mb-1 block">Website <span className="text-red-500">*</span></label>
                         <input
                           type="url"
                           placeholder="https://example.com"
@@ -593,7 +577,7 @@ const App = () => {
 
                       {/* Farcaster */}
                       <div>
-                        <label className="text-xs text-gray-400 mb-1 block">Farcaster</label>
+                        <label className="text-xs text-gray-400 mb-1 block">Farcaster <span className="text-red-500">*</span></label>
                         <input
                           type="url"
                           placeholder="https://warpcast.com/username"

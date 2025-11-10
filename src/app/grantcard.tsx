@@ -4,6 +4,8 @@ import { applyGrants, formatNumber, getContractCapConstants, getTotalStaked, isU
 import { Flame, Wallet, Check, X, Clock, ExternalLink, Lock, Trophy } from 'lucide-react';
 import { useWallet } from '@/context/walletContext'
 import { Redirect } from 'next';
+import SocialLinks from "./SocialLinks";
+
 
 const GrantCard = ({ grant }: { grant: FormattedGrant }) => {
     const { isConnected, connectWallet, address, signer } = useWallet();
@@ -100,6 +102,7 @@ const GrantCard = ({ grant }: { grant: FormattedGrant }) => {
             if (success && txHash) {
                 setStSuccess("Voting was successful ✅");
                 setVoteAmount({ ...voteAmount, amount: "" })
+                setShowVoteModal(false)
             }
         } catch (error) {
             console.error(error);
@@ -142,11 +145,11 @@ const GrantCard = ({ grant }: { grant: FormattedGrant }) => {
                     <div className="grid grid-cols-2 gap-4 mb-6">
                         <div className="bg-gradient-to-br from-purple-50 to-blue-50 p-4 rounded-xl border border-purple-100">
                             <div className="text-xs font-semibold text-purple-600 mb-1">Requested</div>
-                            <div className="text-2xl font-bold text-gray-900">${formatNumber(grant.requestedAmount.toLocaleString())}</div>
+                            <div className="text-2xl font-bold text-gray-900">${formatNumber(grant.requestedAmount)}</div>
                         </div>
                         <div className="bg-gradient-to-br from-orange-50 to-red-50 p-4 rounded-xl border border-orange-100">
                             <div className="text-xs font-semibold text-orange-600 mb-1">Deposit (7%)</div>
-                            <div className="text-2xl font-bold text-gray-900">{formatNumber(grant.depositRequired.toLocaleString())}</div>
+                            <div className="text-2xl font-bold text-gray-900">{formatNumber(grant.depositRequired)}</div>
                             <div className="text-xs text-gray-500">tokens required</div>
                         </div>
                     </div>
@@ -219,6 +222,14 @@ const GrantCard = ({ grant }: { grant: FormattedGrant }) => {
                         </>
                     )}
 
+                    <div className='mt-5'>
+                        <SocialLinks
+                            telegram={grant.socials.telegram}
+                            twitter={grant.socials.twitter}
+                            website={grant.socials.website}
+                            farcaster={grant.socials.farcaster}
+                        />
+                    </div>
 
                 </div>
             </div>
@@ -250,7 +261,7 @@ const GrantCard = ({ grant }: { grant: FormattedGrant }) => {
                         <form onSubmit={handleVote}>
                             <div className="mb-6">
                                 <label className="block text-sm font-semibold text-gray-700 mb-2">
-                                    Vote Amount (Min: {minVotes}, Max: {maxVotes})
+                                    Vote Amount (Min: {formatNumber(minVotes)}, Max: {formatNumber(maxVotes)})
                                 </label>
                                 <input
                                     type="number"
