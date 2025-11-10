@@ -111,7 +111,7 @@ const App = () => {
       setError('Purpose is required');
       return;
     }
-    if (!requestedAmount || parseFloat(requestedAmount) <= 0) {
+    if (!requestedAmount || parseFloat(requestedAmount) <= 0 || parseFloat(requestedAmount) > 5000) {
       setError('Valid requested amount is required');
       return;
     }
@@ -317,7 +317,7 @@ const App = () => {
 
             {/* Top Stakers */}
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+              <h2 className="text-sm font-bold text-gray-900 mb-6 flex items-center gap-3">
                 <div className="w-10 h-10 bg-yellow-100 rounded-xl flex items-center justify-center">
                   <Trophy className="w-6 h-6 text-yellow-600" />
                 </div>
@@ -438,12 +438,14 @@ const App = () => {
                   </div>
 
                   {/* Project Description */}
+                  {/* Project Description */}
                   <div>
                     <label className="block text-sm font-bold text-gray-900 mb-2">
                       Project Description <span className="text-red-500">*</span>
                     </label>
                     <textarea
                       rows={5}
+                      maxLength={200}
                       value={description}
                       onChange={(e) => setDescription(e.target.value)}
                       className="w-full bg-transparent border border-[#2c2f36] focus:border-[#0AFF5E] outline-none rounded-xl px-4 py-2 placeholder-gray-500 text-sm resize-none"
@@ -451,6 +453,9 @@ const App = () => {
                       required
                       disabled={isSubmitting}
                     />
+                    <p className="text-xs text-gray-500 mt-1 text-right">
+                      {description.length}/200 characters
+                    </p>
                   </div>
 
                   {/* Purpose of Grant */}
@@ -460,6 +465,7 @@ const App = () => {
                     </label>
                     <textarea
                       rows={5}
+                      maxLength={250}
                       value={purpose}
                       onChange={(e) => setPurpose(e.target.value)}
                       className="w-full bg-transparent border border-[#2c2f36] focus:border-[#0AFF5E] outline-none rounded-xl px-4 py-2 placeholder-gray-500 text-sm resize-none"
@@ -467,13 +473,20 @@ const App = () => {
                       required
                       disabled={isSubmitting}
                     />
+                    <p className="text-xs text-gray-500 mt-1 text-right">
+                      {purpose.length}/250 characters
+                    </p>
                   </div>
+
 
                   {/* Requested Amount */}
                   <div>
                     <label className="block text-sm font-bold text-gray-900 mb-2">
-                      Requested Amount (USDT) <span className="text-red-500">*</span>
+                      Requested Amount (USDT)  <span className="text-red-500">*</span>
                     </label>
+                    <p className="text-sm text-gray-500 mt-2">
+                      Max 5000 USDT
+                    </p>
                     <input
                       type="number"
                       step="0.01"
@@ -484,9 +497,7 @@ const App = () => {
                       required
                       disabled={isSubmitting}
                     />
-                    <p className="text-sm text-gray-500 mt-2">
-                      Maximum available: 1000 USDT
-                    </p>
+
                   </div>
 
 
