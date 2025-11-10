@@ -64,7 +64,7 @@ const App = () => {
         const stakers = await TopStakers()
         settopStakers(stakers);
         const total = await getTotalStaked();
-        settotalStaked(total)
+        settotalStaked(Number(total))
 
       } catch (error) {
         console.error("Error fetching grants:", error);
