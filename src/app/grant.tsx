@@ -37,10 +37,7 @@ const App = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  const [isVoting, setIsVoting] = useState(false);
 
-  const [sterror, setStError] = useState('');
-  const [stsuccess, setStSuccess] = useState('');
 
   // Mock data
   const [treasuryBalance, settreasuryBalance] = useState(0);
@@ -56,37 +53,34 @@ const App = () => {
   const [topStakers, settopStakers] = useState<Staker[]>([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const formattedGrants = await getGrants();
-        setGrants(formattedGrants);
-
-        const stakers = await TopStakers()
-        settopStakers(stakers);
-        const total = await getTotalStaked();
-        settotalStaked(Number(total))
-
-        const {
-          balanceETH,
-          balanceUSDT,
-        } = await getEthBalanceInUSDT(DEV_WALLET)
-
-        const grantAmount = Number(balanceUSDT) * 0.5;
-        settreasuryBalance(Number(balanceUSDT))
-        setavailableForGrants(grantAmount)
-
-      } catch (error) {
-        console.error("Error fetching grants:", error);
-      }
-      finally {
-        setLoading(false);
-      }
-    };
-
+    setLoading(true);
     fetchData();
+    setLoading(false);
   }, []);
 
+  const fetchData = async () => {
+    try {
+
+      const formattedGrants = await getGrants();
+      setGrants(formattedGrants);
+      const stakers = await TopStakers()
+      settopStakers(stakers);
+      const total = await getTotalStaked();
+      settotalStaked(Number(total))
+      const {
+        balanceETH,
+        balanceUSDT,
+      } = await getEthBalanceInUSDT(DEV_WALLET)
+
+      const grantAmount = Number(balanceUSDT) * 0.5;
+      settreasuryBalance(Number(balanceUSDT))
+      setavailableForGrants(grantAmount)
+
+    } catch (error) {
+      console.error("Error fetching grants:", error);
+    }
+
+  };
 
 
 
@@ -153,7 +147,7 @@ const App = () => {
         socials.farcaster
       );
 
-      setSuccess(`Grant application submitted successfully! Grant ID: ${result.grantId}`);
+      setSuccess(`Grant application submitted successfully!`);
 
       // Reset form
       setProjectName('');
@@ -168,8 +162,11 @@ const App = () => {
         farcaster: ''
       });
 
-      // Optional: Show success notification or redirect
-      console.log('Grant applied:', result);
+      await fetchData();
+      setTimeout(() => {
+        fetchData();
+        setActiveTab("grants");
+      }, 10_000);
 
     } catch (error) {
       console.error('Error applying for grant:', error);
@@ -372,7 +369,7 @@ const App = () => {
 
             <div className="grid grid-cols-1 gap-6">
               {grants.map(grant => (
-                <GrantCard key={grant.id} grant={grant} />
+                <GrantCard key={grant.id} grant={grant} handleRefreshData={fetchData} />
               ))}
             </div>
           </div>
@@ -602,7 +599,7 @@ const App = () => {
         )}
 
         {activeTab === 'stake' && (
-          <StakeTokens />
+          <StakeTokens handleRefreshData={fetchData} />
         )}
       </main>
     </div>

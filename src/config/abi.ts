@@ -1564,7 +1564,7 @@ export const FactoryAbi = [
     "stateMutability": "payable",
     "type": "receive"
   }
-];
+]
 
 
 export const TokenAbi = [

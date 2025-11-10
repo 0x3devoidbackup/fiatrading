@@ -5,7 +5,11 @@ import { Lock, Trophy, Flame } from 'lucide-react';
 import { formatNumber, approveToken, unstakeTokens, stakeTokens, fetchUserTokenBalance } from '@/utils/blockFunctions';
 import { notifySuccess, notifyError, notifyInfo } from '@/utils/notify';
 
-const StakeTokens = () => {
+
+interface GrantCardProps {
+    handleRefreshData: () => void;
+}
+const StakeTokens: React.FC<GrantCardProps> = ({ handleRefreshData }) => {
     const { isConnected, connectWallet, address, signer } = useWallet();
 
     const [userBalance, setUserbalance] = useState("0")
@@ -19,20 +23,20 @@ const StakeTokens = () => {
 
 
     useEffect(() => {
-        async function fetchData() {
-            if (!isConnected || !signer || !address) return;
-
-            try {
-                const { formattedBalance, fomatToken } = await fetchUserTokenBalance(signer, address);
-                setUserbalance(formattedBalance);
-                setUserStaked(fomatToken)
-            } catch (err) {
-                console.error("Failed to fetch balance:", err);
-            }
-        }
-
         fetchData();
-    }, [isConnected, signer, address]);
+    }, []);
+
+    async function fetchData() {
+        if (!isConnected || !signer || !address) return;
+
+        try {
+            const { formattedBalance, fomatToken } = await fetchUserTokenBalance(signer, address);
+            setUserbalance(formattedBalance);
+            setUserStaked(fomatToken)
+        } catch (err) {
+            console.error("Failed to fetch balance:", err);
+        }
+    }
 
     async function handleStake() {
         if (!isConnected || !signer || !address) return;
@@ -47,6 +51,12 @@ const StakeTokens = () => {
             await stakeTokens(signer, amount)
             notifySuccess("Staking has been completed.")
             setInputAmount("")
+            await fetchData();
+            await handleRefreshData()
+            setTimeout(() => {
+                fetchData();
+                handleRefreshData()
+            }, 10_000);
 
         } catch (error) {
             notifyError("An error occured while trying to stake")
@@ -68,6 +78,13 @@ const StakeTokens = () => {
             notifySuccess("Unstaking has been completed.")
             setUserStaked("0")
             setShowunstake(false)
+            await fetchData();
+            await handleRefreshData()
+            setTimeout(() => {
+                fetchData();
+                handleRefreshData()
+            }, 10_000);
+
 
         } catch (error) {
             notifyError("An error occured while trying to unstake")
@@ -100,10 +117,10 @@ const StakeTokens = () => {
                             <h3 className="text-2xl font-bold text-gray-900 mb-4">
                                 Unstake Tokens
                             </h3>
-                           
+
 
                             <div className="mb-6">
-                               
+
                                 <input
                                     type="number"
                                     value={userStaked}
@@ -111,7 +128,7 @@ const StakeTokens = () => {
                                     placeholder="0"
                                     className="w-full px-4 py-2 border-2 text-black border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none text-lg"
                                 />
-                               
+
                             </div>
 
                             <div className="bg-red-50 border border-red-200 rounded-xl p-4 mb-6 flex items-start gap-3">
@@ -133,7 +150,7 @@ const StakeTokens = () => {
                                     onClick={handleUstaking}
 
                                     disabled={isUnstaking}
-                                    className={`flex-1 py-3 text-sm bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-xl font-bold hover:shadow-lg hover:scale-105 transition-all flex items-center justify-center gap-2  ${isUnstaking ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer' }`}
+                                    className={`flex-1 py-3 text-sm bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-xl font-bold hover:shadow-lg hover:scale-105 transition-all flex items-center justify-center gap-2  ${isUnstaking ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
                                 >
                                     Confirm
                                 </button>

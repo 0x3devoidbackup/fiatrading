@@ -1,13 +1,18 @@
 "use client"
 import React, { useEffect, useState } from 'react';
-import { applyGrants, formatNumber, getContractCapConstants, getTotalStaked, isUserVoted, FormattedGrant, fetchUserTokenBalance, voteOnGrant } from '@/utils/blockFunctions';
+import { applyGrants, formatNumber, getContractCapConstants, getTotalStaked, isUserVoted, FormattedGrant, fetchUserTokenBalance, voteOnGrant, approveToken } from '@/utils/blockFunctions';
 import { Flame, Wallet, Check, X, Clock, ExternalLink, Lock, Trophy } from 'lucide-react';
 import { useWallet } from '@/context/walletContext'
 import { Redirect } from 'next';
 import SocialLinks from "./SocialLinks";
 
+interface GrantCardProps {
+    grant: FormattedGrant;
+    handleRefreshData: () => void;
+}
 
-const GrantCard = ({ grant }: { grant: FormattedGrant }) => {
+
+const GrantCard: React.FC<GrantCardProps> = ({ grant, handleRefreshData }) => {
     const { isConnected, connectWallet, address, signer } = useWallet();
 
     const [maxVotesCap, setMaxVotesCap] = useState<number>(0)
@@ -28,44 +33,48 @@ const GrantCard = ({ grant }: { grant: FormattedGrant }) => {
 
 
     useEffect(() => {
-        async function fetchData() {
 
-            try {
-                const {
-                    minVoteValue,
-                    maxVoteValue,
-                    voteCapValue
-                } = await getContractCapConstants()
-
-                setMaxVotesCap(Number(voteCapValue))
-                setMaxVotes(Number(maxVoteValue))
-                setMinVotes(Number(minVoteValue))
-                console.log(voteCapValue)
-
-            } catch (err) {
-                console.error("Failed to fetch balance:", err);
-            }
-        }
-
-        fetchData();
+        fetchVoteData();
     }, []);
 
-    useEffect(() => {
-        async function fetchData() {
-            if (!isConnected || !signer || !address) return;
+    async function fetchVoteData() {
 
-            try {
-                const { formattedBalance, fomatToken } = await fetchUserTokenBalance(signer, address);
-                const voted = await isUserVoted(Number(grant.id), address)
-                setUserbalance(formattedBalance);
-                setIsvoted(voted)
-            } catch (err) {
-                console.error("Failed to fetch balance:", err);
-            }
+        try {
+            const {
+                minVoteValue,
+                maxVoteValue,
+                voteCapValue
+            } = await getContractCapConstants()
+
+            setMaxVotesCap(Number(voteCapValue))
+            setMaxVotes(Number(maxVoteValue))
+            setMinVotes(Number(minVoteValue))
+            console.log(voteCapValue)
+
+        } catch (err) {
+            console.error("Failed to fetch balance:", err);
         }
+    }
 
-        fetchData();
-    }, [isConnected, signer, address]);
+
+    useEffect(() => {
+
+
+        fetchBalanceData();
+    }, [isConnected, signer, address, grant.id]);
+
+    async function fetchBalanceData() {
+        if (!isConnected || !signer || !address) return;
+
+        try {
+            const { formattedBalance, fomatToken } = await fetchUserTokenBalance(signer, address);
+            const voted = await isUserVoted(Number(grant.id), address)
+            setUserbalance(formattedBalance);
+            setIsvoted(voted)
+        } catch (err) {
+            console.error("Failed to fetch balance:", err);
+        }
+    }
 
 
 
@@ -97,12 +106,22 @@ const GrantCard = ({ grant }: { grant: FormattedGrant }) => {
 
         try {
             setIsVoting(true);
+            await approveToken(voteAmount.amount, signer, address)
             const { success, txHash } = await voteOnGrant(signer, voteAmount.grantId, Number(voteAmount.amount));
 
             if (success && txHash) {
                 setStSuccess("Voting was successful ✅");
                 setVoteAmount({ ...voteAmount, amount: "" })
                 setShowVoteModal(false)
+                await handleRefreshData();
+                await fetchVoteData();
+                await fetchBalanceData();
+                setTimeout(() => {
+                    handleRefreshData();
+                    fetchVoteData();
+                    fetchBalanceData();
+                }, 10_000);
+
             }
         } catch (error) {
             console.error(error);
@@ -140,7 +159,8 @@ const GrantCard = ({ grant }: { grant: FormattedGrant }) => {
                         </div>
                     </div>
 
-                    <p className="text-gray-600 leading-relaxed mb-6">{grant.description}</p>
+                    <p className="text-gray-600 leading-relaxed mb-1"><span className='font-extrabold'>Description:</span> {grant.description}</p>
+                    <p className="text-gray-600 leading-relaxed mb-6"><span className='font-extrabold'>Purpose:</span> {grant.purpose}</p>
 
                     <div className="grid grid-cols-2 gap-4 mb-6">
                         <div className="bg-gradient-to-br from-purple-50 to-blue-50 p-4 rounded-xl border border-purple-100">
