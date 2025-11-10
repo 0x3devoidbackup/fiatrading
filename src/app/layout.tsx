@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { DM_Sans } from 'next/font/google';
 import "./globals.css";
+import { WalletProvider } from '@/context/walletContext'
+
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
@@ -23,11 +25,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-     <html lang="en" className={`${dmSans.className}`}>
-      <body
-      >
-        {children}
-      </body>
+    <html lang="en" className={`${dmSans.className}`}>
+      <WalletProvider>
+        <body
+        >
+          {children}
+        </body>
+      </WalletProvider>
     </html>
   );
 }
