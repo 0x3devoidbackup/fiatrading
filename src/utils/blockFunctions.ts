@@ -15,7 +15,7 @@ import { FACTORY_CONTRACT, TOKEN_CONTRACT } from "@/config/contracts";
 import { notifyError, notifySuccess, notifyInfo } from "./notify";
 const RPC_URLS = {
     'base-sepolia': 'https://sepolia.base.org',
-    'base': 'https://mainnet.base.org',
+    'base': 'https://base.blockpi.network/v1/rpc/ccafcc12b71785a4f28afe8108c6ebe25bf51c7b',
     'ethereum': 'https://eth.llamarpc.com',
     'sepolia': 'https://rpc.sepolia.org',
 };

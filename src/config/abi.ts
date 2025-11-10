@@ -1,1550 +1,1569 @@
 export const FactoryAbi = [
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "address",
-        name: "_governanceToken",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "_governanceToken",
+        "type": "address"
+      }
     ],
-    stateMutability: "nonpayable",
-    type: "constructor",
+    "stateMutability": "nonpayable",
+    "type": "constructor"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "address",
-        name: "owner",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "owner",
+        "type": "address"
+      }
     ],
-    name: "OwnableInvalidOwner",
-    type: "error",
+    "name": "OwnableInvalidOwner",
+    "type": "error"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "address",
-        name: "account",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
     ],
-    name: "OwnableUnauthorizedAccount",
-    type: "error",
+    "name": "OwnableUnauthorizedAccount",
+    "type": "error"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "address",
-        name: "token",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      }
     ],
-    name: "SafeERC20FailedOperation",
-    type: "error",
+    "name": "SafeERC20FailedOperation",
+    "type": "error"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: true,
-        internalType: "uint256",
-        name: "grantId",
-        type: "uint256",
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "grantId",
+        "type": "uint256"
       },
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "totalAmount",
-        type: "uint256",
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "totalAmount",
+        "type": "uint256"
       },
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "stakersRewarded",
-        type: "uint256",
-      },
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "stakersRewarded",
+        "type": "uint256"
+      }
     ],
-    name: "AirdropDistributed",
-    type: "event",
+    "name": "AirdropDistributed",
+    "type": "event"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: true,
-        internalType: "uint256",
-        name: "grantId",
-        type: "uint256",
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "grantId",
+        "type": "uint256"
       },
       {
-        indexed: true,
-        internalType: "address",
-        name: "applicant",
-        type: "address",
+        "indexed": true,
+        "internalType": "address",
+        "name": "applicant",
+        "type": "address"
       },
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
     ],
-    name: "DepositMade",
-    type: "event",
+    "name": "DepositMade",
+    "type": "event"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: true,
-        internalType: "uint256",
-        name: "grantId",
-        type: "uint256",
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "grantId",
+        "type": "uint256"
       },
       {
-        indexed: true,
-        internalType: "address",
-        name: "applicant",
-        type: "address",
+        "indexed": true,
+        "internalType": "address",
+        "name": "applicant",
+        "type": "address"
       },
       {
-        indexed: false,
-        internalType: "string",
-        name: "projectName",
-        type: "string",
+        "indexed": false,
+        "internalType": "string",
+        "name": "projectName",
+        "type": "string"
       },
       {
-        indexed: false,
-        internalType: "address",
-        name: "tokenCA",
-        type: "address",
+        "indexed": false,
+        "internalType": "address",
+        "name": "tokenCA",
+        "type": "address"
       },
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "requestedAmount",
-        type: "uint256",
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "requestedAmount",
+        "type": "uint256"
       },
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "depositRequired",
-        type: "uint256",
-      },
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "depositRequired",
+        "type": "uint256"
+      }
     ],
-    name: "GrantApplied",
-    type: "event",
+    "name": "GrantApplied",
+    "type": "event"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: true,
-        internalType: "uint256",
-        name: "grantId",
-        type: "uint256",
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "grantId",
+        "type": "uint256"
       },
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
     ],
-    name: "GrantApproved",
-    type: "event",
+    "name": "GrantApproved",
+    "type": "event"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: true,
-        internalType: "uint256",
-        name: "grantId",
-        type: "uint256",
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "grantId",
+        "type": "uint256"
       },
       {
-        indexed: true,
-        internalType: "address",
-        name: "recipient",
-        type: "address",
+        "indexed": true,
+        "internalType": "address",
+        "name": "recipient",
+        "type": "address"
       },
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
     ],
-    name: "GrantDisbursed",
-    type: "event",
+    "name": "GrantDisbursed",
+    "type": "event"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: true,
-        internalType: "uint256",
-        name: "grantId",
-        type: "uint256",
-      },
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "grantId",
+        "type": "uint256"
+      }
     ],
-    name: "GrantRejected",
-    type: "event",
+    "name": "GrantRejected",
+    "type": "event"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: true,
-        internalType: "address",
-        name: "previousOwner",
-        type: "address",
+        "indexed": true,
+        "internalType": "address",
+        "name": "previousOwner",
+        "type": "address"
       },
       {
-        indexed: true,
-        internalType: "address",
-        name: "newOwner",
-        type: "address",
-      },
+        "indexed": true,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
     ],
-    name: "OwnershipTransferred",
-    type: "event",
+    "name": "OwnershipTransferred",
+    "type": "event"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: true,
-        internalType: "address",
-        name: "staker",
-        type: "address",
+        "indexed": true,
+        "internalType": "address",
+        "name": "staker",
+        "type": "address"
       },
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
     ],
-    name: "Staked",
-    type: "event",
+    "name": "Staked",
+    "type": "event"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
       },
       {
-        indexed: false,
-        internalType: "bool",
-        name: "isBuy",
-        type: "bool",
-      },
+        "indexed": false,
+        "internalType": "bool",
+        "name": "isBuy",
+        "type": "bool"
+      }
     ],
-    name: "TaxCollected",
-    type: "event",
+    "name": "TaxCollected",
+    "type": "event"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: true,
-        internalType: "address",
-        name: "burner",
-        type: "address",
+        "indexed": true,
+        "internalType": "address",
+        "name": "burner",
+        "type": "address"
       },
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
       },
       {
-        indexed: false,
-        internalType: "string",
-        name: "reason",
-        type: "string",
-      },
+        "indexed": false,
+        "internalType": "string",
+        "name": "reason",
+        "type": "string"
+      }
     ],
-    name: "TokensBurned",
-    type: "event",
+    "name": "TokensBurned",
+    "type": "event"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: true,
-        internalType: "address",
-        name: "staker",
-        type: "address",
+        "indexed": true,
+        "internalType": "address",
+        "name": "staker",
+        "type": "address"
       },
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
     ],
-    name: "Unstaked",
-    type: "event",
+    "name": "Unstaked",
+    "type": "event"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: true,
-        internalType: "uint256",
-        name: "grantId",
-        type: "uint256",
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "grantId",
+        "type": "uint256"
       },
       {
-        indexed: true,
-        internalType: "address",
-        name: "voter",
-        type: "address",
+        "indexed": true,
+        "internalType": "address",
+        "name": "voter",
+        "type": "address"
       },
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
       },
       {
-        indexed: false,
-        internalType: "bool",
-        name: "support",
-        type: "bool",
-      },
+        "indexed": false,
+        "internalType": "bool",
+        "name": "support",
+        "type": "bool"
+      }
     ],
-    name: "Voted",
-    type: "event",
+    "name": "Voted",
+    "type": "event"
   },
   {
-    inputs: [],
-    name: "BUY_TAX",
-    outputs: [
+    "inputs": [],
+    "name": "BUY_TAX",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "GRANT_POOL_PERCENT",
-    outputs: [
+    "inputs": [],
+    "name": "GRANT_POOL_PERCENT",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "MAX_REQUEST_AMOUNT",
-    outputs: [
+    "inputs": [],
+    "name": "MAX_REQUEST_AMOUNT",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "MAX_VOTE_CAP",
-    outputs: [
+    "inputs": [],
+    "name": "MAX_VOTE_CAP",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "MAX_VOTE_FEE",
-    outputs: [
+    "inputs": [],
+    "name": "MAX_VOTE_FEE",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "MIN_VOTE_FEE",
-    outputs: [
+    "inputs": [],
+    "name": "MIN_VOTE_FEE",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "SELL_TAX",
-    outputs: [
+    "inputs": [],
+    "name": "SELL_TAX",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "TOP_STAKERS_COUNT",
-    outputs: [
+    "inputs": [],
+    "name": "TOP_STAKERS_COUNT",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "VOTING_PERIOD",
-    outputs: [
+    "inputs": [],
+    "name": "VOTING_PERIOD",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
     ],
-    name: "applicantToGrantId",
-    outputs: [
+    "name": "applicantToGrantId",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        components: [
+        "components": [
           {
-            internalType: "string",
-            name: "projectName",
-            type: "string",
+            "internalType": "string",
+            "name": "projectName",
+            "type": "string"
           },
           {
-            internalType: "address",
-            name: "tokenCA",
-            type: "address",
+            "internalType": "address",
+            "name": "tokenCA",
+            "type": "address"
           },
           {
-            internalType: "string",
-            name: "description",
-            type: "string",
+            "internalType": "string",
+            "name": "description",
+            "type": "string"
           },
           {
-            internalType: "string",
-            name: "purpose",
-            type: "string",
+            "internalType": "string",
+            "name": "purpose",
+            "type": "string"
           },
           {
-            internalType: "uint256",
-            name: "requestedAmount",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "requestedAmount",
+            "type": "uint256"
           },
           {
-            internalType: "uint256",
-            name: "depositRequired",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "depositRequired",
+            "type": "uint256"
           },
           {
-            components: [
+            "components": [
               {
-                internalType: "string",
-                name: "website",
-                type: "string",
+                "internalType": "string",
+                "name": "website",
+                "type": "string"
               },
               {
-                internalType: "string",
-                name: "twitter",
-                type: "string",
+                "internalType": "string",
+                "name": "twitter",
+                "type": "string"
               },
               {
-                internalType: "string",
-                name: "telegram",
-                type: "string",
+                "internalType": "string",
+                "name": "telegram",
+                "type": "string"
               },
               {
-                internalType: "string",
-                name: "farcaster",
-                type: "string",
-              },
+                "internalType": "string",
+                "name": "farcaster",
+                "type": "string"
+              }
             ],
-            internalType: "struct GrantDAO.Socials",
-            name: "socials",
-            type: "tuple",
-          },
+            "internalType": "struct GrantDAO.Socials",
+            "name": "socials",
+            "type": "tuple"
+          }
         ],
-        internalType: "struct GrantDAO.GrantApplication",
-        name: "application",
-        type: "tuple",
-      },
+        "internalType": "struct GrantDAO.GrantApplication",
+        "name": "application",
+        "type": "tuple"
+      }
     ],
-    name: "applyForGrant",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "applyForGrant",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "_grantId",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "_grantId",
+        "type": "uint256"
+      }
     ],
-    name: "cancelGrant",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "cancelGrant",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "_grantId",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "_grantId",
+        "type": "uint256"
       },
       {
-        internalType: "uint256",
-        name: "_amount",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "_amount",
+        "type": "uint256"
+      }
     ],
-    name: "depositSupplyForGrant",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "depositSupplyForGrant",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "depositToTreasury",
-    outputs: [],
-    stateMutability: "payable",
-    type: "function",
+    "inputs": [],
+    "name": "depositToTreasury",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "_grantId",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "_grantId",
+        "type": "uint256"
+      }
     ],
-    name: "disburseGrant",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "disburseGrant",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "address",
-        name: "_token",
-        type: "address",
+        "internalType": "address",
+        "name": "_token",
+        "type": "address"
       },
       {
-        internalType: "uint256",
-        name: "_amount",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "_amount",
+        "type": "uint256"
+      }
     ],
-    name: "emergencyWithdraw",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "emergencyWithdraw",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "_amount",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "_amount",
+        "type": "uint256"
+      }
     ],
-    name: "emergencyWithdrawETH",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "emergencyWithdrawETH",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "getAllGrants",
-    outputs: [
+    "inputs": [],
+    "name": "getAllGrants",
+    "outputs": [
       {
-        components: [
+        "components": [
           {
-            internalType: "uint256",
-            name: "id",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "id",
+            "type": "uint256"
           },
           {
-            internalType: "address",
-            name: "applicant",
-            type: "address",
+            "internalType": "address",
+            "name": "applicant",
+            "type": "address"
           },
           {
-            internalType: "string",
-            name: "projectName",
-            type: "string",
+            "internalType": "string",
+            "name": "projectName",
+            "type": "string"
           },
           {
-            internalType: "address",
-            name: "tokenCA",
-            type: "address",
+            "internalType": "address",
+            "name": "tokenCA",
+            "type": "address"
           },
           {
-            internalType: "string",
-            name: "description",
-            type: "string",
+            "internalType": "string",
+            "name": "description",
+            "type": "string"
           },
           {
-            internalType: "string",
-            name: "purpose",
-            type: "string",
+            "internalType": "string",
+            "name": "purpose",
+            "type": "string"
           },
           {
-            internalType: "uint256",
-            name: "requestedAmount",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "requestedAmount",
+            "type": "uint256"
           },
           {
-            internalType: "uint256",
-            name: "votes",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "votes",
+            "type": "uint256"
           },
           {
-            internalType: "enum GrantDAO.GrantStatus",
-            name: "status",
-            type: "uint8",
+            "internalType": "enum GrantDAO.GrantStatus",
+            "name": "status",
+            "type": "uint8"
           },
           {
-            internalType: "uint256",
-            name: "depositRequired",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "depositRequired",
+            "type": "uint256"
           },
           {
-            internalType: "uint256",
-            name: "createdAt",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "createdAt",
+            "type": "uint256"
           },
           {
-            internalType: "uint256",
-            name: "votingEndsAt",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "votingEndsAt",
+            "type": "uint256"
           },
           {
-            internalType: "bool",
-            name: "deposited",
-            type: "bool",
+            "internalType": "bool",
+            "name": "deposited",
+            "type": "bool"
           },
           {
-            internalType: "bool",
-            name: "disbursed",
-            type: "bool",
+            "internalType": "bool",
+            "name": "disbursed",
+            "type": "bool"
           },
           {
-            components: [
+            "components": [
               {
-                internalType: "string",
-                name: "website",
-                type: "string",
+                "internalType": "string",
+                "name": "website",
+                "type": "string"
               },
               {
-                internalType: "string",
-                name: "twitter",
-                type: "string",
+                "internalType": "string",
+                "name": "twitter",
+                "type": "string"
               },
               {
-                internalType: "string",
-                name: "telegram",
-                type: "string",
+                "internalType": "string",
+                "name": "telegram",
+                "type": "string"
               },
               {
-                internalType: "string",
-                name: "farcaster",
-                type: "string",
-              },
+                "internalType": "string",
+                "name": "farcaster",
+                "type": "string"
+              }
             ],
-            internalType: "struct GrantDAO.Socials",
-            name: "socials",
-            type: "tuple",
-          },
+            "internalType": "struct GrantDAO.Socials",
+            "name": "socials",
+            "type": "tuple"
+          }
         ],
-        internalType: "struct GrantDAO.Grant[]",
-        name: "",
-        type: "tuple[]",
-      },
+        "internalType": "struct GrantDAO.Grant[]",
+        "name": "",
+        "type": "tuple[]"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "getAvailableGrantPool",
-    outputs: [
+    "inputs": [],
+    "name": "getAvailableGrantPool",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "_grantId",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "_grantId",
+        "type": "uint256"
+      }
     ],
-    name: "getGrant",
-    outputs: [
+    "name": "getGrant",
+    "outputs": [
       {
-        components: [
+        "components": [
           {
-            internalType: "uint256",
-            name: "id",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "id",
+            "type": "uint256"
           },
           {
-            internalType: "address",
-            name: "applicant",
-            type: "address",
+            "internalType": "address",
+            "name": "applicant",
+            "type": "address"
           },
           {
-            internalType: "string",
-            name: "projectName",
-            type: "string",
+            "internalType": "string",
+            "name": "projectName",
+            "type": "string"
           },
           {
-            internalType: "address",
-            name: "tokenCA",
-            type: "address",
+            "internalType": "address",
+            "name": "tokenCA",
+            "type": "address"
           },
           {
-            internalType: "string",
-            name: "description",
-            type: "string",
+            "internalType": "string",
+            "name": "description",
+            "type": "string"
           },
           {
-            internalType: "string",
-            name: "purpose",
-            type: "string",
+            "internalType": "string",
+            "name": "purpose",
+            "type": "string"
           },
           {
-            internalType: "uint256",
-            name: "requestedAmount",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "requestedAmount",
+            "type": "uint256"
           },
           {
-            internalType: "uint256",
-            name: "votes",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "votes",
+            "type": "uint256"
           },
           {
-            internalType: "enum GrantDAO.GrantStatus",
-            name: "status",
-            type: "uint8",
+            "internalType": "enum GrantDAO.GrantStatus",
+            "name": "status",
+            "type": "uint8"
           },
           {
-            internalType: "uint256",
-            name: "depositRequired",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "depositRequired",
+            "type": "uint256"
           },
           {
-            internalType: "uint256",
-            name: "createdAt",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "createdAt",
+            "type": "uint256"
           },
           {
-            internalType: "uint256",
-            name: "votingEndsAt",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "votingEndsAt",
+            "type": "uint256"
           },
           {
-            internalType: "bool",
-            name: "deposited",
-            type: "bool",
+            "internalType": "bool",
+            "name": "deposited",
+            "type": "bool"
           },
           {
-            internalType: "bool",
-            name: "disbursed",
-            type: "bool",
+            "internalType": "bool",
+            "name": "disbursed",
+            "type": "bool"
           },
           {
-            components: [
+            "components": [
               {
-                internalType: "string",
-                name: "website",
-                type: "string",
+                "internalType": "string",
+                "name": "website",
+                "type": "string"
               },
               {
-                internalType: "string",
-                name: "twitter",
-                type: "string",
+                "internalType": "string",
+                "name": "twitter",
+                "type": "string"
               },
               {
-                internalType: "string",
-                name: "telegram",
-                type: "string",
+                "internalType": "string",
+                "name": "telegram",
+                "type": "string"
               },
               {
-                internalType: "string",
-                name: "farcaster",
-                type: "string",
-              },
+                "internalType": "string",
+                "name": "farcaster",
+                "type": "string"
+              }
             ],
-            internalType: "struct GrantDAO.Socials",
-            name: "socials",
-            type: "tuple",
-          },
+            "internalType": "struct GrantDAO.Socials",
+            "name": "socials",
+            "type": "tuple"
+          }
         ],
-        internalType: "struct GrantDAO.Grant",
-        name: "",
-        type: "tuple",
-      },
+        "internalType": "struct GrantDAO.Grant",
+        "name": "",
+        "type": "tuple"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "_offset",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "_offset",
+        "type": "uint256"
       },
       {
-        internalType: "uint256",
-        name: "_limit",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "_limit",
+        "type": "uint256"
+      }
     ],
-    name: "getGrants",
-    outputs: [
+    "name": "getGrants",
+    "outputs": [
       {
-        components: [
+        "components": [
           {
-            internalType: "uint256",
-            name: "id",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "id",
+            "type": "uint256"
           },
           {
-            internalType: "address",
-            name: "applicant",
-            type: "address",
+            "internalType": "address",
+            "name": "applicant",
+            "type": "address"
           },
           {
-            internalType: "string",
-            name: "projectName",
-            type: "string",
+            "internalType": "string",
+            "name": "projectName",
+            "type": "string"
           },
           {
-            internalType: "address",
-            name: "tokenCA",
-            type: "address",
+            "internalType": "address",
+            "name": "tokenCA",
+            "type": "address"
           },
           {
-            internalType: "string",
-            name: "description",
-            type: "string",
+            "internalType": "string",
+            "name": "description",
+            "type": "string"
           },
           {
-            internalType: "string",
-            name: "purpose",
-            type: "string",
+            "internalType": "string",
+            "name": "purpose",
+            "type": "string"
           },
           {
-            internalType: "uint256",
-            name: "requestedAmount",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "requestedAmount",
+            "type": "uint256"
           },
           {
-            internalType: "uint256",
-            name: "votes",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "votes",
+            "type": "uint256"
           },
           {
-            internalType: "enum GrantDAO.GrantStatus",
-            name: "status",
-            type: "uint8",
+            "internalType": "enum GrantDAO.GrantStatus",
+            "name": "status",
+            "type": "uint8"
           },
           {
-            internalType: "uint256",
-            name: "depositRequired",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "depositRequired",
+            "type": "uint256"
           },
           {
-            internalType: "uint256",
-            name: "createdAt",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "createdAt",
+            "type": "uint256"
           },
           {
-            internalType: "uint256",
-            name: "votingEndsAt",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "votingEndsAt",
+            "type": "uint256"
           },
           {
-            internalType: "bool",
-            name: "deposited",
-            type: "bool",
+            "internalType": "bool",
+            "name": "deposited",
+            "type": "bool"
           },
           {
-            internalType: "bool",
-            name: "disbursed",
-            type: "bool",
+            "internalType": "bool",
+            "name": "disbursed",
+            "type": "bool"
           },
           {
-            components: [
+            "components": [
               {
-                internalType: "string",
-                name: "website",
-                type: "string",
+                "internalType": "string",
+                "name": "website",
+                "type": "string"
               },
               {
-                internalType: "string",
-                name: "twitter",
-                type: "string",
+                "internalType": "string",
+                "name": "twitter",
+                "type": "string"
               },
               {
-                internalType: "string",
-                name: "telegram",
-                type: "string",
+                "internalType": "string",
+                "name": "telegram",
+                "type": "string"
               },
               {
-                internalType: "string",
-                name: "farcaster",
-                type: "string",
-              },
+                "internalType": "string",
+                "name": "farcaster",
+                "type": "string"
+              }
             ],
-            internalType: "struct GrantDAO.Socials",
-            name: "socials",
-            type: "tuple",
-          },
+            "internalType": "struct GrantDAO.Socials",
+            "name": "socials",
+            "type": "tuple"
+          }
         ],
-        internalType: "struct GrantDAO.Grant[]",
-        name: "",
-        type: "tuple[]",
-      },
+        "internalType": "struct GrantDAO.Grant[]",
+        "name": "",
+        "type": "tuple[]"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "address",
-        name: "_staker",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "_staker",
+        "type": "address"
+      }
     ],
-    name: "getStakerInfo",
-    outputs: [
+    "name": "getStakerInfo",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
       },
       {
-        internalType: "uint256",
-        name: "stakedAt",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "stakedAt",
+        "type": "uint256"
       },
       {
-        internalType: "uint256",
-        name: "lastRewardClaim",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "lastRewardClaim",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "getTopStakers",
-    outputs: [
+    "inputs": [],
+    "name": "getTopStakers",
+    "outputs": [
       {
-        internalType: "address[]",
-        name: "addresses",
-        type: "address[]",
+        "internalType": "address[]",
+        "name": "addresses",
+        "type": "address[]"
       },
       {
-        internalType: "uint256[]",
-        name: "amounts",
-        type: "uint256[]",
-      },
+        "internalType": "uint256[]",
+        "name": "amounts",
+        "type": "uint256[]"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "_grantId",
-        type: "uint256",
-      },
-      {
-        internalType: "bool",
-        name: "_approve",
-        type: "bool",
-      },
+        "internalType": "address",
+        "name": "_user",
+        "type": "address"
+      }
     ],
-    name: "giveVotingApproval",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "getUserStakedAmount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "governanceToken",
-    outputs: [
+    "inputs": [
       {
-        internalType: "contract IERC20",
-        name: "",
-        type: "address",
+        "internalType": "uint256",
+        "name": "_grantId",
+        "type": "uint256"
       },
+      {
+        "internalType": "bool",
+        "name": "_approve",
+        "type": "bool"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "name": "giveVotingApproval",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "grantIdCounter",
-    outputs: [
+    "inputs": [],
+    "name": "governanceToken",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "contract IERC20",
+        "name": "",
+        "type": "address"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [],
+    "name": "grantIdCounter",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    name: "grants",
-    outputs: [
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "id",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "grants",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
       },
       {
-        internalType: "address",
-        name: "applicant",
-        type: "address",
+        "internalType": "address",
+        "name": "applicant",
+        "type": "address"
       },
       {
-        internalType: "string",
-        name: "projectName",
-        type: "string",
+        "internalType": "string",
+        "name": "projectName",
+        "type": "string"
       },
       {
-        internalType: "address",
-        name: "tokenCA",
-        type: "address",
+        "internalType": "address",
+        "name": "tokenCA",
+        "type": "address"
       },
       {
-        internalType: "string",
-        name: "description",
-        type: "string",
+        "internalType": "string",
+        "name": "description",
+        "type": "string"
       },
       {
-        internalType: "string",
-        name: "purpose",
-        type: "string",
+        "internalType": "string",
+        "name": "purpose",
+        "type": "string"
       },
       {
-        internalType: "uint256",
-        name: "requestedAmount",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "requestedAmount",
+        "type": "uint256"
       },
       {
-        internalType: "uint256",
-        name: "votes",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "votes",
+        "type": "uint256"
       },
       {
-        internalType: "enum GrantDAO.GrantStatus",
-        name: "status",
-        type: "uint8",
+        "internalType": "enum GrantDAO.GrantStatus",
+        "name": "status",
+        "type": "uint8"
       },
       {
-        internalType: "uint256",
-        name: "depositRequired",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "depositRequired",
+        "type": "uint256"
       },
       {
-        internalType: "uint256",
-        name: "createdAt",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "createdAt",
+        "type": "uint256"
       },
       {
-        internalType: "uint256",
-        name: "votingEndsAt",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "votingEndsAt",
+        "type": "uint256"
       },
       {
-        internalType: "bool",
-        name: "deposited",
-        type: "bool",
+        "internalType": "bool",
+        "name": "deposited",
+        "type": "bool"
       },
       {
-        internalType: "bool",
-        name: "disbursed",
-        type: "bool",
+        "internalType": "bool",
+        "name": "disbursed",
+        "type": "bool"
       },
       {
-        components: [
+        "components": [
           {
-            internalType: "string",
-            name: "website",
-            type: "string",
+            "internalType": "string",
+            "name": "website",
+            "type": "string"
           },
           {
-            internalType: "string",
-            name: "twitter",
-            type: "string",
+            "internalType": "string",
+            "name": "twitter",
+            "type": "string"
           },
           {
-            internalType: "string",
-            name: "telegram",
-            type: "string",
+            "internalType": "string",
+            "name": "telegram",
+            "type": "string"
           },
           {
-            internalType: "string",
-            name: "farcaster",
-            type: "string",
-          },
+            "internalType": "string",
+            "name": "farcaster",
+            "type": "string"
+          }
         ],
-        internalType: "struct GrantDAO.Socials",
-        name: "socials",
-        type: "tuple",
-      },
+        "internalType": "struct GrantDAO.Socials",
+        "name": "socials",
+        "type": "tuple"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
     ],
-    name: "hasApplied",
-    outputs: [
+    "name": "hasApplied",
+    "outputs": [
       {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "_grantId",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "_grantId",
+        "type": "uint256"
       },
       {
-        internalType: "address",
-        name: "_voter",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "_voter",
+        "type": "address"
+      }
     ],
-    name: "hasUserVoted",
-    outputs: [
+    "name": "hasUserVoted",
+    "outputs": [
       {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       },
       {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
     ],
-    name: "hasVotedOnGrant",
-    outputs: [
+    "name": "hasVotedOnGrant",
+    "outputs": [
       {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
     ],
-    name: "isStaker",
-    outputs: [
+    "name": "isStaker",
+    "outputs": [
       {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "owner",
-    outputs: [
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
       {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "renounceOwnership",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "_amount",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "_amount",
+        "type": "uint256"
+      }
     ],
-    name: "stake",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "stake",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    name: "stakerAddresses",
-    outputs: [
+    "name": "stakerAddresses",
+    "outputs": [
       {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "stakerCounter",
-    outputs: [
+    "inputs": [],
+    "name": "stakerCounter",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
     ],
-    name: "stakerIndex",
-    outputs: [
+    "name": "stakerIndex",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
     ],
-    name: "stakers",
-    outputs: [
+    "name": "stakers",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
       },
       {
-        internalType: "uint256",
-        name: "stakedAt",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "stakedAt",
+        "type": "uint256"
       },
       {
-        internalType: "uint256",
-        name: "lastRewardClaim",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "lastRewardClaim",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
     ],
-    name: "tokenCAUsed",
-    outputs: [
+    "name": "tokenCAUsed",
+    "outputs": [
       {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "totalStaked",
-    outputs: [
+    "inputs": [],
+    "name": "totalStaked",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "address",
-        name: "newOwner",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
     ],
-    name: "transferOwnership",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "treasuryBalanceETH",
-    outputs: [
+    "inputs": [],
+    "name": "treasuryBalanceETH",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "treasuryBalanceTokens",
-    outputs: [
+    "inputs": [],
+    "name": "treasuryBalanceTokens",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "_amount",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "_amount",
+        "type": "uint256"
+      }
     ],
-    name: "unstake",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "unstake",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "_minVoteFee",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "_minVoteFee",
+        "type": "uint256"
       },
       {
-        internalType: "uint256",
-        name: "_maxVoteFee",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "_maxVoteFee",
+        "type": "uint256"
       },
       {
-        internalType: "uint256",
-        name: "_maxVoteCap",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "_maxVoteCap",
+        "type": "uint256"
       },
       {
-        internalType: "uint256",
-        name: "_maxRequestAmount",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "_maxRequestAmount",
+        "type": "uint256"
+      }
     ],
-    name: "updateVotingRequirements",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "updateVotingRequirements",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "_grantId",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "_grantId",
+        "type": "uint256"
       },
       {
-        internalType: "uint256",
-        name: "_amount",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "_amount",
+        "type": "uint256"
+      }
     ],
-    name: "vote",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "vote",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       },
       {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
     ],
-    name: "votes",
-    outputs: [
+    "name": "votes",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
       },
       {
-        internalType: "uint256",
-        name: "timestamp",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "timestamp",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    stateMutability: "payable",
-    type: "receive",
-  },
+    "stateMutability": "payable",
+    "type": "receive"
+  }
 ];
 
 

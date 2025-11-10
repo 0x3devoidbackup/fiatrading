@@ -10,7 +10,7 @@ export const BASE_MAINNET = {
     name: 'Base Mainnet',
     currency: 'ETH',
     explorerUrl: 'https://basescan.org',
-    rpcUrl: 'https://mainnet.base.org'
+    rpcUrl: 'https://base.blockpi.network/v1/rpc/ccafcc12b71785a4f28afe8108c6ebe25bf51c7b'
 };
 
 

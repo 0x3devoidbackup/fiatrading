@@ -1,13 +1,12 @@
 "use client"
 import React, { useEffect, useState } from 'react';
-import { ArrowUpRight, Coins, TrendingUp, Users, Award, Flame, Wallet, Check, X, Clock, ExternalLink, Lock, Trophy } from 'lucide-react';
+import { Loader2, Coins, TrendingUp, Users, Award, Flame, Wallet, Check, X, Clock, ExternalLink, Lock, Trophy } from 'lucide-react';
 import { ConnectWalletButton } from "@/utils/connectWallet"
 import { applyGrants, getGrants, TopStakers, formatNumber, getTotalStaked, FormattedGrant, fetchSevenPercentage, getEthBalanceInUSDT } from '@/utils/blockFunctions';
 import { useWallet } from '@/context/walletContext'
 import StakeTokens from './stake';
 import { notifyInfo, notifySuccess } from '@/utils/notify';
 import { DEV_WALLET } from '@/config/contracts';
-
 import GrantCard from "./grantcard"
 interface Staker {
   address: string;
@@ -183,8 +182,8 @@ const App = () => {
     return (
       <div className="flex items-center justify-center h-screen bg-[#0c0e13]">
         <div className="flex flex-col items-center space-y-3">
-          <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-          <p className="text-white text-sm font-medium">Fetching data...</p>
+          <Loader2 className="w-10 h-10 text-blue-500 animate-spin" />
+          <p className="text-white text-sm font-medium">Loading, please wait...</p>
         </div>
       </div>
     );
