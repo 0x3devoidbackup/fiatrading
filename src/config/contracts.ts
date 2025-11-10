@@ -1,4 +1,4 @@
-export const FACTORY_CONTRACT: string = "0x6b1c359cD0C3Eb1FeD9cDEf23eC549B56108651c"
+export const FACTORY_CONTRACT: string = "0x41aadF727d5beF4ca2B246F151727c45019B1d8f"
 export const TOKEN_CONTRACT: string = "0x13Ab41bc4536c5B42C36b955a045bbb99D3A5B07"
 export const DEV_WALLET: string = "0xb2f91298deced087bb07d54f2cf900e6fcf63775"
 
