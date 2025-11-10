@@ -5,7 +5,9 @@ import { ConnectWalletButton } from "@/utils/connectWallet"
 import { applyGrants, getGrants, TopStakers, formatNumber, getTotalStaked, FormattedGrant, fetchSevenPercentage, getEthBalanceInUSDT } from '@/utils/blockFunctions';
 import { useWallet } from '@/context/walletContext'
 import StakeTokens from './stake';
-import { notifyInfo, notifySuccess } from '@/utils/notify';
+import Image from 'next/image'
+
+
 import { DEV_WALLET } from '@/config/contracts';
 import GrantCard from "./grantcard"
 interface Staker {
@@ -191,10 +193,14 @@ const App = () => {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50">
       {/* Header */}
       <header className="bg-white border-b border-gray-200 sticky top-0 z-40 backdrop-blur-lg bg-opacity-80">
-        <div className="max-w-7xl mx-auto px-2 py-4">
+        <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-gradient-to-br from-purple-600 via-blue-600 to-purple-700 rounded-2xl flex items-center justify-center shadow-lg">
+            <div className="flex items-center gap-4 ml-5">
+
+              <Image src="/images/logoblue.jpeg" alt="logo" width={70} height={70} />
+
+
+              {/* <div className="w-12 h-12 bg-gradient-to-br from-purple-600 via-blue-600 to-purple-700 rounded-2xl flex items-center justify-center shadow-lg">
                 <Coins className="w-7 h-7 text-white" />
               </div>
               <div>
@@ -202,7 +208,7 @@ const App = () => {
                   GRANT
                 </h1>
                 <p className="text-xs text-gray-500 font-bold">Community Governed Grants</p>
-              </div>
+              </div> */}
             </div>
 
             <div className="flex items-center gap-6">
