@@ -2,10 +2,12 @@
 import React, { useEffect, useState } from 'react';
 import { ArrowUpRight, Coins, TrendingUp, Users, Award, Flame, Wallet, Check, X, Clock, ExternalLink, Lock, Trophy } from 'lucide-react';
 import { ConnectWalletButton } from "@/utils/connectWallet"
-import { applyGrants, getGrants, TopStakers, formatNumber, getTotalStaked, FormattedGrant, fetchSevenPercentage, voteOnGrant } from '@/utils/blockFunctions';
+import { applyGrants, getGrants, TopStakers, formatNumber, getTotalStaked, FormattedGrant, fetchSevenPercentage, getEthBalanceInUSDT } from '@/utils/blockFunctions';
 import { useWallet } from '@/context/walletContext'
 import StakeTokens from './stake';
 import { notifyInfo, notifySuccess } from '@/utils/notify';
+import { DEV_WALLET } from '@/config/contracts';
+
 import GrantCard from "./grantcard"
 interface Staker {
   address: string;
@@ -42,8 +44,8 @@ const App = () => {
   const [stsuccess, setStSuccess] = useState('');
 
   // Mock data
-  const treasuryBalance = 100000;
-  const availableForGrants = treasuryBalance * 0.5;
+  const [treasuryBalance, settreasuryBalance] = useState(0);
+  const [availableForGrants, setavailableForGrants] = useState(0);
   const [totalStaked, settotalStaked] = useState(0);
 
 
@@ -66,6 +68,15 @@ const App = () => {
         const total = await getTotalStaked();
         settotalStaked(Number(total))
 
+        const {
+          balanceETH,
+          balanceUSDT,
+        } = await getEthBalanceInUSDT(DEV_WALLET)
+
+        const grantAmount = Number(balanceUSDT) * 0.5;
+        settreasuryBalance(Number(balanceUSDT))
+        setavailableForGrants(grantAmount)
+
       } catch (error) {
         console.error("Error fetching grants:", error);
       }
@@ -81,56 +92,6 @@ const App = () => {
 
 
 
-
-
-  const checklistItems: string[] = [
-    "I confirm that all information provided is accurate.",
-    "I understand that false details may lead to disqualification.",
-    "I agree to the platform’s Privacy Policy.",
-
-  ];
-
-  const ChecklistAgreement: React.FC = () => {
-    const [checked, setChecked] = useState<boolean[]>(
-      checklistItems.map(() => false)
-    );
-
-    const toggleCheck = (index: number): void => {
-      setChecked((prev) => {
-        const updated = [...prev];
-        updated[index] = !updated[index];
-        return updated;
-      });
-    };
-
-    const allChecked: boolean = checked.every(Boolean);
-
-    return (
-      <div className=" text-gray-600 space-y-1 text-xs">
-
-        {checklistItems.map((item, i) => (
-          <label key={i} className="flex items-start space-x-2 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={checked[i]}
-              onChange={() => toggleCheck(i)}
-              className="mt-1"
-            />
-            <span>{item}</span>
-          </label>
-        ))}
-
-        {/* <button
-          disabled={!allChecked}
-          onClick={onContinue}
-          className={`w-full py-2 rounded-lg mt-4 ${allChecked ? "bg-green-600" : "bg-gray-500 cursor-not-allowed"
-            }`}
-        >
-          Continue
-        </button> */}
-      </div>
-    );
-  };
 
 
   async function handleGrantApplication(e: React.FormEvent) {
@@ -218,6 +179,17 @@ const App = () => {
       setIsSubmitting(false);
     }
   }
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen bg-[#0c0e13]">
+        <div className="flex flex-col items-center space-y-3">
+          <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+          <p className="text-white text-sm font-medium">Fetching data...</p>
+        </div>
+      </div>
+    );
+  }
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50">

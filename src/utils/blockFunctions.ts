@@ -3,7 +3,6 @@ import {
     formatEther,
     formatUnits,
     parseEther,
-    parseUnits,
     JsonRpcSigner,
     JsonRpcProvider
 } from "ethers";
@@ -23,7 +22,7 @@ const RPC_URLS = {
 import { formatAddress } from "./connectWallet"
 
 
-const provider = new JsonRpcProvider(RPC_URLS['base-sepolia']);
+const provider = new JsonRpcProvider(RPC_URLS['base']);
 
 
 export async function approveToken(
@@ -617,4 +616,39 @@ export async function fetchSevenPercentage(
         console.error("Error fetching seven percent:", error);
         throw error;
     }
+}
+
+export async function getEthBalanceInUSDT(
+  address: string
+): Promise<{ balanceETH: string; balanceUSDT: string }> {
+  try {
+    // 1) Fetch ETH balance (in wei)
+    const balanceWei = await provider.getBalance(address);
+
+    const balanceETH = formatEther(balanceWei);
+
+    // 3) Fetch ETH price in USD from CoinGecko API
+    const response = await fetch(
+      "https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd"
+    );
+    if (!response.ok) {
+      throw new Error(`CoinGecko price fetch failed: ${response.status}`);
+    }
+    const priceJson = await response.json();
+    const ethPriceUSD = priceJson.ethereum.usd;
+    if (typeof ethPriceUSD !== "number") {
+      throw new Error("Invalid price data from CoinGecko");
+    }
+
+    // 4) Calculate balance in USDT (1 USDT ≈ 1 USD)
+    const balanceUSDT = (parseFloat(balanceETH) * ethPriceUSD).toFixed(2);
+
+    return {
+      balanceETH,
+      balanceUSDT,
+    };
+  } catch (error) {
+    console.error("Error in getEthBalanceInUSDT:", error);
+    throw error;
+  }
 }

@@ -5,8 +5,15 @@ export const BASE_SEPOLIA = {
     explorerUrl: 'https://sepolia.basescan.org',
     rpcUrl: 'https://sepolia.base.org'
 };
+export const BASE_MAINNET = {
+    chainId: 8453,
+    name: 'Base Mainnet',
+    currency: 'ETH',
+    explorerUrl: 'https://basescan.org',
+    rpcUrl: 'https://mainnet.base.org'
+};
 
 
-export const CHAINS = [BASE_SEPOLIA];
-export const DEFAULT_CHAIN = BASE_SEPOLIA;
-export const RPC_URL: string = "https://sepolia.basescan.org";
+export const CHAINS = [BASE_MAINNET];
+export const DEFAULT_CHAIN = BASE_MAINNET;
+export const RPC_URL: string = 'https://mainnet.base.org';
