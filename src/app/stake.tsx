@@ -173,16 +173,21 @@ const StakeTokens: React.FC<GrantCardProps> = ({ handleRefreshData }) => {
                             required
                             disabled={isSubmitting}
                         />
-                        {/* <div className="flex gap-2 mt-3">
+                        <div className="flex gap-2 mt-3">
                             {[25, 50, 75, 100].map(pct => (
                                 <button
+                                    onClick={() => {
+                                        if (!userBalance) return; // ensure balance exists
+                                        const calculated = ((Number(userBalance) * pct) / 100).toFixed(1);
+                                        setInputAmount(calculated);
+                                    }}
                                     key={pct}
-                                    className="flex-1 px-4 py-2 bg-gray-100 hover:bg-purple-100 hover:text-purple-700 rounded-lg font-bold text-gray-700 transition-all"
+                                    className="flex-1 text-[12px] px-2 py-1 bg-gray-100 hover:bg-purple-100 hover:text-purple-700 rounded-lg font-bold text-gray-700 transition-all"
                                 >
                                     {pct}%
                                 </button>
                             ))}
-                        </div> */}
+                        </div>
                     </div>
 
                     <div className="bg-gradient-to-br from-yellow-50 to-orange-50 border-2 border-yellow-200 rounded-2xl p-6">

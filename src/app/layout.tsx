@@ -4,6 +4,7 @@ import "./globals.css";
 import { WalletProvider } from '@/context/walletContext'
 
 
+import Footer from "./footer";
 const dmSans = DM_Sans({
   subsets: ['latin'],
   weight: ['400', '500', '700'],
@@ -30,6 +31,8 @@ export default function RootLayout({
         <body
         >
           {children}
+        <Footer/>
+
         </body>
       </WalletProvider>
     </html>

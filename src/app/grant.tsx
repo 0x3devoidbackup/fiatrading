@@ -232,7 +232,7 @@ const App = () => {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as "dashboard" | "grants" | "apply" | "stake")}
-                className={`cursor-pointer px-4 py-4 font-bold text-xs lg:text-sm transition-all flex items-center gap-2 relative ${activeTab === tab.id
+                className={`cursor-pointer px-2 py-3 lg:px-4 lg:py-4 font-bold text-xs lg:text-sm transition-all flex items-center gap-1 relative ${activeTab === tab.id
                   ? 'text-purple-600'
                   : 'text-gray-500 hover:text-gray-900'
                   }`}
