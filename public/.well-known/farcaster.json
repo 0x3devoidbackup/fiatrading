@@ -1,4 +1,9 @@
 {
+    "accountAssociation": {
+        "header": "eyJmaWQiOjE0NTE2NzIsInR5cGUiOiJjdXN0b2R5Iiwia2V5IjoiMHgxMjUxQzU5ZDBCNWY0ZjM1N0VCMDU5NERjODgyQjYxNzQxN0MwMjlDIn0",
+        "payload": "eyJkb21haW4iOiJ3d3cuZ3JhbnRkYW8uZnVuIn0",
+        "signature": "TO80tni4fP4zLpqg7yBDBwB6qaf2On96UaHKchUSlXYxkz4CZ8izWKOehzW7xaTVpTSv5u64nCrLzyU4R8DB4hs="
+    },
     "miniapp": {
         "version": "1",
         "name": "Grantdao",
