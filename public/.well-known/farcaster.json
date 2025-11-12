@@ -1,13 +1,20 @@
 {
-    "id": "",
-    "name": "Grantdao",
-    "url": "https://www.grantdao.fun",
-    "icon": "https://www.grantdao.fun/images/logo.png",
-    "description": "A Community Governed Grants",
-    "splashImageUrl": "https://www.grantdao.fun/images/logo.png",
-    "splashBackgroundColor": "#000000",
-    "developer": {
-        "name": "Sypher3Labs",
-        "url": ""
+    "miniapp": {
+        "version": "1",
+        "name": "Grantdao",
+        "iconUrl": "https://www.grantdao.fun/images/logo.png",
+        "homeUrl": "https://www.grantdao.fun/",
+        "imageUrl": "https://www.grantdao.fun/images/logo.png",
+        "buttonTitle": "🚩 Apply Grant",
+        "splashImageUrl": "https://www.grantdao.fun/images/logo.png",
+        "splashBackgroundColor": "#000000",
+        "requiredChains": [
+            "eip155:8453"
+        ],
+        "requiredCapabilities": [
+            "actions.signIn",
+            "wallet.getEthereumProvider",
+            "actions.swapToken"
+        ]
     }
 }
