@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@farcaster/miniapp-sdk": "^0.2.1",
+    "@farcaster/miniapp-wagmi-connector": "^1.1.0",
     "@mediapipe/camera_utils": "^0.3.1675466862",
     "@mediapipe/drawing_utils": "^0.3.1675466124",
     "@mediapipe/hands": "^0.4.1675469240",
@@ -22,7 +23,9 @@
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "react-hot-toast": "^2.5.2",
-    "react-icons": "^5.5.0"
+    "react-icons": "^5.5.0",
+    "viem": "^2.39.0",
+    "wagmi": "^2.19.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

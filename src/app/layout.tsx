@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
 import { DM_Sans } from 'next/font/google';
 import "./globals.css";
-import { WalletProvider } from '@/context/walletContext'
-
+import Providers from '@/context/wagmiProviders'
+import { WalletProvider } from "@/context/wagmiWalletContext";
 
 import Footer from "./footer";
+
 const dmSans = DM_Sans({
   subsets: ['latin'],
   weight: ['400', '500', '700'],
 });
-
-
 
 export const metadata: Metadata = {
   title: 'GrantDao',
@@ -36,7 +35,6 @@ export const metadata: Metadata = {
   },
 }
 
-
 export const viewport = {
   width: "device-width",
   initialScale: 1.0,
@@ -49,14 +47,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${dmSans.className}`}>
-      <WalletProvider>
-        <body
-        >
-          {children}
-          <Footer />
-
-        </body>
-      </WalletProvider>
+      <body>
+        <Providers>
+          <WalletProvider>
+            {children}
+            <Footer />
+          </WalletProvider>
+        </Providers>
+      </body>
     </html>
   );
 }

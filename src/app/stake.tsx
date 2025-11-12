@@ -1,5 +1,5 @@
 'use client'
-import { useWallet } from '@/context/walletContext'
+import { useWallet } from '@/context/wagmiWalletContext'
 import React, { useState, useEffect } from 'react'
 import { Lock, Trophy, Flame } from 'lucide-react';
 import { formatNumber, approveToken, unstakeTokens, stakeTokens, fetchUserTokenBalance } from '@/utils/blockFunctions';

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { applyGrants, formatNumber, getContractCapConstants, getTotalStaked, isUserVoted, FormattedGrant, fetchUserTokenBalance, voteOnGrant, approveToken } from '@/utils/blockFunctions';
 import { Flame, Wallet, Check, X, Clock, ExternalLink, Lock, Trophy } from 'lucide-react';
-import { useWallet } from '@/context/walletContext'
+import { useWallet } from '@/context/wagmiWalletContext'
 import { Redirect } from 'next';
 import SocialLinks from "./SocialLinks";
 
@@ -14,6 +14,7 @@ interface GrantCardProps {
 
 const GrantCard: React.FC<GrantCardProps> = ({ grant, handleRefreshData }) => {
     const { isConnected, connectWallet, address, signer } = useWallet();
+   
 
     const [maxVotesCap, setMaxVotesCap] = useState<number>(0)
     const [maxVotes, setMaxVotes] = useState<number>(0)

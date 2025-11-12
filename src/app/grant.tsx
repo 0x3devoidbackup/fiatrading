@@ -3,10 +3,11 @@ import React, { useEffect, useState } from 'react';
 import { Loader2, Coins, TrendingUp, Users, Award, Flame, Wallet, Check, X, Clock, ExternalLink, Lock, Trophy } from 'lucide-react';
 import { ConnectWalletButton } from "@/utils/connectWallet"
 import { applyGrants, getGrants, TopStakers, formatNumber, getTotalStaked, FormattedGrant, fetchSevenPercentage, getEthBalanceInUSDT } from '@/utils/blockFunctions';
-import { useWallet } from '@/context/walletContext'
+import { useAccount, useConnect } from 'wagmi'
 import StakeTokens from './stake';
 import Image from 'next/image'
-
+import {useWallet} from "@/context/wagmiWalletContext"
+// import {ConnectButton} from "@/utils/connectWallet"
 
 import { DEV_WALLET } from '@/config/contracts';
 import GrantCard from "./grantcard"
@@ -17,7 +18,9 @@ interface Staker {
 }
 
 const App = () => {
-  const { isConnected, connectWallet, address, signer } = useWallet();
+  // const { isConnected, connectWallet, address, signer } = useWallet();
+  const { isConnected, address, signer } = useWallet()
+
 
   const [activeTab, setActiveTab] = useState<'dashboard' | 'grants' | 'apply' | 'stake'>('dashboard');
 

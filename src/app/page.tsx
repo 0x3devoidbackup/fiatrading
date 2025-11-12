@@ -7,7 +7,7 @@ export default function Home() {
   useEffect(() => {
     const init = async () => {
       await sdk.actions.ready();
-      console.log('Farcaster Mini App is ready!');
+      await sdk.wallet.getEthereumProvider();
     };
     init();
   }, []);
