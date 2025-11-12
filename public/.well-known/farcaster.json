@@ -1,0 +1,13 @@
+{
+    "id": "",
+    "name": "Grantdao",
+    "url": "https://www.grantdao.fun",
+    "icon": "https://www.grantdao.fun/images/logo.png",
+    "description": "A Community Governed Grants",
+    "splashImageUrl": "https://www.grantdao.fun/images/logo.png",
+    "splashBackgroundColor": "#000000",
+    "developer": {
+        "name": "Sypher3Labs",
+        "url": ""
+    }
+}
