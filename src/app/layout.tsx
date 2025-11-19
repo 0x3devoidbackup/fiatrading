@@ -51,7 +51,7 @@ export default function RootLayout({
         <Providers>
           <WalletProvider>
             {children}
-            <Footer />
+            {/* <Footer /> */}
           </WalletProvider>
         </Providers>
       </body>
