@@ -9,7 +9,7 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: '',
+  title: 'Fiatrading',
   description: '',
   openGraph: {
     images: [''],

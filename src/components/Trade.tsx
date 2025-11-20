@@ -14,7 +14,7 @@ export default function TradePage() {
     const pair = "HIPP/USD";
 
     return (
-        <div className="max-w-lg mx-auto min-h-screen bg-black text-white px-2 py-3 space-y-2">
+        <div className="max-w-lg mx-auto min-h-screen bg-black text-white px-6 py-3 space-y-2">
 
             {/* Pair + Change */}
             <div className="flex items-center space-x-1.5">
