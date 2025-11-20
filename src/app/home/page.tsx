@@ -62,12 +62,12 @@ const TokensPage = () => {
                     </div>
                     <p className='text-xs text-gray-300'>Earn</p>
                 </div>
-                <div className='flex flex-col items-center space-y-1'>
+                {/* <div className='flex flex-col items-center space-y-1'>
                     <div className="bg-[#1b1d22] p-2 w-fit rounded-full cursor-pointer hover:bg-[#23252b] transition">
                         <CalendarDays className="w-5 h-5 text-white" />
                     </div>
                     <p className='text-xs text-gray-300'>Events</p>
-                </div>
+                </div> */}
 
             </div>
             <div className="mt-10 hidden lg:flex rounded-xl shadow-lg overflow-hidden">
