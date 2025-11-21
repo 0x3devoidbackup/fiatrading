@@ -1,6 +1,7 @@
 "use client";
-
-import { Eye, Clock, Copy, Search } from "lucide-react";
+import React, { useState, useEffect } from 'react';
+import PaymentOptions from '@/components/PaymentOptions';
+import { Eye, Clock, X, Search } from "lucide-react";
 
 const assets = [
   {
@@ -38,6 +39,8 @@ const assets = [
 ];
 
 export default function PortfolioPage() {
+  const [addFunds, setAddFunds] = useState(false)
+
   return (
     <div className="max-w-4xl mx-auto min-h-screen bg-black text-white px-4 py-6 mb-10 space-y-6">
 
@@ -61,19 +64,18 @@ export default function PortfolioPage() {
 
       {/* ACTION BUTTONS */}
       <div className="flex justify-between items-center ">
-        <button className="bg-blue-600 px-4 py-2 rounded-xl font-semibold text-sm">Add Funds</button>
+        <button className="bg-blue-600 px-4 py-2 rounded-xl font-semibold text-sm cursor-pointer" onClick={(() => setAddFunds(!addFunds))}>Add Funds</button>
         <button className="bg-[#1b1d22] px-4 py-2 rounded-xl font-semibold text-sm">Withdraw</button>
         <button className="bg-[#1b1d22] px-4 py-2 rounded-xl font-semibold text-sm">Transfer</button>
-        <button className="bg-[#1b1d22] px-4 py-2 rounded-xl font-semibold text-sm">Convert</button>
       </div>
 
- 
+
 
       {/* ASSETS LIST HEADER */}
       <div className="flex items-center justify-between mt-4">
         <h2 className="text-lg font-bold">Assets List</h2>
 
-    
+
       </div>
 
       {/* FILTERS */}
@@ -84,7 +86,7 @@ export default function PortfolioPage() {
             <span>Hide small balances</span>
           </label>
 
-         
+
         </div>
 
         <Search className="w-5 h-5 text-gray-400" />
@@ -121,6 +123,37 @@ export default function PortfolioPage() {
         ))}
       </div>
 
+
+
+      {addFunds && (
+        <div
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center
+                 md:items-center z-50"
+
+        >
+          <div
+            className="
+                   bg-[#0c0e13]  rounded-t-2xl md:rounded-2xl shadow-xl 
+                    w-full md:w-[450px] 
+                    p-6 
+                    fixed bottom-0 md:static
+                    animate-slideUp md:animate-fadeIn
+                    "
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className='flex justify-between items-center'>
+              <div></div>
+              <h2 className='text-center font-extrabold'>Please Select Deposit Method</h2>
+              <X className="w-5 h-5 text-white cursor-pointer" onClick={(() => setAddFunds(!addFunds))} />
+
+            </div>
+
+
+            <PaymentOptions />
+
+          </div>
+        </div>
+      )}
     </div>
   );
 }

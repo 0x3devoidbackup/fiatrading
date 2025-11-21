@@ -1,9 +1,13 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import { User, Token } from '@/types';
-import { Send, Rocket, CalendarDays, Gift, ArrowUpRight, ArrowDownRight, Coins, Plus, Minus } from 'lucide-react';
+import { Send, Rocket, X, Gift, ArrowUpRight, ArrowDownRight, Coins, Plus, Minus, ArrowBigRight, ChevronRight } from 'lucide-react';
 import { useRouter } from "next/navigation";
+import Image from 'next/image';
+import Link from 'next/link';
 
+
+import PaymentOptions from '@/components/PaymentOptions';
 // Mock data
 const mockTokens: Token[] = [
     { id: '1', name: 'Bitcoin', symbol: 'BTC', price: 45000, change24h: 2.5, marketCap: 850000000000, supply: 19000000, pair: "USD" },
@@ -15,6 +19,7 @@ const mockTokens: Token[] = [
 
 const TokensPage = () => {
     const router = useRouter();
+    const [addFunds, setAddFunds] = useState(false)
 
     return (<div className="min-h-screen">
         <div className="max-w-5xl mx-auto px-6 py-4">
@@ -30,7 +35,7 @@ const TokensPage = () => {
                         <span className='text-gray-500 mt-3 font-bold text-sm'>USD</span>
                     </div>
 
-                    <button className="cursor-pointer w-fit bg-gradient-to-r from-blue-600 to-blue-600 text-white text-xs py-2 px-4 rounded-xl font-semibold hover:shadow-lg transition-all">Add Funds</button>
+                    <button onClick={(() => setAddFunds(!addFunds))} className="cursor-pointer w-fit bg-gradient-to-r from-blue-600 to-blue-600 text-white text-xs py-2 px-4 rounded-xl font-semibold hover:shadow-lg transition-all">Add Funds</button>
 
                 </div>
 
@@ -38,12 +43,16 @@ const TokensPage = () => {
 
             <div className='max-w-2xl mx-auto flex justify-between items-center mt-10'>
 
-                <div className='flex flex-col items-center space-y-1'>
-                    <div className="bg-[#1b1d22] p-2 w-fit rounded-full cursor-pointer hover:bg-[#23252b] transition">
-                        <Rocket className="w-5 h-5 text-white" />
+
+                <Link href='/launch'>
+                    <div className='flex flex-col items-center space-y-1'>
+                        <div className="bg-[#1b1d22] p-2 w-fit rounded-full cursor-pointer hover:bg-[#23252b] transition">
+                            <Rocket className="w-5 h-5 text-white" />
+                        </div>
+                        <p className='text-xs text-gray-300'>Launch</p>
                     </div>
-                    <p className='text-xs text-gray-300'>Launch</p>
-                </div>
+                </Link>
+
                 <div className='flex flex-col items-center space-y-1'>
                     <div className="bg-[#1b1d22] p-2 w-fit rounded-full cursor-pointer hover:bg-[#23252b] transition">
                         <Gift className="w-5 h-5 text-white" />
@@ -62,12 +71,7 @@ const TokensPage = () => {
                     </div>
                     <p className='text-xs text-gray-300'>Earn</p>
                 </div>
-                {/* <div className='flex flex-col items-center space-y-1'>
-                    <div className="bg-[#1b1d22] p-2 w-fit rounded-full cursor-pointer hover:bg-[#23252b] transition">
-                        <CalendarDays className="w-5 h-5 text-white" />
-                    </div>
-                    <p className='text-xs text-gray-300'>Events</p>
-                </div> */}
+              
 
             </div>
             <div className="mt-10 hidden lg:flex rounded-xl shadow-lg overflow-hidden">
@@ -170,6 +174,37 @@ const TokensPage = () => {
 
                 </table>
             </div>
+
+            {addFunds && (
+                <div
+                    className="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center
+                 md:items-center z-50"
+
+                >
+                    <div
+                        className="
+                   bg-[#0c0e13]  rounded-t-2xl md:rounded-2xl shadow-xl 
+                    w-full md:w-[450px] 
+                    p-6 
+                    fixed bottom-0 md:static
+                    animate-slideUp md:animate-fadeIn
+                    "
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <div className='flex justify-between items-center'>
+                            <div></div>
+                            <h2 className='text-center font-extrabold'>Please Select Deposit Method</h2>
+                            <X className="w-5 h-5 text-white cursor-pointer" onClick={(() => setAddFunds(!addFunds))} />
+
+                        </div>
+
+
+                        <PaymentOptions />
+
+                    </div>
+                </div>
+            )}
+
         </div>
     </div>
     )
