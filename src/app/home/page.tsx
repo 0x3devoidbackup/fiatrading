@@ -15,6 +15,12 @@ const mockTokens: Token[] = [
     { id: '3', name: 'Solana', symbol: 'SOL', price: 105, change24h: 5.8, marketCap: 45000000000, supply: 430000000, pair: "NGN" },
     { id: '4', name: 'Cardano', symbol: 'ADA', price: 0.65, change24h: 3.2, marketCap: 23000000000, supply: 35000000000, pair: "AUD" },
     { id: '5', name: 'Polkadot', symbol: 'DOT', price: 8.5, change24h: -0.8, marketCap: 12000000000, supply: 1400000000, pair: "CAD" },
+    { id: '6', name: 'Ripple', symbol: 'XRP', price: 0.52, change24h: 1.1, marketCap: 28000000000, supply: 52000000000, pair: "USD" },
+    { id: '7', name: 'Dogecoin', symbol: 'DOGE', price: 0.085, change24h: -2.3, marketCap: 12000000000, supply: 140000000000, pair: "GBP" },
+    { id: '8', name: 'Avalanche', symbol: 'AVAX', price: 38, change24h: 4.7, marketCap: 14000000000, supply: 360000000, pair: "CNY" },
+    { id: '9', name: 'Chainlink', symbol: 'LINK', price: 17.5, change24h: 0.9, marketCap: 9000000000, supply: 600000000, pair: "JPY" },
+    { id: '10', name: 'Litecoin', symbol: 'LTC', price: 95, change24h: -1.9, marketCap: 7000000000, supply: 73000000, pair: "USD" },
+
 ];
 
 const TokensPage = () => {
@@ -71,7 +77,7 @@ const TokensPage = () => {
                     </div>
                     <p className='text-xs text-gray-300'>Earn</p>
                 </div>
-              
+
 
             </div>
             <div className="mt-10 hidden lg:flex rounded-xl shadow-lg overflow-hidden">
