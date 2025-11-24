@@ -1,8 +1,13 @@
-import React from 'react';
-import { User, Headset, Home, Wallet, ArrowUpDown, ChartBarBig } from 'lucide-react';
+import React, { useState } from 'react';
+import { User, Headset, Home, Wallet, ArrowUpDown, ChartBarBig, X } from 'lucide-react';
 import Link from 'next/link';
+import SettingsModal from '@/components/ProfileModal';
+
 
 const Navbar: React.FC = () => {
+
+    const [modal, setModal] = useState(false)
+
     return (
         <nav className="w-full px-6 py-4 lg:bg-[#0c0e13] lg:mb-5 text-white">
 
@@ -34,10 +39,10 @@ const Navbar: React.FC = () => {
 
                 {/* Right: Icons */}
                 <div className="flex items-center space-x-4">
-                    <button className="bg-[#1b1d22] p-2 rounded-full hover:bg-[#23252b] transition">
+                    <button className="bg-[#1b1d22] p-2 rounded-full hover:bg-[#23252b] transition cursor-pointer" onClick={(() => setModal(!modal))}>
                         <User className="w-5 h-5" />
                     </button>
-                    <button className="bg-[#1b1d22] p-2 rounded-full hover:bg-[#23252b] transition">
+                    <button className="bg-[#1b1d22] p-2 rounded-full hover:bg-[#23252b] transition cursor-pointer">
                         <Headset className="w-5 h-5" />
                     </button>
                 </div>
@@ -46,17 +51,17 @@ const Navbar: React.FC = () => {
             {/* MOBILE TOP SECTION */}
             <div className="lg:hidden max-w-5xl mx-auto flex justify-between items-center">
 
-                <div className="bg-[#1b1d22] p-2 rounded-full cursor-pointer hover:bg-[#23252b] transition">
-                    <User className="w-5 h-5 text-white" />
-                </div>
+                <button className="bg-[#1b1d22] p-2 rounded-full hover:bg-[#23252b] transition cursor-pointer" onClick={(() => setModal(!modal))}>
+                    <User className="w-5 h-5" />
+                </button>
 
                 <div className="border border-[#0c0e13] bg-[#1b1d22] py-2 px-4 rounded-xl">
                     <h2 className="font-bold text-sm text-white">FIATRADING</h2>
                 </div>
 
-                <div className="bg-[#1b1d22] p-2 rounded-full cursor-pointer hover:bg-[#23252b] transition">
-                    <Headset className="w-5 h-5 text-white" />
-                </div>
+                <button className="bg-[#1b1d22] p-2 rounded-full hover:bg-[#23252b] transition">
+                    <Headset className="w-5 h-5" />
+                </button>
             </div>
 
             {/* MOBILE BOTTOM NAV */}
@@ -79,7 +84,7 @@ const Navbar: React.FC = () => {
                         <ArrowUpDown className="w-4 h-4 text-white" />
                         <p className='text-[10px] text-gray-300'>Trade</p>
                     </button>
-                    </Link>
+                </Link>
 
                 <Link href="/portfolio">
                     <button className="p-2 flex flex-col space-y-1 items-center hover:bg-[#23252b] transition">
@@ -88,6 +93,24 @@ const Navbar: React.FC = () => {
                     </button>
                 </Link>
             </div>
+
+            {modal && (
+                <div className="fixed inset-0 z-[999] bg-black/80 backdrop-blur-sm overflow-y-auto">
+                    <div className="max-w-md mx-auto p-4 pt-4">
+
+                        {/* Close Button */}
+                        <div className="flex items-center justify-end mb-4">
+                            <X
+                                className="w-6 h-6 text-neutral-300 cursor-pointer"
+                                onClick={() => setModal(false)}
+                            />
+                        </div>
+
+                        <SettingsModal />
+                    </div>
+                </div>
+            )}
+
         </nav>
     );
 };

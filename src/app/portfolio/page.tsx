@@ -2,20 +2,21 @@
 import React, { useState, useEffect } from 'react';
 import PaymentOptions from '@/components/PaymentOptions';
 import { Eye, Clock, X, Search } from "lucide-react";
+import CryptoSearchPage from '@/components/WithdrawalModal';
 
 const assets = [
   {
     id: 1,
-    name: "HUMP",
-    full: "HUMP AI",
+    name: "GBP",
+    full: "British pound",
     amount: 346.75,
     usd: 0.0076,
     icon: "🟤",
   },
   {
     id: 2,
-    name: "ETH",
-    full: "Ethereum",
+    name: "AUD",
+    full: "Australian dollar",
     amount: 0.00097,
     usd: 0.0028,
     icon: "🔷",
@@ -40,6 +41,7 @@ const assets = [
 
 export default function PortfolioPage() {
   const [addFunds, setAddFunds] = useState(false)
+  const [withdraw, setWithdraw] = useState(false)
 
   return (
     <div className="max-w-4xl mx-auto min-h-screen bg-black text-white px-4 py-6 mb-10 space-y-6">
@@ -63,10 +65,9 @@ export default function PortfolioPage() {
       </div>
 
       {/* ACTION BUTTONS */}
-      <div className="flex justify-between items-center ">
-        <button className="bg-blue-600 px-4 py-2 rounded-xl font-semibold text-sm cursor-pointer" onClick={(() => setAddFunds(!addFunds))}>Add Funds</button>
-        <button className="bg-[#1b1d22] px-4 py-2 rounded-xl font-semibold text-sm">Withdraw</button>
-        <button className="bg-[#1b1d22] px-4 py-2 rounded-xl font-semibold text-sm">Transfer</button>
+      <div className="flex justify-between items-center space-x-3">
+        <button className="bg-blue-600 px-4 py-2 rounded-xl font-semibold text-sm cursor-pointer w-full" onClick={(() => setAddFunds(!addFunds))}>Add Funds</button>
+        <button className="bg-[#1b1d22] px-4 py-2 rounded-xl font-semibold text-sm cursor-pointer w-full" onClick={(() => setWithdraw(!withdraw))}>Withdraw</button>
       </div>
 
 
@@ -151,6 +152,23 @@ export default function PortfolioPage() {
 
             <PaymentOptions />
 
+          </div>
+        </div>
+      )}
+
+      {withdraw && (
+        <div className="fixed inset-0 z-[999] bg-black/80 backdrop-blur-sm overflow-y-auto">
+          <div className="max-w-md mx-auto p-4 pt-4">
+
+            {/* Close Button */}
+            <div className="flex items-center justify-end mb-4">
+              <X
+                className="w-6 h-6 text-neutral-300 cursor-pointer"
+                onClick={() => setWithdraw(!withdraw)}
+              />
+            </div>
+
+            <CryptoSearchPage />
           </div>
         </div>
       )}

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Token } from '@/types';
 import { ArrowUpRight, ArrowDownRight, Coins, Plus, Minus } from 'lucide-react';
 import { useRouter } from "next/navigation";
-
+import Link from 'next/link';
 // Mock data
 const mockTokens: Token[] = [
     { id: '1', name: 'Bitcoin', symbol: 'BTC', price: 45000, change24h: 2.5, marketCap: 850000000000, supply: 19000000, pair: "USD" },
@@ -79,9 +79,11 @@ const MarketPage = () => {
                                 </td>
                                 <td className="px-6 py-4 text-right text-gray-600">${(token.marketCap / 1000000000).toFixed(2)}B</td>
                                 <td className="px-6 py-4 text-right">
-                                    <button className="bg-blue-600 text-sm text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                                        Trade
-                                    </button>
+                                    <Link href="/trade">
+                                        <button className="bg-blue-600 text-sm text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                            Trade
+                                        </button>
+                                    </Link>
                                 </td>
                             </tr>
                         ))}
@@ -103,7 +105,7 @@ const MarketPage = () => {
                         {mockTokens.map((token) => (
                             <tr
                                 key={token.id}
-                                onClick={() => router.push(`/trade/${token.name}`)}
+                                onClick={() => router.push(`/trade`)}
                                 className="cursor-pointer hover:bg-[#0c0e13]"
                             >
                                 <td className='py-2'>

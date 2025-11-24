@@ -65,12 +65,16 @@ const TokensPage = () => {
                     </div>
                     <p className='text-xs text-gray-300'>Rewards</p>
                 </div>
-                <div className='flex flex-col items-center space-y-1'>
-                    <div className="bg-[#1b1d22] p-2 w-fit rounded-full cursor-pointer hover:bg-[#23252b] transition">
-                        <Send className="w-5 h-5 text-white" />
+
+                <Link href='/referral'>
+                    <div className='flex flex-col items-center space-y-1'>
+                        <div className="bg-[#1b1d22] p-2 w-fit rounded-full cursor-pointer hover:bg-[#23252b] transition">
+                            <Send className="w-5 h-5 text-white" />
+                        </div>
+                        <p className='text-xs text-gray-300'>Referrals</p>
                     </div>
-                    <p className='text-xs text-gray-300'>Referrals</p>
-                </div>
+                </Link>
+
                 <div className='flex flex-col items-center space-y-1'>
                     <div className="bg-[#1b1d22] p-2 w-fit rounded-full cursor-pointer hover:bg-[#23252b] transition">
                         <Coins className="w-5 h-5 text-white" />
@@ -114,9 +118,11 @@ const TokensPage = () => {
                                 </td>
                                 <td className="px-6 py-4 text-right text-gray-600">${(token.marketCap / 1000000000).toFixed(2)}B</td>
                                 <td className="px-6 py-4 text-right">
-                                    <button className="bg-blue-600 text-sm text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                                        Trade
-                                    </button>
+                                    <Link href="/trade">
+                                        <button className="bg-blue-600 text-sm text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                            Trade
+                                        </button>
+                                    </Link>
                                 </td>
                             </tr>
                         ))}
@@ -138,7 +144,7 @@ const TokensPage = () => {
                         {mockTokens.map((token) => (
                             <tr
                                 key={token.id}
-                                onClick={() => router.push(`/trade/${token.name}`)}
+                                onClick={() => router.push(`/trade`)}
                                 className="cursor-pointer hover:bg-[#0c0e13]"
                             >
                                 <td className='py-2'>
