@@ -19,7 +19,7 @@ const PairSelector = () => {
   );
 
   return (
-    <div className="max-w-3xl mx-auto py-4 text-white">
+    <div className="max-w-3xl mx-auto py-4 px-2 text-white">
 
       {/* Search */}
       <div className="bg-neutral-900 p-3 rounded-xl mb-4">
