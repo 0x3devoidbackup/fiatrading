@@ -105,7 +105,7 @@ const Transactions = () => {
             {/* ALL TRANSACTIONS */}
             {All && (
                 <div className="fixed inset-0 z-[999] bg-black/80 backdrop-blur-sm overflow-y-auto">
-                    <div className="max-w-md mx-auto pt-4">
+                    <div className="max-w-md mx-auto px-2 pt-4">
                         <div className="flex items-center justify-end mb-4">
                             <X
                                 className="w-6 h-6 text-neutral-300 cursor-pointer"
