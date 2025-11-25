@@ -5,23 +5,9 @@ import { Send, Rocket, X, Gift, ArrowUpRight, ArrowDownRight, Coins, Plus, Minus
 import { useRouter } from "next/navigation";
 import Image from 'next/image';
 import Link from 'next/link';
-
-
+import { mockTokens } from '@/data/mockData';
 import PaymentOptions from '@/components/PaymentOptions';
-// Mock data
-const mockTokens: Token[] = [
-    { id: '1', name: 'Bitcoin', symbol: 'BTC', price: 45000, change24h: 2.5, marketCap: 850000000000, supply: 19000000, pair: "USD" },
-    { id: '2', name: 'Ethereum', symbol: 'ETH', price: 3200, change24h: -1.2, marketCap: 380000000000, supply: 120000000, pair: "EURO" },
-    { id: '3', name: 'Solana', symbol: 'SOL', price: 105, change24h: 5.8, marketCap: 45000000000, supply: 430000000, pair: "NGN" },
-    { id: '4', name: 'Cardano', symbol: 'ADA', price: 0.65, change24h: 3.2, marketCap: 23000000000, supply: 35000000000, pair: "AUD" },
-    { id: '5', name: 'Polkadot', symbol: 'DOT', price: 8.5, change24h: -0.8, marketCap: 12000000000, supply: 1400000000, pair: "CAD" },
-    { id: '6', name: 'Ripple', symbol: 'XRP', price: 0.52, change24h: 1.1, marketCap: 28000000000, supply: 52000000000, pair: "USD" },
-    { id: '7', name: 'Dogecoin', symbol: 'DOGE', price: 0.085, change24h: -2.3, marketCap: 12000000000, supply: 140000000000, pair: "GBP" },
-    { id: '8', name: 'Avalanche', symbol: 'AVAX', price: 38, change24h: 4.7, marketCap: 14000000000, supply: 360000000, pair: "CNY" },
-    { id: '9', name: 'Chainlink', symbol: 'LINK', price: 17.5, change24h: 0.9, marketCap: 9000000000, supply: 600000000, pair: "JPY" },
-    { id: '10', name: 'Litecoin', symbol: 'LTC', price: 95, change24h: -1.9, marketCap: 7000000000, supply: 73000000, pair: "USD" },
 
-];
 
 const TokensPage = () => {
     const router = useRouter();
@@ -97,7 +83,7 @@ const TokensPage = () => {
                     </thead>
                     <tbody>
                         {mockTokens.map((token) => (
-                            <tr key={token.id} className=" hover:[#0c0e13]">
+                            <tr key={token._id} className=" hover:[#0c0e13]">
                                 <td className="px-6 py-4">
                                     <div className="flex items-center space-x-3">
                                         <div className="w-10 h-10 bg-[#1b1d22] rounded-full flex items-center justify-center text-white font-bold">
@@ -118,7 +104,7 @@ const TokensPage = () => {
                                 </td>
                                 <td className="px-6 py-4 text-right text-gray-600">${(token.marketCap / 1000000000).toFixed(2)}B</td>
                                 <td className="px-6 py-4 text-right">
-                                    <Link href="/trade">
+                                    <Link href={`/trade/${token._id}`}>
                                         <button className="bg-blue-600 text-sm text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
                                             Trade
                                         </button>
@@ -143,8 +129,8 @@ const TokensPage = () => {
                     <tbody>
                         {mockTokens.map((token) => (
                             <tr
-                                key={token.id}
-                                onClick={() => router.push(`/trade`)}
+                                key={token._id}
+                                onClick={() => router.push(`/trade/${token._id}`)}
                                 className="cursor-pointer hover:bg-[#0c0e13]"
                             >
                                 <td className='py-2'>

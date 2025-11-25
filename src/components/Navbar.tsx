@@ -28,7 +28,7 @@ const Navbar: React.FC = () => {
                         <button className="hover:text-blue-400 transition">Market</button>
 
                     </Link>
-                    <Link href="/trade">
+                    <Link href="/trade/86736716">
                         <button className="hover:text-blue-400 transition">Trade</button>
                     </Link>
                     <Link href="/portfolio">
@@ -79,7 +79,7 @@ const Navbar: React.FC = () => {
                         <p className='text-[10px] text-gray-300'>Market</p>
                     </button></Link>
 
-                <Link href="/trade">
+                <Link href="/trade/8437398">
                     <button className="p-2 flex flex-col space-y-1 items-center hover:bg-[#23252b] transition">
                         <ArrowUpDown className="w-4 h-4 text-white" />
                         <p className='text-[10px] text-gray-300'>Trade</p>
@@ -106,7 +106,7 @@ const Navbar: React.FC = () => {
                             />
                         </div>
 
-                        <SettingsModal />
+                        <SettingsModal onComplete={() => setModal(false)} />
                     </div>
                 </div>
             )}

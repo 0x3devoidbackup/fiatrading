@@ -6,7 +6,7 @@ export interface User {
 }
 
 export interface Token {
-  id: string;
+  _id: string;
   name: string;
   symbol: string;
   price: number;

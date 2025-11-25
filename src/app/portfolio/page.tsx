@@ -1,43 +1,13 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import PaymentOptions from '@/components/PaymentOptions';
-import { Eye, Clock, X, Search } from "lucide-react";
+import { Eye, Clock, X, Search, } from "lucide-react";
 import CryptoSearchPage from '@/components/WithdrawalModal';
+import Link from 'next/link';
+import { fiatAssets } from '@/data/mockData';
 
-const assets = [
-  {
-    id: 1,
-    name: "GBP",
-    full: "British pound",
-    amount: 346.75,
-    usd: 0.0076,
-    icon: "🟤",
-  },
-  {
-    id: 2,
-    name: "AUD",
-    full: "Australian dollar",
-    amount: 0.00097,
-    usd: 0.0028,
-    icon: "🔷",
-  },
-  {
-    id: 3,
-    name: "USD",
-    full: "Dollar",
-    amount: 0,
-    usd: 0,
-    icon: "🟢",
-  },
-  {
-    id: 4,
-    name: "EURO",
-    full: "EURO",
-    amount: 0,
-    usd: 0,
-    icon: "🟠",
-  },
-];
+
+
 
 export default function PortfolioPage() {
   const [addFunds, setAddFunds] = useState(false)
@@ -95,9 +65,9 @@ export default function PortfolioPage() {
 
       {/* ASSETS LIST */}
       <div className="space-y-6 mt-4">
-        {assets.map((asset) => (
+        {fiatAssets.map((asset) => (
           <div
-            key={asset.id}
+            key={asset._id}
             className="flex items-center justify-between border-b border-[#1c1d20] pb-4"
           >
             {/* LEFT */}
@@ -117,9 +87,11 @@ export default function PortfolioPage() {
             </div>
 
             {/* TRADE BUTTON */}
-            <button className="bg-[#1b1d22] px-4 py-2 rounded-xl font-semibold text-sm">
-              Trade
-            </button>
+            <Link href={`/trade/${asset._id}`}>
+              <button className="bg-[#1b1d22] px-4 py-2 rounded-xl font-semibold text-sm">
+                Trade
+              </button>
+            </Link>
           </div>
         ))}
       </div>

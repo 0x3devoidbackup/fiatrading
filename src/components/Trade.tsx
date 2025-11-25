@@ -1,26 +1,52 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, Info, Plus, Minus } from "lucide-react";
+import { ChevronDown, Info, Plus, Minus, X, } from "lucide-react";
+import PairSelector from "./SelectPairs"
 
-export default function TradePage() {
+export default function Swap() {
     const [tab, setTab] = useState<"buy" | "sell">("buy");
-    const [orderType, setOrderType] = useState("Limit");
+    const [orderType, setOrderType] = useState("Market");
     const [price, setPrice] = useState(689.1);
     const [amount, setAmount] = useState(8.003192);
     const [total, setTotal] = useState(5515);
     const [slider, setSlider] = useState(0);
+    const [pair, setPair] = useState("HIPP/USD")
+    const [isSlectingpair, setSelectinPair] = useState(false)
 
-    const pair = "HIPP/USD";
+
+    const mockSpot = [
+        {
+            pair: "BTC/EUR",
+            side: "BUY",
+            price: "45000",
+            amount: "0.001",
+            time: "2025-11-11 09:30:14",
+        },
+        {
+            pair: "ETH/USD",
+            side: "SELL",
+            price: "2300",
+            amount: "0.05",
+            time: "2025-11-09 15:22:58",
+        },
+    ];
+
+    const Section = ({ children }: { children: React.ReactNode }) => (
+        <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4 mb-4">
+            {children}
+        </div>
+    );
 
     return (
         <div className="max-w-lg mx-auto min-h-screen bg-black text-white px-6 py-3 space-y-2">
 
             {/* Pair + Change */}
-            <div className="flex items-center space-x-1.5">
+            <button className="flex items-center space-x-.5 cursor-pointer" onClick={() => setSelectinPair(true)}>
                 <h1 className="text-sm font-semibold">{pair}</h1>
+                <ChevronDown className="w-5 h-5 text-white" />
                 <span className="bg-green-700 text-[10px] px-1.5 py-0.5 rounded">+0.41%</span>
-            </div>
+            </button>
 
             {/* BUY / SELL TABS */}
             <div className="flex bg-[#15161a] p-0.5 rounded-lg">
@@ -159,6 +185,23 @@ export default function TradePage() {
                 }`}>
                 {tab === "buy" ? "Buy" : "Sell"} HIPP
             </button>
+
+
+
+            {isSlectingpair && (
+                <div className="fixed inset-0 z-[999] bg-black/80 backdrop-blur-sm overflow-y-auto">
+                    <div className="max-w-md mx-auto  pt-4">
+                        <div className="flex items-center justify-end mb-4">
+                            <X
+                                className="w-6 h-6 text-neutral-300 cursor-pointer"
+                                onClick={() => setSelectinPair(false)}
+                            />
+                        </div>
+
+                        <PairSelector />
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

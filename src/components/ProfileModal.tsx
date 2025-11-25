@@ -1,29 +1,30 @@
 import React from "react";
 import {
-    X,
-    Percent,
+
     Gift,
     UserPlus,
     Shield,
     FileText,
     Settings,
-    KeyRound,
     MessageCircle,
     Heart,
-    SlidersHorizontal,
-    Moon,
-    Copy,
-} from "lucide-react";
 
-export default function SettingsModal() {
+} from "lucide-react";
+import Link from "next/link"
+
+interface Profile {
+    onComplete: () => void;
+}
+
+export default function SettingsModal({ onComplete }: Profile) {
     const menu = [
-        { icon: Gift, label: "Rewards Hub" },
-        { icon: UserPlus, label: "Referral" },
-        { icon: Shield, label: "Security" },
-        { icon: FileText, label: "Transactions", dot: true },
-        { icon: Settings, label: "Settings" },
-        { icon: MessageCircle, label: "Join Community" },
-        { icon: Heart, label: "Customer Service & Support" },
+        { icon: Gift, label: "Rewards Hub", link: "/home" },
+        { icon: UserPlus, label: "Referral", link: "/referral" },
+        { icon: Shield, label: "Security", link: "/home" },
+        { icon: FileText, label: "Transactions", dot: true, link: "/transactions" },
+        { icon: Settings, label: "Settings", link: "/settings" },
+        { icon: MessageCircle, label: "Join Community", link: "/home" },
+        { icon: Heart, label: "Customer Service & Support", link: "/home" },
     ];
 
     return (
@@ -38,7 +39,9 @@ export default function SettingsModal() {
             {/* Menu List */}
             <div className="space-y-2 mb-6">
                 {menu.map((item, i) => (
-                    <div
+                    <Link
+                        onClick={onComplete}
+                        href={item.link}
                         key={i}
                         className="flex cursor-pointer items-center justify-between p-3 bg-neutral-900 rounded-xl border border-neutral-800 hover:bg-neutral-800 transition"
                     >
@@ -50,7 +53,7 @@ export default function SettingsModal() {
                         {item.dot && <span className="w-2 h-2 bg-red-500 rounded-full"></span>}
 
                         <span className="text-neutral-500">›</span>
-                    </div>
+                    </Link>
                 ))}
             </div>
 
@@ -60,9 +63,11 @@ export default function SettingsModal() {
                     Please do not disclose your password, SMS codes or Google Authenticator
                     codes to anyone.
                 </p>
-                <button className="w-full cursor-pointer py-3 rounded-xl border border-neutral-700 text-sm font-medium hover:bg-neutral-800">
-                    Log Out
-                </button>
+                <Link href="/">
+                    <button className="w-full cursor-pointer py-3 rounded-xl border border-neutral-700 text-sm font-medium hover:bg-neutral-800">
+                        Log Out
+                    </button>
+                </Link>
             </div>
 
 

@@ -1,0 +1,52 @@
+import { Token } from '@/types';
+
+
+export const mockTokens: Token[] = [
+    { _id: '1', name: 'Bitcoin', symbol: 'BTC', price: 45000, change24h: 2.5, marketCap: 850000000000, supply: 19000000, pair: "USD" },
+    { _id: '2', name: 'Ethereum', symbol: 'ETH', price: 3200, change24h: -1.2, marketCap: 380000000000, supply: 120000000, pair: "EURO" },
+    { _id: '3', name: 'Solana', symbol: 'SOL', price: 105, change24h: 5.8, marketCap: 45000000000, supply: 430000000, pair: "NGN" },
+    { _id: '4', name: 'Cardano', symbol: 'ADA', price: 0.65, change24h: 3.2, marketCap: 23000000000, supply: 35000000000, pair: "AUD" },
+    { _id: '5', name: 'Polkadot', symbol: 'DOT', price: 8.5, change24h: -0.8, marketCap: 12000000000, supply: 1400000000, pair: "CAD" },
+    { _id: '6', name: 'Ripple', symbol: 'XRP', price: 0.52, change24h: 1.1, marketCap: 28000000000, supply: 52000000000, pair: "USD" },
+    { _id: '7', name: 'Dogecoin', symbol: 'DOGE', price: 0.085, change24h: -2.3, marketCap: 12000000000, supply: 140000000000, pair: "GBP" },
+    { _id: '8', name: 'Avalanche', symbol: 'AVAX', price: 38, change24h: 4.7, marketCap: 14000000000, supply: 360000000, pair: "CNY" },
+    { _id: '9', name: 'Chainlink', symbol: 'LINK', price: 17.5, change24h: 0.9, marketCap: 9000000000, supply: 600000000, pair: "JPY" },
+    { _id: '10', name: 'Litecoin', symbol: 'LTC', price: 95, change24h: -1.9, marketCap: 7000000000, supply: 73000000, pair: "USD" },
+
+
+]
+
+export const fiatAssets = [
+    {
+        _id: 1,
+        name: "GBP",
+        full: "British pound",
+        amount: 346.75,
+        usd: 0.0076,
+        icon: "🟤",
+    },
+    {
+        _id: 2,
+        name: "AUD",
+        full: "Australian dollar",
+        amount: 0.00097,
+        usd: 0.0028,
+        icon: "🔷",
+    },
+    {
+        _id: 3,
+        name: "USD",
+        full: "Dollar",
+        amount: 0,
+        usd: 0,
+        icon: "🟢",
+    },
+    {
+        _id: 4,
+        name: "EURO",
+        full: "EURO",
+        amount: 0,
+        usd: 0,
+        icon: "🟠",
+    },
+];
