@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import { X } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { ArrowLeft, X } from "lucide-react";
 
 const mockAll = [
     {
@@ -61,6 +62,8 @@ const mockDepWith = [
 ];
 
 const Transactions = () => {
+    const router = useRouter();
+
     const [All, setAll] = useState(false);
     const [spot, setSpot] = useState(false);
     const [depWith, setDepWith] = useState(false);
@@ -72,8 +75,12 @@ const Transactions = () => {
     );
 
     return (
-        <div className="max-w-3xl mx-auto p-4">
-            <h2 className=" font-extrabold text-2xl">Transactions</h2>
+        <div className="min-h-screen text-white px-4 pb-20 max-w-xl mx-auto">
+            <ArrowLeft
+                className="w-6 h-6 cursor-pointer text-neutral-300"
+                onClick={() => router.back()}
+            />
+            <h2 className=" font-extrabold text-2xl mt-5">Transactions</h2>
 
             {/* Main Options */}
             <div className="space-y-2 mb-6 mt-5">

@@ -20,9 +20,9 @@ export default function SettingsModal({ onComplete }: Profile) {
     const menu = [
         { icon: Gift, label: "Rewards Hub", link: "/home" },
         { icon: UserPlus, label: "Referral", link: "/referral" },
-        { icon: Shield, label: "Security", link: "/home" },
+        { icon: Shield, label: "Security", link: "/security" },
         { icon: FileText, label: "Transactions", dot: true, link: "/transactions" },
-        { icon: Settings, label: "Settings", link: "/settings" },
+        // { icon: Settings, label: "Settings", link: "/settings" },
         { icon: MessageCircle, label: "Join Community", link: "/home" },
         { icon: Heart, label: "Customer Service & Support", link: "/home" },
     ];

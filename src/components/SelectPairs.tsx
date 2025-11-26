@@ -19,7 +19,7 @@ const PairSelector = () => {
   );
 
   return (
-    <div className="max-w-3xl mx-auto py-4 text-white">
+    <div className="min-h-screen text-white px-4 pb-20 max-w-xl mx-auto">
 
       {/* Search */}
       <div className="bg-neutral-900 p-3 rounded-xl mb-4">
@@ -55,9 +55,8 @@ const PairSelector = () => {
             <div className="text-right">
               <div className="text-white font-semibold">{p.price}</div>
               <div
-                className={`text-sm font-medium ${
-                  p.change >= 0 ? "text-green-400" : "text-red-400"
-                }`}
+                className={`text-sm font-medium ${p.change >= 0 ? "text-green-400" : "text-red-400"
+                  }`}
               >
                 {p.change >= 0 ? "+" : ""}
                 {p.change}%
