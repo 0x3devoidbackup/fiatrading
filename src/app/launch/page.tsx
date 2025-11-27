@@ -15,6 +15,8 @@ const LaunchPage = () => {
         telegram: "",
         website: "",
     });
+    const [pair, setPair] = useState("");
+
 
     const [loading, setLoading] = useState(false);
     return (
@@ -69,6 +71,29 @@ const LaunchPage = () => {
                 </div>
 
                 {/* INPUTS */}
+
+                {/* Pair Selector */}
+                <div className="mt-3">
+                    <label className="block text-sm font-semibold mb-1">
+                        FIAT PAIR <span className="text-red-500">*</span>
+                    </label>
+
+                    <select
+                        required
+                        value={pair}
+                        onChange={(e) => setPair(e.target.value)}
+                        className="w-fit cursor-pointer bg-transparent border border-[#2c2f36] focus:border-[#224930] outline-none rounded-xl py-2 px-4 text-sm"
+                    >
+                        <option value="" className="bg-black">Select Pair</option>
+                        <option value="USD" className="bg-black">USD</option>
+                        <option value="EUR" className="bg-black">EUR</option>
+                        <option value="GBP" className="bg-black">GBP</option>
+                        <option value="NGN" className="bg-black">NGN</option>
+                        <option value="ZAR" className="bg-black">ZAR</option>
+                        <option value="JPY" className="bg-black">JPY</option>
+                    </select>
+                </div>
+
 
                 <div className="grid sm:grid-cols-2 gap-2 mt-5">
                     <div>

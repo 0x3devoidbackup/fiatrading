@@ -39,7 +39,7 @@ export default function Swap() {
     );
 
     return (
-        <div className="max-w-lg mx-auto min-h-screen  text-white px-6 py-3 space-y-2">
+        <div className="max-w-lg mx-auto  text-white px-6 py-3 space-y-2">
 
             {/* Pair + Change */}
             <button className="flex items-center space-x-.5 cursor-pointer" onClick={() => setSelectinPair(true)}>

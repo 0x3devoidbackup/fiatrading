@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { User, Headset, Home, Wallet, ArrowUpDown, ChartBarBig, X } from 'lucide-react';
 import Link from 'next/link';
 import SettingsModal from '@/components/ProfileModal';
+import Image from 'next/image';
 
 
 const Navbar: React.FC = () => {
@@ -16,7 +17,7 @@ const Navbar: React.FC = () => {
 
                 {/* Left: Logo */}
                 <div className="flex items-center space-x-4">
-                    <h2 className="font-bold text-xl">FIATRADING</h2>
+                    <Image src="/images/logo.png" className='rounded' alt='.' width={50} height={50} />
                 </div>
 
                 {/* Center: Navigation */}
@@ -42,9 +43,12 @@ const Navbar: React.FC = () => {
                     <button className="bg-[#1b1d22] p-2 rounded-full hover:bg-[#23252b] transition cursor-pointer" onClick={(() => setModal(!modal))}>
                         <User className="w-5 h-5" />
                     </button>
-                    <button className="bg-[#1b1d22] p-2 rounded-full hover:bg-[#23252b] transition cursor-pointer">
-                        <Headset className="w-5 h-5" />
-                    </button>
+                    <Link href="https://farcaster.xyz/support">
+                        <button className="bg-[#1b1d22] p-2 rounded-full hover:bg-[#23252b] transition cursor-pointer">
+                            <Headset className="w-5 h-5" />
+                        </button>
+                    </Link>
+
                 </div>
             </div>
 
@@ -55,13 +59,19 @@ const Navbar: React.FC = () => {
                     <User className="w-5 h-5" />
                 </button>
 
-                <div className="border border-[#0c0e13] bg-[#1b1d22] py-2 px-4 rounded-xl">
+                {/* <div className="border border-[#0c0e13] bg-[#1b1d22] py-2 px-4 rounded-xl">
                     <h2 className="font-bold text-sm text-white">FIATRADING</h2>
-                </div>
+                </div> */}
 
-                <button className="bg-[#1b1d22] p-2 rounded-full hover:bg-[#23252b] transition">
-                    <Headset className="w-5 h-5" />
-                </button>
+                <div className="flex items-center space-x-4">
+                    <Image src="/images/logo.png" alt='.' width={35} height={30} className='rounded' />
+                </div>
+                <Link href="https://farcaster.xyz/support">
+                    <button className="bg-[#1b1d22] p-2 rounded-full hover:bg-[#23252b] transition">
+                        <Headset className="w-5 h-5" />
+                    </button>
+                </Link>
+
             </div>
 
             {/* MOBILE BOTTOM NAV */}

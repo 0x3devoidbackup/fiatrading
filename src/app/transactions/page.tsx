@@ -75,7 +75,7 @@ const Transactions = () => {
     );
 
     return (
-        <div className="min-h-screen text-white px-4 pb-20 max-w-xl mx-auto">
+        <div className=" text-white px-4 pb-20 max-w-xl mx-auto">
             <ArrowLeft
                 className="w-6 h-6 cursor-pointer text-neutral-300"
                 onClick={() => router.back()}

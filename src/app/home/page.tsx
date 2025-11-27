@@ -45,12 +45,16 @@ const TokensPage = () => {
                     </div>
                 </Link>
 
-                <div className='flex flex-col items-center space-y-1'>
-                    <div className="bg-[#1b1d22] p-2 w-fit rounded-full cursor-pointer hover:bg-[#23252b] transition">
-                        <Gift className="w-5 h-5 text-white" />
+                <Link href='/rewards'>
+                    <div className='flex flex-col items-center space-y-1'>
+                        <div className="bg-[#1b1d22] p-2 w-fit rounded-full cursor-pointer hover:bg-[#23252b] transition">
+                            <Gift className="w-5 h-5 text-white" />
+                        </div>
+                        <p className='text-xs text-gray-300'>Rewards</p>
                     </div>
-                    <p className='text-xs text-gray-300'>Rewards</p>
-                </div>
+                </Link>
+
+
 
                 <Link href='/referral'>
                     <div className='flex flex-col items-center space-y-1'>
@@ -61,12 +65,16 @@ const TokensPage = () => {
                     </div>
                 </Link>
 
-                <div className='flex flex-col items-center space-y-1'>
-                    <div className="bg-[#1b1d22] p-2 w-fit rounded-full cursor-pointer hover:bg-[#23252b] transition">
-                        <Coins className="w-5 h-5 text-white" />
+
+
+                <Link href='/trade/8368095'>
+                    <div className='flex flex-col items-center space-y-1'>
+                        <div className="bg-[#1b1d22] p-2 w-fit rounded-full cursor-pointer hover:bg-[#23252b] transition">
+                            <Coins className="w-5 h-5 text-white" />
+                        </div>
+                        <p className='text-xs text-gray-300'>Earn</p>
                     </div>
-                    <p className='text-xs text-gray-300'>Earn</p>
-                </div>
+                </Link>
 
 
             </div>
@@ -116,7 +124,7 @@ const TokensPage = () => {
                 </table>
             </div>
 
-            <div className="mt-10 lg:hidden rounded-xl shadow-lg overflow-hidden">
+            <div className="mt-10 lg:hidden rounded-xl shadow-lg overflow-hidden pb-20">
                 <table className="w-full">
                     <thead className="">
                         <tr>

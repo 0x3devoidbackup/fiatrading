@@ -18,13 +18,13 @@ interface Profile {
 
 export default function SettingsModal({ onComplete }: Profile) {
     const menu = [
-        { icon: Gift, label: "Rewards Hub", link: "/home" },
+        { icon: Gift, label: "Rewards Hub", link: "/rewards" },
         { icon: UserPlus, label: "Referral", link: "/referral" },
         { icon: Shield, label: "Security", link: "/security" },
         { icon: FileText, label: "Transactions", dot: true, link: "/transactions" },
         // { icon: Settings, label: "Settings", link: "/settings" },
-        { icon: MessageCircle, label: "Join Community", link: "/home" },
-        { icon: Heart, label: "Customer Service & Support", link: "/home" },
+        { icon: MessageCircle, label: "Join Community", link: "https://telegram.org/" },
+        { icon: Heart, label: "Customer Service & Support", link: "https://farcaster.xyz/" },
     ];
 
     return (
@@ -60,7 +60,7 @@ export default function SettingsModal({ onComplete }: Profile) {
             {/* Buttons */}
             <div className="space-y-3">
                 <p className="text-[10px] text-neutral-500 text-center mt-4">
-                    Please do not disclose your password, SMS codes or Google Authenticator
+                    Please do not disclose your password or Email codes
                     codes to anyone.
                 </p>
                 <Link href="/">
