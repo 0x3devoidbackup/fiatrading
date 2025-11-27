@@ -64,7 +64,7 @@ const Navbar: React.FC = () => {
                 </div> */}
 
                 <div className="flex items-center space-x-4">
-                    <Image src="/images/logo.png" alt='.' width={35} height={30} className='rounded' />
+                    <Image src="/images/logo.png" alt='.' width={50} height={50} className='rounded' />
                 </div>
                 <Link href="https://farcaster.xyz/support">
                     <button className="bg-[#1b1d22] p-2 rounded-full hover:bg-[#23252b] transition">
