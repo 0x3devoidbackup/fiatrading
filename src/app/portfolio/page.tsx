@@ -14,7 +14,7 @@ export default function PortfolioPage() {
   const [withdraw, setWithdraw] = useState(false)
 
   return (
-    <div className="max-w-4xl mx-auto min-h-screen bg-black text-white px-4 py-6 mb-10 space-y-6">
+    <div className="max-w-4xl mx-auto min-h-screen text-white px-4 py-6 mb-10 space-y-6">
 
       {/* TOP SECTION */}
       <div className="space-y-1">
@@ -23,8 +23,8 @@ export default function PortfolioPage() {
           <Eye className="w-4 h-4" />
         </div>
 
-        <h1 className="text-3xl font-bold">0.01 <span className="text-gray-400 text-sm">USDT</span></h1>
-        <p className="text-gray-500 text-sm">≈ 0.0099 USD</p>
+        <h1 className="text-3xl font-bold">10,000 <span className="text-gray-400 text-sm">USDT</span></h1>
+        <p className="text-gray-500 text-sm">≈ 10,001 USD</p>
 
         <div className="flex items-center space-x-2 text-sm text-white mt-2">
           <div className="bg-[#141519] px-3 py-2 rounded-lg flex items-center space-x-2">
@@ -35,9 +35,26 @@ export default function PortfolioPage() {
       </div>
 
       {/* ACTION BUTTONS */}
-      <div className="flex justify-between items-center space-x-3">
-        <button className="bg-blue-600 px-4 py-2 rounded-xl font-semibold text-sm cursor-pointer w-full" onClick={(() => setAddFunds(!addFunds))}>Add Funds</button>
-        <button className="bg-[#1b1d22] px-4 py-2 rounded-xl font-semibold text-sm cursor-pointer w-full" onClick={(() => setWithdraw(!withdraw))}>Withdraw</button>
+      <div className="grid grid-cols-3 gap-3">
+        <button
+          className="bg-blue-600 py-2 rounded-xl font-semibold text-sm cursor-pointer w-full"
+          onClick={() => setAddFunds(!addFunds)}
+        >
+          Add Funds
+        </button>
+
+        <button
+          className="bg-[#1b1d22] py-2 rounded-xl font-semibold text-sm cursor-pointer w-full"
+          onClick={() => setWithdraw(!withdraw)}
+        >
+          Withdraw
+        </button>
+
+        <Link href="/send">
+          <button className="bg-[#1b1d22] py-2 rounded-xl font-semibold text-sm cursor-pointer w-full">
+            Send
+          </button>
+        </Link>
       </div>
 
 

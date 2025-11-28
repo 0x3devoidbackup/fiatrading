@@ -15,7 +15,7 @@ type Transaction = {
 };
 const mock: Transaction[] = [
     {
-        _id: "0x91f3...a23d",
+        _id: "MF...a23d",
         name: "John",
         amount: "1200",
         price: 0.15,
@@ -25,7 +25,7 @@ const mock: Transaction[] = [
         hash: "0x91f3cfe321902a23d"
     },
     {
-        _id: "0xa34b...12ff",
+        _id: "MF...12ff",
         name: "Lola",
         amount: "800",
         price: 0.15,
@@ -35,7 +35,7 @@ const mock: Transaction[] = [
         hash: "0xa34beab90170212ff"
     },
     {
-        _id: "0x71ac...8842",
+        _id: "MF...8842",
         name: "Mike",
         amount: "560",
         price: 0.15,
@@ -45,7 +45,7 @@ const mock: Transaction[] = [
         hash: "0x71ac9082d8728842"
     },
     {
-        _id: "0x33df...cc11",
+        _id: "MF...cc11",
         name: "Ada",
         amount: "1500",
         price: 0.15,
@@ -55,7 +55,7 @@ const mock: Transaction[] = [
         hash: "0x33df9fedbb89cc11"
     },
     {
-        _id: "0xcc91...3bb1",
+        _id: "MF...3bb1",
         name: "David",
         amount: "2200",
         price: 0.15,
@@ -65,7 +65,7 @@ const mock: Transaction[] = [
         hash: "0xcc9183dde0993bb1"
     },
     {
-        _id: "0x99d0...771a",
+        _id: "MF...771a",
         name: "Henry",
         amount: "480",
         price: 0.15,
@@ -75,7 +75,7 @@ const mock: Transaction[] = [
         hash: "0x99d0ffdd2902771a"
     },
     {
-        _id: "0x51c1...992b",
+        _id: "MF...992b",
         name: "Queen",
         amount: "2600",
         price: 0.15,
@@ -85,7 +85,7 @@ const mock: Transaction[] = [
         hash: "0x51c18d922314992b"
     },
     {
-        _id: "0x883d...019a",
+        _id: "MF...019a",
         name: "Samuel",
         amount: "1900",
         price: 0.15,
@@ -95,7 +95,7 @@ const mock: Transaction[] = [
         hash: "0x883dba119802019a"
     },
     {
-        _id: "0x71ab...9021",
+        _id: "MF...9021",
         name: "Ope",
         amount: "700",
         price: 0.15,
@@ -105,7 +105,7 @@ const mock: Transaction[] = [
         hash: "0x71ab2ee003119021"
     },
     {
-        _id: "0x1200...ee22",
+        _id: "MF...ee22",
         name: "Gideon",
         amount: "1300",
         price: 0.15,
@@ -122,7 +122,7 @@ const Transactions = () => {
     const [tnx, setTnx] = useState<Transaction[]>(mock);
 
     return (
-        <div className="bg-[#0c0e13] rounded-2xl border border-[#1b1f29] mt-5 w-full p-4  flex flex-col max-w-2xl mx-auto">
+        <div className="bg-[#0c0e13] rounded-2xl border border-[#1b1f29] MF-5 w-full p-4  flex flex-col max-w-2xl mx-auto">
             <h3 className="text-white font-semibold mb-3 text-sm uppercase tracking-wide">
                 Transactions
             </h3>

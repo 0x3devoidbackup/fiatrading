@@ -1,7 +1,7 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import { User, Token } from '@/types';
-import { Send, Rocket, X, Gift, ArrowUpRight, ArrowDownRight, Coins, Plus, Minus, ArrowBigRight, ChevronRight } from 'lucide-react';
+import { Send, Rocket, X, Gift, ArrowUpRight, ArrowDownRight, Coins, Plus, Minus, TrendingUp, ChevronRight } from 'lucide-react';
 import { useRouter } from "next/navigation";
 import Image from 'next/image';
 import Link from 'next/link';
@@ -70,9 +70,9 @@ const TokensPage = () => {
                 <Link href='/trade/8368095'>
                     <div className='flex flex-col items-center space-y-1'>
                         <div className="bg-[#1b1d22] p-2 w-fit rounded-full cursor-pointer hover:bg-[#23252b] transition">
-                            <Coins className="w-5 h-5 text-white" />
+                            <TrendingUp className="w-5 h-5 text-white" />
                         </div>
-                        <p className='text-xs text-gray-300'>Earn</p>
+                        <p className='text-xs text-gray-300'>Trade</p>
                     </div>
                 </Link>
 
