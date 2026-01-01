@@ -1,18 +1,19 @@
 import type { Metadata } from "next";
-import { DM_Sans } from 'next/font/google';
+import { DM_Sans } from "next/font/google";
 import "./globals.css";
-import ClientLayout from "./client-layout"; // new wrapper
+import ClientLayout from "./client-layout";
+import { AuthProvider } from "@/context/AuthContext";
 
 const dmSans = DM_Sans({
-  subsets: ['latin'],
-  weight: ['400', '500', '700'],
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
 });
 
 export const metadata: Metadata = {
-  title: 'MintFiat - AI Trading Marketplace',
-  description: '',
+  title: "MintFiat - AI Trading Marketplace",
+  description: "",
   openGraph: {
-    images: [''],
+    images: [""],
   },
 };
 
@@ -21,13 +22,17 @@ export const viewport = {
   initialScale: 1.0,
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" className={dmSans.className}>
       <body className="min-h-screen bg-gray-50 antialiased">
-        <ClientLayout>
-          {children}
-        </ClientLayout>
+        <AuthProvider>
+          <ClientLayout>{children}</ClientLayout>
+        </AuthProvider>
       </body>
     </html>
   );

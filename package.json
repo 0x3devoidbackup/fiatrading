@@ -17,6 +17,7 @@
     "@mediapipe/tasks-vision": "^0.10.22-rc.20250304",
     "@web3modal/ethers": "^5.1.11",
     "@web3modal/react": "^2.7.1",
+    "axios": "^1.13.2",
     "ethers": "^6.13.7",
     "lucide-react": "^0.548.0",
     "next": "16.0.1",
