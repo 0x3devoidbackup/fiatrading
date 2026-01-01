@@ -9,6 +9,5 @@ export default axios.create({
     "Content-Type": "application/json",
     Accept: "application/json, text/plain, */*",
   },
-  timeout: 10000,
 });
 

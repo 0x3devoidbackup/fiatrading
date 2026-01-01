@@ -15,6 +15,7 @@ interface AuthContextType {
   loading: boolean;
   isAuthenticated: boolean;
   login: (email: string, password: string) => Promise<void>;
+//   register: (fullname: string, email: string, password: string, refUID: any) => Promise<void>;
   logout: () => Promise<void>;
 }
 

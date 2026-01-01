@@ -18,15 +18,17 @@ class NotificationManager {
     this.container = document.createElement("div");
     this.container.id = "notification-container";
     this.container.style.cssText = `
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 9999;
-      display: flex;
-      flex-direction: column-reverse;
-      gap: 12px;
-      pointer-events: none;
-    `;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 12px;
+    pointer-events: none;
+`;
+
     document.body.appendChild(this.container);
   }
 
@@ -41,7 +43,7 @@ class NotificationManager {
         icon: "✕",
       },
       info: {
-        bg: "#3b82f6",
+        bg: "#1F1F1F",
         icon: "ℹ",
       },
       warning: {
@@ -137,7 +139,7 @@ class NotificationManager {
       closeBtn.style.background = "rgba(255, 255, 255, 0.2)";
     };
 
-    notification.appendChild(icon);
+    // notification.appendChild(icon);
     notification.appendChild(messageEl);
     notification.appendChild(closeBtn);
 
