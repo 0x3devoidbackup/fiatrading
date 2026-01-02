@@ -2,7 +2,7 @@ import axios from "axios";
 
 const server = "https://mintfiat.onrender.com";
 
-export default axios.create({
+export const api = axios.create({
   baseURL: server,
   withCredentials: true,
   headers: {
@@ -10,4 +10,3 @@ export default axios.create({
     Accept: "application/json, text/plain, */*",
   },
 });
-

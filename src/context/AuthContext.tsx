@@ -1,6 +1,14 @@
-'use client'
-import { createContext, useContext, useEffect, useState, ReactNode } from "react";
-import axios from "../api/axios";
+"use client";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  ReactNode,
+} from "react";
+import {api} from "../api/axios";
+import { notify } from "@/utils/notify";
+import axios from "axios";
 
 // 1️⃣ Define user type (adjust based on your backend)
 interface User {
@@ -14,8 +22,8 @@ interface AuthContextType {
   user: User | null;
   loading: boolean;
   isAuthenticated: boolean;
-  login: (email: string, password: string) => Promise<void>;
-//   register: (fullname: string, email: string, password: string, refUID: any) => Promise<void>;
+  login: (email: string, password: string) => Promise<Boolean>;
+  //   register: (fullname: string, email: string, password: string, refUID: any) => Promise<void>;
   logout: () => Promise<void>;
 }
 
@@ -52,9 +60,34 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     checkAuth();
   }, []);
 
-  const login = async (email: string, password: string) => {
-    const res = await axios.post("/auth/signin", { email, password });
-    setUser(res.data.user);
+  const login = async (email: string, password: string): Promise<boolean> => {
+    if (!email || !password) {
+      notify("Email and password are required");
+      return false;
+    }
+
+    try {
+      setLoading(true);
+
+      const response = await api.post("/auth/signin", {
+        email: email.trim().toLowerCase(),
+        password,
+      });
+
+      setUser(response.data.user);
+      return true;
+    } catch (error: any) {
+      let message = "Something went wrong. Please try again.";
+
+      if (axios.isAxiosError(error)) {
+        message = error.response?.data?.message || error.message || message;
+      }
+
+      notify(message);
+      return false;
+    } finally {
+      setLoading(false);
+    }
   };
 
   const logout = async () => {

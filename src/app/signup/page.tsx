@@ -3,7 +3,7 @@ import React, { useState, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, X, Check } from "lucide-react";
-import axios from "@/api/axios";
+import { api } from "@/api/axios";
 import { useAuth } from "@/context/AuthContext";
 import { notify } from "@/utils/notify";
 import Image from "next/image";
@@ -59,8 +59,8 @@ const SigupPage = () => {
 
     try {
       setLoading(true);
-      const data = { email };
-      const response = await axios.post("/auth/signup", data);
+      const data = { email: email.trim().toLowerCase() };
+      const response = await api.post("/auth/signup", data);
       const responseData = response.data;
       if (
         response.status === 201 &&
@@ -96,12 +96,12 @@ const SigupPage = () => {
     try {
       setLoading(true);
       const data = { email, otpCode };
-      const response = await axios.post("/auth/verify-otp", data);
+      const response = await api.post("/auth/verify-otp", data);
 
       console.log(response);
       const responseData = response.data;
       if (
-        response.status === 201 &&
+        response.status === 201 ||
         responseData.otpSendingStatus.status === 200
       ) {
         //  setPasswordContinue(true);
@@ -133,7 +133,7 @@ const SigupPage = () => {
         password,
         referralUID,
       };
-      const response = await axios.post("/auth/signup", data);
+      const response = await api.post("/auth/signup", data);
       console.log(response);
     } catch (e) {
       console.log(e);

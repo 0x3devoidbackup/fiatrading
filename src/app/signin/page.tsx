@@ -6,37 +6,50 @@ import { useRouter } from "next/navigation";
 import { User, UserToken } from "@/types";
 import Image from "next/image";
 import CenterLoader from "@/utils/loader";
+import {api} from "@/api/axios";
+import { notify } from "@/utils/notify";
+import { useAuth } from "@/context/AuthContext";
 
 const SiginPage = () => {
   const router = useRouter();
+  const {login} = useAuth()
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
 
-  const [user, setUser] = useState<User | null>(null);
-  const [userTokens, setUserTokens] = useState<UserToken[]>([]);
+  const isValidEmail = (email: string) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
 
-  const handleSignIn = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const mockUser: User = {
-      id: "1",
-      email,
-      name: email.split("@")[0],
-      fiatBalance: 10000,
-    };
+    if (!email || !password) {
+      notify("Email and password must be filled");
+      return;
+    }
 
-    setUser(mockUser);
-    setUserTokens([
-      { tokenId: "1", amount: 0.5 },
-      { tokenId: "2", amount: 2.3 },
-    ]);
+    if (!isValidEmail(email)) {
+      notify("Invalid email address");
+      return;
+    }
 
-    router.push("/home");
+    try {
+      setLoading(true);
+     const res = await login(email, password);
+     if(res){
+      router.push("/home")
+     }
+    } catch (e: any) {
+      console.log(e);
+      const msg = e.response.data.message;
+      notify(msg);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -79,6 +92,7 @@ const SiginPage = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full bg-[#111] border border-[#333] rounded-xl px-3 py-2 pr-12 focus:outline-none focus:border-blue-500"
+              required
             />
 
             <button
