@@ -71,7 +71,7 @@ const SiginPage = () => {
         </div>
 
         <div className="mt-10">
-          <h1 className="font-extrabold text-3xl">Sign In to MINTFIAT</h1>
+          <h1 className="font-extrabold text-3xl">Sign In to MintFiat</h1>
         </div>
       </div>
       <div className="mt-10">
