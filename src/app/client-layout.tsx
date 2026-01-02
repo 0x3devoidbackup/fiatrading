@@ -6,7 +6,7 @@ import Navbar from "@/components/Navbar";
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
-  const hideNavbarRoutes = ["/", "/signin", "/signup"];
+  const hideNavbarRoutes = ["/", "/signin", "/signup", "/reset-password"];
   const shouldShowNavbar = !hideNavbarRoutes.includes(pathname);
 
   return (

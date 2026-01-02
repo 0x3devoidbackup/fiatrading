@@ -4,96 +4,107 @@ import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { User, UserToken } from "@/types";
+import Image from "next/image";
+import CenterLoader from "@/utils/loader";
 
 const SiginPage = () => {
-    const router = useRouter();
+  const router = useRouter();
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-    const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [show, setShow] = useState(false);
 
-    const [user, setUser] = useState<User | null>(null);
-    const [userTokens, setUserTokens] = useState<UserToken[]>([]);
+  const [user, setUser] = useState<User | null>(null);
+  const [userTokens, setUserTokens] = useState<UserToken[]>([]);
 
-    const handleSignIn = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+  const handleSignIn = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-        const mockUser: User = {
-            id: "1",
-            email,
-            name: email.split("@")[0],
-            fiatBalance: 10000,
-        };
-
-        setUser(mockUser);
-        setUserTokens([
-            { tokenId: "1", amount: 0.5 },
-            { tokenId: "2", amount: 2.3 },
-        ]);
-
-        router.push("/home");
+    const mockUser: User = {
+      id: "1",
+      email,
+      name: email.split("@")[0],
+      fiatBalance: 10000,
     };
 
-    return (
-        <div className="min-h-screen flex items-center justify-center px-4 text-white">
-            <div className="bg-[#0c0e13] border border-[#1b1f29] p-10 rounded-2xl shadow-xl max-w-md w-full">
-                <h2 className="text-3xl font-bold mb-8 text-center">Welcome Back</h2>
+    setUser(mockUser);
+    setUserTokens([
+      { tokenId: "1", amount: 0.5 },
+      { tokenId: "2", amount: 2.3 },
+    ]);
 
-                <form onSubmit={handleSignIn}>
-                    {/* Email */}
-                    <div className="mb-6">
-                        <label className="block text-sm font-medium mb-2">Email</label>
-                        <input
-                            type="email"
-                            value={email}
-                            placeholder="johndoe@gmail.com"
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                        />
-                    </div>
+    router.push("/home");
+  };
 
-                    {/* Password */}
-                    <div className="mb-6 relative">
-                        <label className="block text-sm font-medium mb-2">Password</label>
-                        <input
-                            type={showPassword ? "text" : "password"}
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                        />
+  return (
+    <div className="min-h-screen max-w-2xl mx-auto px-4 pb-40">
+      <CenterLoader show={loading} />
 
-                        <button
-                            type="button"
-                            onClick={() => setShowPassword(!showPassword)}
-                            className="absolute right-3 top-11 text-gray-600"
-                        >
-                            {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                        </button>
-                    </div>
+      <div className="mt-10">
+        <div className="flex items-center justify-between">
+          <Image src="/images/logo.png" alt="." width={20} height={20} />
 
-                    {/* Button */}
-                    <button
-                        type="submit"
-                        className="cursor-pointer w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-lg font-semibold hover:shadow-lg transition-all"
-                    >
-                        Sign In
-                    </button>
-                </form>
-
-                <p className="text-center mt-6 text-gray-300">
-                    Dont have an account?{" "}
-                    <Link href="/signup">
-                        <button className="text-purple-600 cursor-pointer font-semibold hover:underline">
-                            Sign Up
-                        </button>
-                    </Link>
-                </p>
-            </div>
+          <Link href="/signup">
+            <button className="text-white cursor-pointer font-semibold hover:underline">
+              Sign Up
+            </button>
+          </Link>
         </div>
-    );
+
+        <div className="mt-10">
+          <h1 className="font-extrabold text-3xl">Sign In to MINTFIAT</h1>
+        </div>
+      </div>
+      <div className="mt-10">
+        <form onSubmit={handleSignIn}>
+          <input
+            type="email"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full bg-[#111] border border-[#333] rounded-xl px-3 py-2 pr-12 focus:outline-none focus:border-blue-500"
+            required
+          />
+
+          <div className="relative mb-6 mt-5">
+            <input
+              type={show ? "text" : "password"}
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full bg-[#111] border border-[#333] rounded-xl px-3 py-2 pr-12 focus:outline-none focus:border-blue-500"
+            />
+
+            <button
+              type="button"
+              onClick={() => setShow(!show)}
+              className="absolute cursor-pointer right-4 top-1/2 -translate-y-1/2 text-white/60"
+            >
+              {show ? "🙈" : "👁️"}
+            </button>
+          </div>
+
+          <div className="mt-5">
+            <button
+              type="submit"
+              className="w-full text-sm cursor-pointer bg-blue-600 py-3 rounded-full font-semibold "
+            >
+              Sign In
+            </button>
+          </div>
+
+          <Link href="/reset-password">
+            <p className="text-start font-bold mt-5 text-blue-600 text-sm">
+             Forget password ?
+            </p>
+          </Link>
+        </form>
+      </div>
+    </div>
+  );
 };
 
 export default SiginPage;
