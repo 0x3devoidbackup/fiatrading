@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const server = "https://mintfiat-db.onrender.com";
+const server = "https://api.mintfiat.finance";
 const local = "http://localhost:5000"
 
 export const api = axios.create({
