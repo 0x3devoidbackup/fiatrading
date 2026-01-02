@@ -68,11 +68,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     try {
       setLoading(true);
-
       const response = await api.post("/auth/signin", {
         email: email.trim().toLowerCase(),
         password,
       });
+      console.log(response.data)
       setUser(response.data);
       return true;
     } catch (error: any) {
