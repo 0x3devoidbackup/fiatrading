@@ -71,7 +71,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }, { withCredentials: true});
 
       // ✅ Set user from response
-      const userData = response.data.user || response.data;
+      const userData = response.data.userData || response.data;
       setUser(userData);
 
       console.log(response.data);
