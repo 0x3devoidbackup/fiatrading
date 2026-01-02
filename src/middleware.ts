@@ -1,12 +1,14 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { useAuth } from "./context/AuthContext";
 
 const PUBLIC_ROUTES = ["/signin", "/signup", "/reset-password"];
 const AUTH_ROUTES = ["/signin", "/signup", "/reset-password"]; // Routes that logged-in users shouldn't access
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const token = request.cookies.get("accessToken");
+  const {checkAuth} = useAuth()
+  const token = await checkAuth();
 
   if (token && AUTH_ROUTES.some((route) => pathname.startsWith(route))) {
     const homeUrl = new URL("/home", request.url);

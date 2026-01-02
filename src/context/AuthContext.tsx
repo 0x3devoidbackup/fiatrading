@@ -23,6 +23,7 @@ interface AuthContextType {
   isAuthenticated: boolean;
   login: (email: string, password: string) => Promise<Boolean>;
   logout: () => Promise<void>;
+  checkAuth: () => Promise<Boolean>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -39,24 +40,24 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // 🔑 Persistent login check
   useEffect(() => {
-    async function checkAuth() {
-      try {
-        // ✅ Use api instance instead of axios directly
-        const res = await api.get("/users/me");
-        setUser(res.data.user || res.data);
-      } catch (err) {
-        console.log("Not authenticated:", err);
-        setUser(null);
-      } finally {
-        setLoading(false);
-      }
-    }
-
     checkAuth();
   }, []);
+  async function checkAuth(): Promise<boolean> {
+    try {
+      const res = await api.get("/users/me");
+      setUser(res.data.user || res.data);
 
+      return true;
+    } catch (err) {
+      console.log("Not authenticated:", err);
+      setUser(null);
+
+      return false;
+    } finally {
+      setLoading(false);
+    }
+  }
   const login = async (email: string, password: string): Promise<boolean> => {
     if (!email || !password) {
       notify("Email and password are required");
@@ -65,12 +66,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     try {
       setLoading(true);
-      const response = await api.post("/auth/signin", {
-        email: email.trim().toLowerCase(),
-        password,
-      }, { withCredentials: true});
-
-      // ✅ Set user from response
+      const response = await api.post(
+        "/auth/signin",
+        {
+          email: email.trim().toLowerCase(),
+          password,
+        },
+        { withCredentials: true }
+      );
       const userData = response.data.userData || response.data;
       setUser(userData);
 
@@ -114,6 +117,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         isAuthenticated: !!user,
         login,
         logout,
+        checkAuth,
       }}
     >
       {children}
