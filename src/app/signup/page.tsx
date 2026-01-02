@@ -29,6 +29,9 @@ const SigupPage = () => {
     number: /\d/.test(password),
   };
   const isPasswordValid = Object.values(rules).every(Boolean);
+  const isValidEmail = (email: string) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
 
   const handleCodeChange = (value: string, index: number) => {
     if (!/^\d?$/.test(value)) return;
@@ -46,17 +49,39 @@ const SigupPage = () => {
     e: React.FormEvent<HTMLFormElement>
   ) => {
     e.preventDefault();
-    //request for code
+
     if (!email) return;
 
-    setEmailContinue(true);
+    if (!isValidEmail(email)) {
+      notify("Invalid email address");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const data = { email };
+      const response = await axios.post("/auth/signup", data);
+      const responseData = response.data;
+      if (
+        response.status === 201 &&
+        responseData.otpSendingStatus.status === 200
+      ) {
+        setEmailContinue(true);
+      }
+    } catch (e: any) {
+      console.log(e);
+      const msg = e.response.data.message;
+      notify(msg);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleCodeContinuation = async (
     e: React.FormEvent<HTMLFormElement>
   ) => {
     e.preventDefault();
-    // Ensure code is complete (6 digits)
+
     const isComplete =
       Array.isArray(code) &&
       code.length === 6 &&
@@ -67,9 +92,28 @@ const SigupPage = () => {
       return;
     }
     const otpCode = code.join("");
+    console.log(otpCode);
+    try {
+      setLoading(true);
+      const data = { email, otpCode };
+      const response = await axios.post("/auth/verify-otp", data);
 
-    // setLoading(true);
-    setPasswordContinue(true);
+      console.log(response);
+      const responseData = response.data;
+      if (
+        response.status === 201 &&
+        responseData.otpSendingStatus.status === 200
+      ) {
+        //  setPasswordContinue(true);
+      }
+    } catch (e: any) {
+      console.log(e);
+      const msg = e.response.data.message;
+      if (!msg) return;
+      notify(msg);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -97,13 +141,15 @@ const SigupPage = () => {
   };
 
   return (
-    <div className="min-h-screen max-w-2xl mx-auto px-4 pb-40">
+    <div className="max-w-md mx-auto px-4 pb-40">
       <CenterLoader show={loading} />
 
-      <div className="mt-10">
+      <div className="mt-5">
         <div className="flex items-center justify-between">
-          <Image src="/images/logo.png" alt="." width={20} height={20} />
-
+          <img
+            src="https://violet-recent-skunk-362.mypinata.cloud/ipfs/bafkreih2bop2brxlarnn3mkpmaesju4wodw33lrqyfk4jvxxa6duki2cfa"
+            className="w-10 h-10"
+          />
           <Link href="/signin">
             <button className="text-white cursor-pointer font-semibold hover:underline">
               Sign In
@@ -120,7 +166,7 @@ const SigupPage = () => {
         </div>
       </div>
       <div className="fixed bottom-0 left-0 right-0 bg-black/95 backdrop-blur-sm">
-        <div className="max-w-2xl mx-auto px-4 py-4">
+        <div className="max-w-md mx-auto px-4 py-4">
           <form onSubmit={handleEmailContinuation}>
             <input
               type="email"
@@ -134,6 +180,7 @@ const SigupPage = () => {
             <div className="mt-5">
               <button
                 type="submit"
+                disabled={loading}
                 className="w-full cursor-pointer bg-white text-black py-2 rounded-3xl font-semibold hover:shadow-lg transition-all"
               >
                 Continue
@@ -153,7 +200,7 @@ const SigupPage = () => {
 
       {emailContinue && (
         <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50">
-          <div className="min-h-screen max-w-2xl mx-auto px-4 pb-40 mt-5">
+          <div className="max-w-md mx-auto px-4 pb-40 mt-5">
             <div className="flex items-center justify-end mb-4">
               <X
                 className="w-6 h-6 font-bold text-neutral-300 cursor-pointer"
@@ -169,7 +216,7 @@ const SigupPage = () => {
             </p>
 
             <p className="text-sm font-semibold mb-8">
-             {email}
+              {email}
               <span className="opacity-60">(valid for 15 minutes)</span>
             </p>
 
@@ -182,7 +229,7 @@ const SigupPage = () => {
                       inputsRef.current[i] = el;
                     }}
                     id={`otp-${i}`}
-                    type="text"
+                    type="number"
                     value={digit}
                     maxLength={1}
                     onChange={(e) => handleCodeChange(e.target.value, i)}
@@ -192,9 +239,9 @@ const SigupPage = () => {
               </div>
 
               <div className="mb-10 text-sm">
-                <p className="opacity-50 ">
+                {/* <p className="opacity-50 ">
                   Get code again after <span className="text-white">7s</span>
-                </p>
+                </p> */}
                 <button type="button" className="text-[#9DD1F1] cursor-pointer">
                   Request Again
                 </button>
@@ -203,7 +250,8 @@ const SigupPage = () => {
               <div className="px-5 pb-6">
                 <button
                   type="submit"
-                  className="w-full  cursor-pointer bg-blue-600 py-2 rounded-full font-semibold text-sm"
+                  disabled={loading}
+                  className="w-full cursor-pointer bg-blue-600 py-2 rounded-full font-semibold text-sm"
                 >
                   Next
                 </button>
@@ -219,7 +267,7 @@ const SigupPage = () => {
 
       {passwordContinue && (
         <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50">
-          <div className="min-h-screen max-w-2xl mx-auto px-4 pb-40 mt-5">
+          <div className="max-w-md mx-auto px-4 pb-40 mt-5">
             <div className="flex items-center justify-start mb-4">
               <ArrowLeft
                 className="w-6 h-6 font-bold text-neutral-300 cursor-pointer"

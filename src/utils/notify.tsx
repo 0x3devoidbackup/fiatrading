@@ -43,7 +43,7 @@ class NotificationManager {
         icon: "✕",
       },
       info: {
-        bg: "#1F1F1F",
+        bg: "#333332",
         icon: "ℹ",
       },
       warning: {
@@ -73,11 +73,12 @@ class NotificationManager {
     notification.style.cssText = `
       background: ${this.getNotificationStyles(type)};
       color: white;
-      padding: 16px 20px;
+      padding: 10px 10px;
       border-radius: 12px;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
       display: flex;
       align-items: center;
+      text-align: center;
       gap: 12px;
       min-width: 320px;
       max-width: 420px;
@@ -126,7 +127,7 @@ class NotificationManager {
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      font-size: 16px;
+      font-size: 14px;
       font-weight: bold;
       flex-shrink: 0;
       transition: background 0.2s;
@@ -139,9 +140,7 @@ class NotificationManager {
       closeBtn.style.background = "rgba(255, 255, 255, 0.2)";
     };
 
-    // notification.appendChild(icon);
     notification.appendChild(messageEl);
-    notification.appendChild(closeBtn);
 
     this.container?.appendChild(notification);
     this.notifications.add(notification);
@@ -192,20 +191,4 @@ const notificationManager = new NotificationManager();
 
 export const notify = (message: string, type: NotificationType = "info") => {
   notificationManager.show({ message, type });
-};
-
-export const notifySuccess = (message: string) => {
-  notificationManager.show({ message, type: "success" });
-};
-
-export const notifyError = (message: string) => {
-  notificationManager.show({ message, type: "error" });
-};
-
-export const notifyWarning = (message: string) => {
-  notificationManager.show({ message, type: "warning" });
-};
-
-export const notifyInfo = (message: string) => {
-  notificationManager.show({ message, type: "info" });
 };

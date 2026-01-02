@@ -90,7 +90,7 @@ export default function SetPassword() {
   };
 
   return (
-    <div className="min-h-screen max-w-2xl mx-auto px-4 pb-40">
+    <div className=" max-w-md mx-auto px-4 pb-40">
       <div className="mt-10">
         <CenterLoader show={loading} />
 
@@ -132,7 +132,7 @@ export default function SetPassword() {
 
             {emailContinue && (
               <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50">
-                <div className="min-h-screen max-w-2xl mx-auto px-4 pb-40 mt-5">
+                <div className="max-w-md mx-auto px-4 pb-40 mt-5">
                   <div className="flex items-center justify-end mb-4">
                     <X
                       className="w-6 h-6 font-bold text-neutral-300 cursor-pointer"
@@ -198,7 +198,7 @@ export default function SetPassword() {
       
             {passwordContinue && (
               <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50">
-                <div className="min-h-screen max-w-2xl mx-auto px-4 pb-40 mt-5">
+                <div className=" max-w-md mx-auto px-4 pb-40 mt-5">
                   <div className="flex items-center justify-start mb-4">
                     <ArrowLeft
                       className="w-6 h-6 font-bold text-neutral-300 cursor-pointer"

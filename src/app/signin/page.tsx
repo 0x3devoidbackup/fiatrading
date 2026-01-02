@@ -40,12 +40,15 @@ const SiginPage = () => {
   };
 
   return (
-    <div className="min-h-screen max-w-2xl mx-auto px-4 pb-40">
+    <div className="max-w-md mx-auto px-4 pb-40">
       <CenterLoader show={loading} />
 
-      <div className="mt-10">
+      <div className="mt-5">
         <div className="flex items-center justify-between">
-          <Image src="/images/logo.png" alt="." width={20} height={20} />
+          <img
+            src="https://violet-recent-skunk-362.mypinata.cloud/ipfs/bafkreih2bop2brxlarnn3mkpmaesju4wodw33lrqyfk4jvxxa6duki2cfa"
+            className="w-10 h-10"
+          />
 
           <Link href="/signup">
             <button className="text-white cursor-pointer font-semibold hover:underline">
@@ -98,7 +101,7 @@ const SiginPage = () => {
 
           <Link href="/reset-password">
             <p className="text-start font-bold mt-5 text-blue-600 text-sm">
-             Forget password ?
+              Forget password ?
             </p>
           </Link>
         </form>
