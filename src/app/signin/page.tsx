@@ -40,7 +40,9 @@ const SiginPage = () => {
     try {
       setLoading(true);
      const res = await login(email, password);
+ 
      if(res){
+      notify("Login successful");
       router.push("/home")
      }
     } catch (e: any) {

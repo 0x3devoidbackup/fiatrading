@@ -48,7 +48,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     async function checkAuth() {
       try {
-        const res = await axios.get("/auth/me");
+        const res = await axios.get("/users/me");
         setUser(res.data.user);
       } catch (err) {
         setUser(null);
@@ -73,8 +73,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         email: email.trim().toLowerCase(),
         password,
       });
-
-      setUser(response.data.user);
+      setUser(response.data);
       return true;
     } catch (error: any) {
       let message = "Something went wrong. Please try again.";

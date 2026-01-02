@@ -12,7 +12,7 @@ export function middleware(request: NextRequest) {
   }
 
   // Read auth cookie (HttpOnly is fine here)
-  const token = request.cookies.get("token"); 
+  const token = request.cookies.get("accessToken"); 
 
   // If not authenticated, redirect to signin
   if (!token) {

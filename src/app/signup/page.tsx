@@ -6,7 +6,7 @@ import { ArrowLeft, X, Check } from "lucide-react";
 import { api } from "@/api/axios";
 import { useAuth } from "@/context/AuthContext";
 import { notify } from "@/utils/notify";
-import Image from "next/image";
+import axios from "axios";
 import CenterLoader from "@/utils/loader";
 
 const SigupPage = () => {
@@ -68,10 +68,14 @@ const SigupPage = () => {
       ) {
         setEmailContinue(true);
       }
-    } catch (e: any) {
-      console.log(e);
-      const msg = e.response.data.message;
-      notify(msg);
+    } catch (error: any) {
+      let message = "Something went wrong. Please try again.";
+
+      if (axios.isAxiosError(error)) {
+        message = error.response?.data?.message || error.message || message;
+      }
+      notify(message);
+      return false;
     } finally {
       setLoading(false);
     }
@@ -92,25 +96,22 @@ const SigupPage = () => {
       return;
     }
     const otpCode = code.join("");
-    console.log(otpCode);
     try {
       setLoading(true);
-      const data = { email, otpCode };
-      const response = await api.post("/auth/verify-otp", data);
-
+      const data = { email: email.trim().toLowerCase(), otp: otpCode };
+      const response = await api.post("/auth/verify-otp/verify-email", data);
       console.log(response);
-      const responseData = response.data;
-      if (
-        response.status === 201 ||
-        responseData.otpSendingStatus.status === 200
-      ) {
-        //  setPasswordContinue(true);
+      if (response.status === 200) {
+        setPasswordContinue(true);
       }
-    } catch (e: any) {
-      console.log(e);
-      const msg = e.response.data.message;
-      if (!msg) return;
-      notify(msg);
+    } catch (error: any) {
+      let message = "Something went wrong. Please try again.";
+
+      if (axios.isAxiosError(error)) {
+        message = error.response?.data?.message || error.message || message;
+      }
+      notify(message);
+      return false;
     } finally {
       setLoading(false);
     }
@@ -125,18 +126,30 @@ const SigupPage = () => {
     }
 
     try {
-      // setLoading(true);
+      setLoading(true);
 
       //input data
       const data = {
-        email,
+        email: email.trim().toLowerCase(),
         password,
-        referralUID,
+        referralId: referralUID,
       };
-      const response = await api.post("/auth/signup", data);
+      const response = await api.post("/auth/complete-registration", data);
       console.log(response);
-    } catch (e) {
-      console.log(e);
+      if (response.status === 200) {
+        notify(response.data.message);
+        router.push("/signin");
+      }
+    } catch (error: any) {
+      let message = "Something went wrong. Please try again.";
+
+      if (axios.isAxiosError(error)) {
+        message = error.response?.data?.message || error.message || message;
+      }
+      notify(message);
+      return false;
+    } finally {
+      setLoading(false);
     }
   };
 
