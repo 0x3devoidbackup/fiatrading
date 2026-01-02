@@ -23,10 +23,9 @@ const TokensPage = () => {
 
                 <div className='flex justify-between items-center mt-1'>
                     <div className='flex space-x-1'>
-                        <h1 className='text-2xl font-extrabold'>100</h1>
+                        <h1 className='text-2xl font-extrabold'>0</h1>
                         <span className='text-gray-500 mt-3 font-bold text-sm'>USD</span>
                     </div>
-
                     <button onClick={(() => setAddFunds(!addFunds))} className="cursor-pointer w-fit bg-gradient-to-r from-blue-600 to-blue-600 text-white text-xs py-2 px-4 rounded-xl font-semibold hover:shadow-lg transition-all">Add Funds</button>
 
                 </div>

@@ -28,13 +28,6 @@ const mockLogins: LoginEntry[] = [
     location: "Lagos, Nigeria",
     time: "Today • 08:12 AM",
     status: "success",
-  },
-  {
-    id: 2,
-    device: "Windows Desktop",
-    location: "Abuja, Nigeria",
-    time: "Yesterday • 10:40 PM",
-    status: "success",
   }
 ];
 

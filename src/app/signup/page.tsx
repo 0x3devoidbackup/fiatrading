@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, X, Check } from "lucide-react";
@@ -62,8 +62,9 @@ const SigupPage = () => {
       const data = { email: email.trim().toLowerCase() };
       const response = await api.post("/auth/signup", data);
       const responseData = response.data;
+      console.log(response)
       if (
-        response.status === 201 &&
+        response.status === 201 ||
         responseData.otpSendingStatus.status === 200
       ) {
         setEmailContinue(true);

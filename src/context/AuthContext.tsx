@@ -6,31 +6,27 @@ import {
   useState,
   ReactNode,
 } from "react";
-import {api} from "../api/axios";
+import { api } from "../api/axios";
 import { notify } from "@/utils/notify";
 import axios from "axios";
 
-// 1️⃣ Define user type (adjust based on your backend)
 interface User {
   id: string;
   email: string;
-  // add other fields your backend returns
+  emailVerified: boolean;
+  freezed: boolean;
 }
 
-// 2️⃣ Define AuthContext type
 interface AuthContextType {
   user: User | null;
   loading: boolean;
   isAuthenticated: boolean;
   login: (email: string, password: string) => Promise<Boolean>;
-  //   register: (fullname: string, email: string, password: string, refUID: any) => Promise<void>;
   logout: () => Promise<void>;
 }
 
-// 3️⃣ Create context with proper type
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// 4️⃣ Custom hook
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
@@ -39,7 +35,6 @@ export const useAuth = () => {
   return context;
 };
 
-// 5️⃣ AuthProvider component
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
@@ -48,9 +43,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     async function checkAuth() {
       try {
-        const res = await axios.get("/users/me");
-        setUser(res.data.user);
+        // ✅ Use api instance instead of axios directly
+        const res = await api.get("/users/me");
+        setUser(res.data.user || res.data);
       } catch (err) {
+        console.log("Not authenticated:", err);
         setUser(null);
       } finally {
         setLoading(false);
@@ -72,8 +69,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         email: email.trim().toLowerCase(),
         password,
       });
-      console.log(response.data)
-      setUser(response.data);
+
+      // ✅ Set user from response
+      const userData = response.data.user || response.data;
+      setUser(userData);
+
+      console.log(response.data);
+
       return true;
     } catch (error: any) {
       let message = "Something went wrong. Please try again.";
@@ -89,9 +91,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  // AuthContext.tsx
   const logout = async () => {
-    await axios.post("/auth/logout");
-    setUser(null);
+    try {
+      setLoading(true);
+      await api.post("/auth/signout");
+      console.log("✅ Logout successful");
+    } catch (error) {
+      console.error("Logout error:", error);
+    } finally {
+      // ✅ Always clear user state (even if backend call fails)
+      setUser(null);
+      setLoading(false);
+    }
   };
 
   return (

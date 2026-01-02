@@ -5,11 +5,12 @@ import { Eye, Clock, X, Search, } from "lucide-react";
 import CryptoSearchPage from '@/components/WithdrawalModal';
 import Link from 'next/link';
 import { fiatAssets } from '@/data/mockData';
-
+import { useAuth } from '@/context/AuthContext';
 
 
 
 export default function PortfolioPage() {
+  const {user} = useAuth()
   const [addFunds, setAddFunds] = useState(false)
   const [withdraw, setWithdraw] = useState(false)
 
@@ -23,8 +24,8 @@ export default function PortfolioPage() {
           <Eye className="w-4 h-4" />
         </div>
 
-        <h1 className="text-3xl font-bold">10,000 <span className="text-gray-400 text-sm">USDT</span></h1>
-        <p className="text-gray-500 text-sm">≈ 10,001 USD</p>
+        <h1 className="text-3xl font-bold">0 <span className="text-gray-400 text-sm">USD</span></h1>
+        {/* <p className="text-gray-500 text-sm">≈ 0 USD</p> */}
 
         <div className="flex items-center space-x-2 text-sm text-white mt-2">
           <div className="bg-[#141519] px-3 py-2 rounded-lg flex items-center space-x-2">
