@@ -68,7 +68,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const response = await api.post("/auth/signin", {
         email: email.trim().toLowerCase(),
         password,
-      });
+      }, { withCredentials: true});
 
       // ✅ Set user from response
       const userData = response.data.user || response.data;
