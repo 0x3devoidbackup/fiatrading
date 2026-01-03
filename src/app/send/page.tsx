@@ -10,9 +10,9 @@ export default function SendPage() {
     const [tab, setTab] = useState('mexc');
 
     return (
-        <div className="min-h-screen bg-black text-white p-4">
+        <div className="max-w-3xl mx-auto  px-2 py-4 pb-20 text-white ">
             {/* Header */}
-            <div className="flex items-center gap-3 mb-6">
+            <div className="flex items-center gap-3 mb-3">
                 <ArrowLeft
                     className="w-6 h-6 cursor-pointer text-neutral-300"
                     onClick={() => router.back()}
@@ -46,18 +46,16 @@ export default function SendPage() {
             </div>
 
 
-            {/* Tabs */}
-            <div className="flex items-center gap-6 mb-6 text-sm">
-
+            <p className=" mb-3 text-sm">
                 MintFiat UID
-            </div>
+            </p>
 
             {/* Recipient Input */}
-            <div className="mb-6 relative">
+            <div className="mb-3 relative">
                 <input
                     type="text"
                     placeholder="MintFiat UID"
-                    className="w-full bg-[#111318] border border-[#1f232d] rounded-xl px-4 py-4 focus:outline-none"
+                    className="w-full bg-[#111318] border border-[#1f232d] rounded px-4 py-2 focus:outline-none"
                 />
             </div>
 
@@ -66,16 +64,16 @@ export default function SendPage() {
             <div className="mb-2 relative">
                 <input
                     type="number"
-                    placeholder="Please enter quantity"
-                    className="w-full bg-[#111318] border border-[#1f232d] rounded-xl px-4 py-4 focus:outline-none"
+                    placeholder="Enter quantity"
+                    className="w-full bg-[#111318] border border-[#1f232d] rounded px-4 py-2 focus:outline-none"
                 />
-                <button className="absolute right-4 top-4 text-blue-500 text-sm">All</button>
+                <button className="absolute right-4 top-3 text-blue-500 text-sm">All</button>
             </div>
-            <div className="text-sm text-gray-500 mb-6">Available 50,000 USD</div>
+            <div className="text-sm text-gray-500 mb-3">Available 50,000 USD</div>
 
             {/* Submit Button */}
             <div className="mt-10">
-                <button className="w-full bg-[#1a1c22] text-gray-600 py-3 rounded-xl cursor-not-allowed">
+                <button className="w-full bg-[#fff] text-black font-bold py-2 text-sm rounded-xl cursor-not-allowed">
                     Submit
                 </button>
             </div>

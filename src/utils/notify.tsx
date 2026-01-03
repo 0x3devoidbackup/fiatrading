@@ -43,7 +43,7 @@ class NotificationManager {
         icon: "✕",
       },
       info: {
-        bg: "#333332",
+        bg: "#1b1d22",
         icon: "ℹ",
       },
       warning: {

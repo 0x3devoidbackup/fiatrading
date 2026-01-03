@@ -15,7 +15,7 @@ export default function RewardsHub() {
     const tradedPct = Math.min(100, (traded / tradedGoal) * 100);
 
     return (
-        <div className="min-h-screen bg-black text-white p-6 pb-20 flex justify-center">
+        <div className=" text-white p-4 pb-20 flex justify-center">
             <div className="w-full max-w-xl">
                 {/* Top nav */}
                 <div className="flex items-center gap-3 mb-4">

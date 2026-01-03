@@ -1,9 +1,13 @@
 export interface User {
   id: string;
+  _id: string;
   email: string;
   name: string;
   fiatBalance: number;
+  emailVerified: boolean;
+
 }
+
 
 export interface Token {
   _id: string;

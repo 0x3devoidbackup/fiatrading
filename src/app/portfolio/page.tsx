@@ -15,7 +15,7 @@ export default function PortfolioPage() {
   const [withdraw, setWithdraw] = useState(false)
 
   return (
-    <div className="max-w-4xl mx-auto min-h-screen text-white px-4 py-6 mb-10 space-y-6">
+    <div className="max-w-4xl mx-auto text-white px-2 py-4 pb-20 space-y-6">
 
       {/* TOP SECTION */}
       <div className="space-y-1">

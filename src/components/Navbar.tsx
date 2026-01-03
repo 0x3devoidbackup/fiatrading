@@ -16,7 +16,7 @@ const Navbar: React.FC = () => {
   const [modal, setModal] = useState(false);
 
   return (
-    <nav className="w-full px-6 py-4 lg:bg-[#0c0e13] lg:mb-5 text-white">
+    <nav className="w-full px-2 py-4 lg:bg-[#0c0e13] lg:mb-5 text-white">
       {/* DESKTOP NAVBAR */}
       <div className="hidden lg:flex max-w-6xl mx-auto justify-between items-center">
         {/* Left: Logo */}

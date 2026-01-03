@@ -129,7 +129,6 @@ const SigupPage = () => {
     try {
       setLoading(true);
 
-      //input data
       const data = {
         email: email.trim().toLowerCase(),
         password,
@@ -213,7 +212,7 @@ const SigupPage = () => {
       </div>
 
       {emailContinue && (
-        <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50">
+        <div className="fixed inset-0 bg-[#0a0a0a] z-50">
           <div className="max-w-md mx-auto px-4 pb-40 mt-5">
             <div className="flex items-center justify-end mb-4">
               <X
@@ -280,7 +279,7 @@ const SigupPage = () => {
       )}
 
       {passwordContinue && (
-        <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50">
+        <div className="fixed inset-0 bg-[#0a0a0a] z-50">
           <div className="max-w-md mx-auto px-4 pb-40 mt-5">
             <div className="flex items-center justify-start mb-4">
               <ArrowLeft

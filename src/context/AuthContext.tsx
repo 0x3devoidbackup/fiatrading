@@ -9,13 +9,7 @@ import {
 import { api } from "../api/axios";
 import { notify } from "@/utils/notify";
 import axios from "axios";
-
-interface User {
-  id: string;
-  email: string;
-  emailVerified: boolean;
-  freezed: boolean;
-}
+import { User } from "@/types";
 
 interface AuthContextType {
   user: User | null;
@@ -47,12 +41,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       const res = await api.get("/users/me");
       setUser(res.data.user || res.data);
-
       return true;
     } catch (err) {
-      console.log("Not authenticated:", err);
       setUser(null);
-
       return false;
     } finally {
       setLoading(false);
@@ -77,7 +68,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const userData = response.data.userData || response.data;
       setUser(userData);
 
-      console.log(response.data);
 
       return true;
     } catch (error: any) {
@@ -99,11 +89,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       setLoading(true);
       await api.post("/auth/signout");
-      console.log("✅ Logout successful");
     } catch (error) {
       console.error("Logout error:", error);
     } finally {
-      // ✅ Always clear user state (even if backend call fails)
       setUser(null);
       setLoading(false);
     }

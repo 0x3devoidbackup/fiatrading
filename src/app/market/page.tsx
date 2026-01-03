@@ -13,8 +13,8 @@ const MarketPage = () => {
     const router = useRouter();
 
     return (
-        <div className='max-w-5xl mx-auto py-2 px-4'>
-            <div className="mt-5 hidden lg:flex rounded-xl shadow-lg overflow-hidden">
+        <div className='max-w-5xl mx-auto pb-20 px-2'>
+            <div className="hidden lg:flex rounded-xl shadow-lg overflow-hidden">
                 <table className="w-full">
                     <thead className="">
                         <tr>
@@ -60,13 +60,13 @@ const MarketPage = () => {
                 </table>
             </div>
 
-            <div className="mt-5 lg:hidden rounded-xl shadow-lg overflow-hidden">
+            <div className="mt-3 lg:hidden rounded-xl shadow-lg overflow-hidden">
                 <table className="w-full">
                     <thead className="">
                         <tr>
-                            <th className="px-2 py-2 text-left text-sm font-semibold text-gray-600">Spot</th>
-                            <th className="px-2 py-2 text-right text-sm font-semibold text-gray-600">Last Price</th>
-                            <th className="px-2 py-2 text-right text-sm font-semibold text-gray-600"> Change</th>
+                            <th className="text-left text-sm font-semibold text-gray-600">Token</th>
+                            <th className="text-left text-sm font-semibold text-gray-600">Price</th>
+                            <th className=" text-right text-sm font-semibold text-gray-600">Change</th>
 
                         </tr>
                     </thead>
@@ -77,7 +77,7 @@ const MarketPage = () => {
                                 onClick={() => router.push(`/trade/${token._id}`)}
                                 className="cursor-pointer hover:bg-[#0c0e13]"
                             >
-                                <td className='py-2'>
+                                <td className='py-1'>
                                     <div className="flex items-center space-x-2">
                                         <div className="w-10 h-10 bg-[#1b1d22] text-sm rounded-full flex items-center justify-center text-white font-bold">
                                             {token.symbol.charAt(0)}
@@ -91,7 +91,7 @@ const MarketPage = () => {
                                     </div>
                                 </td>
 
-                                <td className="text-right  text-xs">
+                                <td className="text-left  text-xs">
                                     ${token.price.toLocaleString()}
                                 </td>
 

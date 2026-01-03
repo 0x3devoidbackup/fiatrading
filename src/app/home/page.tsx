@@ -1,218 +1,262 @@
-"use client"
-import React, { useState, useEffect } from 'react';
-import { User, Token } from '@/types';
-import { Send, Rocket, X, Gift, ArrowUpRight, ArrowDownRight, Coins, Plus, Minus, TrendingUp, ChevronRight } from 'lucide-react';
+"use client";
+import React, { useState, useEffect } from "react";
+import { User, Token } from "@/types";
+import {
+  Send,
+  Rocket,
+  X,
+  Gift,
+  ArrowUpRight,
+  ArrowDownRight,
+  Coins,
+  Plus,
+  Minus,
+  TrendingUp,
+  ChevronRight,
+} from "lucide-react";
 import { useRouter } from "next/navigation";
-import Image from 'next/image';
-import Link from 'next/link';
-import { mockTokens } from '@/data/mockData';
-import PaymentOptions from '@/components/PaymentOptions';
-
+import Image from "next/image";
+import Link from "next/link";
+import { mockTokens } from "@/data/mockData";
+import PaymentOptions from "@/components/PaymentOptions";
 
 const TokensPage = () => {
-    const router = useRouter();
-    const [addFunds, setAddFunds] = useState(false)
+  const router = useRouter();
+  const [addFunds, setAddFunds] = useState(false);
 
-    return (<div className="min-h-screen">
-        <div className="max-w-5xl mx-auto px-6 py-4">
-            <div>
+  return (
+    <div className="min-h-screen">
+      <div className="max-w-5xl mx-auto px-2 py-4">
+        <div></div>
+        <div className="max-w-2xl mx-auto">
+          <p className="text-xs font-bold">Total Asset</p>
 
+          <div className="flex justify-between items-center mt-1">
+            <div className="flex space-x-1">
+              <h1 className="text-2xl font-extrabold">0</h1>
+              <span className="text-gray-500 mt-3 font-bold text-sm">USD</span>
             </div>
-            <div className='max-w-2xl mx-auto'>
-                <p className='text-xs font-bold'>Total Asset</p>
+            <button
+              onClick={() => setAddFunds(!addFunds)}
+              className="cursor-pointer w-fit bg-gradient-to-r from-blue-600 to-blue-600 text-white text-xs py-2 px-4 rounded-xl font-semibold hover:shadow-lg transition-all"
+            >
+              Add Funds
+            </button>
+          </div>
+        </div>
 
-                <div className='flex justify-between items-center mt-1'>
-                    <div className='flex space-x-1'>
-                        <h1 className='text-2xl font-extrabold'>0</h1>
-                        <span className='text-gray-500 mt-3 font-bold text-sm'>USD</span>
-                    </div>
-                    <button onClick={(() => setAddFunds(!addFunds))} className="cursor-pointer w-fit bg-gradient-to-r from-blue-600 to-blue-600 text-white text-xs py-2 px-4 rounded-xl font-semibold hover:shadow-lg transition-all">Add Funds</button>
-
-                </div>
-
+        <div className="max-w-2xl mx-auto flex justify-between items-center mt-10">
+          <Link href="/launch">
+            <div className="flex flex-col items-center space-y-1">
+              <div className="bg-[#1b1d22] p-2 w-fit rounded-full cursor-pointer hover:bg-[#23252b] transition">
+                <Rocket className="w-5 h-5 text-white" />
+              </div>
+              <p className="text-xs text-gray-300">Launch</p>
             </div>
+          </Link>
 
-            <div className='max-w-2xl mx-auto flex justify-between items-center mt-10'>
+          <Link href="/rewards">
+            <div className="flex flex-col items-center space-y-1">
+              <div className="bg-[#1b1d22] p-2 w-fit rounded-full cursor-pointer hover:bg-[#23252b] transition">
+                <Gift className="w-5 h-5 text-white" />
+              </div>
+              <p className="text-xs text-gray-300">Rewards</p>
+            </div>
+          </Link>
 
+          <Link href="/referral">
+            <div className="flex flex-col items-center space-y-1">
+              <div className="bg-[#1b1d22] p-2 w-fit rounded-full cursor-pointer hover:bg-[#23252b] transition">
+                <Send className="w-5 h-5 text-white" />
+              </div>
+              <p className="text-xs text-gray-300">Referrals</p>
+            </div>
+          </Link>
 
-                <Link href='/launch'>
-                    <div className='flex flex-col items-center space-y-1'>
-                        <div className="bg-[#1b1d22] p-2 w-fit rounded-full cursor-pointer hover:bg-[#23252b] transition">
-                            <Rocket className="w-5 h-5 text-white" />
+          <Link href="/trade/8368095">
+            <div className="flex flex-col items-center space-y-1">
+              <div className="bg-[#1b1d22] p-2 w-fit rounded-full cursor-pointer hover:bg-[#23252b] transition">
+                <TrendingUp className="w-5 h-5 text-white" />
+              </div>
+              <p className="text-xs text-gray-300">Trade</p>
+            </div>
+          </Link>
+        </div>
+        <div className="mt-10 hidden lg:flex rounded-xl shadow-lg overflow-hidden">
+          <table className="w-full">
+            <thead className="">
+              <tr>
+                <th className="px-4 text-left text-sm font-semibold text-gray-600">
+                  Token
+                </th>
+                <th className=" text-right text-sm font-semibold text-gray-600">
+                  Price
+                </th>
+                <th className="text-right text-sm font-semibold text-gray-600">
+                  24h Change
+                </th>
+                <th className="text-right text-sm font-semibold text-gray-600">
+                  Market Cap
+                </th>
+                <th className=" text-right text-sm font-semibold text-gray-600">
+                  Buy/Sell
+                </th>
+              </tr>
+            </thead>
+            <tbody className="">
+              {mockTokens.map((token) => (
+                <tr key={token._id} className="hover:[#0c0e13]">
+                  <td className="p-2">
+                    <div className="flex items-start space-x-3">
+                      <div className="w-10 h-10 bg-[#1b1d22] rounded-full flex items-center justify-center text-white font-bold">
+                        {token.symbol.charAt(0)}
+                      </div>
+                      <div>
+                        <div className="font-semibold text-sm">
+                          {token.name.toUpperCase()} /
+                          <span className="text-gray-400 text-xs">
+                            {token.pair.toUpperCase()}
+                          </span>
                         </div>
-                        <p className='text-xs text-gray-300'>Launch</p>
+                        <span className="text-gray-500 text-xs">SPOT</span>
+                      </div>
                     </div>
-                </Link>
+                  </td>
+                  <td className="text-right font-semibold">
+                    ${token.price.toLocaleString()}
+                  </td>
+                  <td className="text-right">
+                    <span
+                      className={`flex items-center justify-end space-x-1 ${
+                        token.change24h >= 0 ? "text-green-600" : "text-red-600"
+                      }`}
+                    >
+                      {token.change24h >= 0 ? (
+                        <ArrowUpRight className="w-4 h-4" />
+                      ) : (
+                        <ArrowDownRight className="w-4 h-4" />
+                      )}
+                      <span className="font-semibold">
+                        {Math.abs(token.change24h)}%
+                      </span>
+                    </span>
+                  </td>
+                  <td className=" text-right text-gray-600">
+                    ${(token.marketCap / 1000000000).toFixed(2)}B
+                  </td>
+                  <td className="text-right">
+                    <Link href={`/trade/${token._id}`}>
+                      <button className="bg-blue-600 text-sm text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        Trade
+                      </button>
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
-                <Link href='/rewards'>
-                    <div className='flex flex-col items-center space-y-1'>
-                        <div className="bg-[#1b1d22] p-2 w-fit rounded-full cursor-pointer hover:bg-[#23252b] transition">
-                            <Gift className="w-5 h-5 text-white" />
-                        </div>
-                        <p className='text-xs text-gray-300'>Rewards</p>
-                    </div>
-                </Link>
-
-
-
-                <Link href='/referral'>
-                    <div className='flex flex-col items-center space-y-1'>
-                        <div className="bg-[#1b1d22] p-2 w-fit rounded-full cursor-pointer hover:bg-[#23252b] transition">
-                            <Send className="w-5 h-5 text-white" />
-                        </div>
-                        <p className='text-xs text-gray-300'>Referrals</p>
-                    </div>
-                </Link>
-
-
-
-                <Link href='/trade/8368095'>
-                    <div className='flex flex-col items-center space-y-1'>
-                        <div className="bg-[#1b1d22] p-2 w-fit rounded-full cursor-pointer hover:bg-[#23252b] transition">
-                            <TrendingUp className="w-5 h-5 text-white" />
-                        </div>
-                        <p className='text-xs text-gray-300'>Trade</p>
-                    </div>
-                </Link>
-
-
-            </div>
-            <div className="mt-10 hidden lg:flex rounded-xl shadow-lg overflow-hidden">
-                <table className="w-full">
-                    <thead className="">
-                        <tr>
-                            <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">Token</th>
-                            <th className="px-6 py-4 text-right text-sm font-semibold text-gray-600">Price</th>
-                            <th className="px-6 py-4 text-right text-sm font-semibold text-gray-600">24h Change</th>
-                            <th className="px-6 py-4 text-right text-sm font-semibold text-gray-600">Market Cap</th>
-                            <th className="px-6 py-4 text-right text-sm font-semibold text-gray-600">Buy/Sell</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {mockTokens.map((token) => (
-                            <tr key={token._id} className=" hover:[#0c0e13]">
-                                <td className="px-6 py-4">
-                                    <div className="flex items-center space-x-3">
-                                        <div className="w-10 h-10 bg-[#1b1d22] rounded-full flex items-center justify-center text-white font-bold">
-                                            {token.symbol.charAt(0)}
-                                        </div>
-                                        <div>
-                                            <div className="font-semibold text-sm">{token.name.toUpperCase()} /<span className='text-gray-400 text-xs'>{token.pair.toUpperCase()}</span></div>
-                                            <span className='text-gray-500 text-xs'>SPOT</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td className="px-6 py-4 text-right font-semibold">${token.price.toLocaleString()}</td>
-                                <td className="px-6 py-4 text-right">
-                                    <span className={`flex items-center justify-end space-x-1 ${token.change24h >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                                        {token.change24h >= 0 ? <ArrowUpRight className="w-4 h-4" /> : <ArrowDownRight className="w-4 h-4" />}
-                                        <span className="font-semibold">{Math.abs(token.change24h)}%</span>
-                                    </span>
-                                </td>
-                                <td className="px-6 py-4 text-right text-gray-600">${(token.marketCap / 1000000000).toFixed(2)}B</td>
-                                <td className="px-6 py-4 text-right">
-                                    <Link href={`/trade/${token._id}`}>
-                                        <button className="bg-blue-600 text-sm text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                                            Trade
-                                        </button>
-                                    </Link>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-
-            <div className="mt-10 lg:hidden rounded-xl shadow-lg overflow-hidden pb-20">
-                <table className="w-full">
-                    <thead className="">
-                        <tr>
-                            <th className="px-2 py-2 text-left text-sm font-semibold text-gray-600">Spot</th>
-                            <th className="px-2 py-2 text-right text-sm font-semibold text-gray-600">Last Price</th>
-                            <th className="px-2 py-2 text-right text-sm font-semibold text-gray-600"> Change</th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {mockTokens.map((token) => (
-                            <tr
-                                key={token._id}
-                                onClick={() => router.push(`/trade/${token._id}`)}
-                                className="cursor-pointer hover:bg-[#0c0e13]"
-                            >
-                                <td className='py-2'>
-                                    <div className="flex items-center space-x-2">
-                                        <div className="w-10 h-10 bg-[#1b1d22] text-sm rounded-full flex items-center justify-center text-white font-bold">
-                                            {token.symbol.charAt(0)}
-                                        </div>
-                                        <div>
-                                            <div className="font-semibold text-xs">
-                                                {token.name.toUpperCase()} /
-                                                <span className='text-gray-400 text-[10px]'>{token.pair.toUpperCase()}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-
-                                <td className="text-right  text-xs">
-                                    ${token.price.toLocaleString()}
-                                </td>
-
-                                <td className="text-right">
-                                    <span
-                                        className={`flex items-center justify-end space-x-1 text-xs ${token.change24h >= 0
-                                            ? 'bg-green-600 w-fit float-end py-1 px-2 rounded-xl'
-                                            : 'bg-red-500 w-fit float-end py-1 px-2 rounded-xl'
-                                            }`}
-                                    >
-                                        {token.change24h >= 0 ? (
-                                            <Plus className="w-3 h-3" />
-                                        ) : (
-                                            <Minus className="w-3 h-3" />
-                                        )}
-                                        <span className="font-semibold">{Math.abs(token.change24h)}%</span>
-                                    </span>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-
-                </table>
-            </div>
-
-            {addFunds && (
-                <div
-                    className="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center
-                 md:items-center z-50"
-
+        <div className="mt-10 lg:hidden rounded-xl shadow-lg overflow-hidden pb-20">
+          <table className="w-full">
+            <thead className="">
+              <tr>
+                <th className=" text-left text-sm font-semibold text-gray-600">
+                  Tokens
+                </th>
+                <th className=" text-left text-sm font-semibold text-gray-600">
+                  Price
+                </th>
+                <th className=" text-right text-sm font-semibold text-gray-600">
+                  {" "}
+                  Change
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {mockTokens.map((token) => (
+                <tr
+                  key={token._id}
+                  onClick={() => router.push(`/trade/${token._id}`)}
+                  className="cursor-pointer hover:bg-[#0c0e13]"
                 >
-                    <div
-                        className="
+                  <td className="py-1">
+                    <div className="flex items-center space-x-2">
+                      <div className="w-10 h-10 bg-[#1b1d22] text-sm rounded-full flex items-center justify-center text-white font-bold">
+                        {token.symbol.charAt(0)}
+                      </div>
+                      <div>
+                        <div className="font-semibold text-xs">
+                          {token.name.toUpperCase()} /
+                          <span className="text-gray-400 text-[10px]">
+                            {token.pair.toUpperCase()}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+
+                  <td className="text-left  text-xs">
+                    ${token.price.toLocaleString()}
+                  </td>
+
+                  <td className="text-right">
+                    <span
+                      className={`flex items-center justify-end space-x-1 text-xs ${
+                        token.change24h >= 0
+                          ? "bg-green-600 w-fit float-end py-1 px-2 rounded-xl"
+                          : "bg-red-500 w-fit float-end py-1 px-2 rounded-xl"
+                      }`}
+                    >
+                      {token.change24h >= 0 ? (
+                        <Plus className="w-3 h-3" />
+                      ) : (
+                        <Minus className="w-3 h-3" />
+                      )}
+                      <span className="font-semibold">
+                        {Math.abs(token.change24h)}%
+                      </span>
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {addFunds && (
+          <div
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center
+                 md:items-center z-50"
+          >
+            <div
+              className="
                    bg-[#0c0e13]  rounded-t-2xl md:rounded-2xl shadow-xl 
                     w-full md:w-[450px] 
                     p-6 
                     fixed bottom-0 md:static
                     animate-slideUp md:animate-fadeIn
                     "
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <div className='flex justify-between items-center'>
-                            <div></div>
-                            <h2 className='text-center font-extrabold'>Please Select Deposit Method</h2>
-                            <X className="w-5 h-5 text-white cursor-pointer" onClick={(() => setAddFunds(!addFunds))} />
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex justify-between items-center">
+                <div></div>
+                <h2 className="text-center font-extrabold">
+                  Please Select Deposit Method
+                </h2>
+                <X
+                  className="w-5 h-5 text-white cursor-pointer"
+                  onClick={() => setAddFunds(!addFunds)}
+                />
+              </div>
 
-                        </div>
-
-
-                        <PaymentOptions />
-
-                    </div>
-                </div>
-            )}
-
-        </div>
+              <PaymentOptions />
+            </div>
+          </div>
+        )}
+      </div>
     </div>
-    )
+  );
 };
 
-export default TokensPage
+export default TokensPage;
