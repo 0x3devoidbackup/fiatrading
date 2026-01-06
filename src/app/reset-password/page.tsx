@@ -16,7 +16,6 @@ export default function SetPassword() {
   const [passwordContinue, setPasswordContinue] = useState<boolean>(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [referralUID, setReferralUID] = useState("");
   const [code, setCode] = useState(["", "", "", "", "", ""]);
 
   const [show, setShow] = useState(false);
@@ -58,20 +57,19 @@ export default function SetPassword() {
     try {
       setLoading(true);
       const data = { email: email.trim().toLowerCase() };
-      const response = await api.post("/auth/reset-password", data);
+      const response = await api.post(
+        "/auth/signup?action=resetPassword",
+        data
+      );
       const responseData = response.data;
-      console.log(response);
-      // if (
-      //   response.status === 201 ||
-      //   responseData.otpSendingStatus.status === 200
-      // ) {
-      //   setEmailContinue(true);
-      // }
+      if (
+        response.status === 202 ||
+        responseData.otpSendingStatus.status === 200
+      ) {
+        setEmailContinue(true);
+      }
     } catch (error: any) {
       let message = "Something went wrong. Please try again.";
-
-      console.log(error)
-
       if (axios.isAxiosError(error)) {
         message = error.response?.data?.message || error.message || message;
       }
@@ -86,7 +84,7 @@ export default function SetPassword() {
     e: React.FormEvent<HTMLFormElement>
   ) => {
     e.preventDefault();
-    // Ensure code is complete (6 digits)
+
     const isComplete =
       Array.isArray(code) &&
       code.length === 6 &&
@@ -97,23 +95,55 @@ export default function SetPassword() {
       return;
     }
     const otpCode = code.join("");
+    try {
+      setLoading(true);
+      const data = { email: email.trim().toLowerCase(), otp: otpCode };
+      const response = await api.post("/auth/verify-otp/reset-password", data);
+      if (response.status === 200) {
+        setPasswordContinue(true);
+      }
+    } catch (error: any) {
+      let message = "Something went wrong. Please try again.";
 
-    // setLoading(true);
-    setPasswordContinue(true);
+      if (axios.isAxiosError(error)) {
+        message = error.response?.data?.message || error.message || message;
+      }
+      notify(message);
+      return false;
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleResetPassword = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!isPasswordValid) {
+      notify("Password does not meet requirements");
+      return;
+    }
 
     try {
       setLoading(true);
 
-      //   const data = { email, password, referralUID };
-      //   await axios.post("/auth/signup", data);
+      const data = {
+        email: email.trim().toLowerCase(),
+        newPassword: password,
+      };
+      const response = await api.post("/auth/reset-password", data);
+      console.log(response);
+      if (response.status === 200) {
+        notify(response.data.message);
+        router.push("/signin");
+      }
+    } catch (error: any) {
+      let message = "Something went wrong. Please try again.";
 
-      // redirect or success action
-    } catch (error) {
-      console.error(error);
+      if (axios.isAxiosError(error)) {
+        message = error.response?.data?.message || error.message || message;
+      }
+      notify(message);
+      return false;
     } finally {
       setLoading(false);
     }
@@ -244,7 +274,7 @@ export default function SetPassword() {
               Set a new password to complete password reset
             </p>
 
-            <form onSubmit={handleSignUp}>
+            <form onSubmit={handleResetPassword}>
               {/* Password Input */}
               <div className="relative mb-6">
                 <input
