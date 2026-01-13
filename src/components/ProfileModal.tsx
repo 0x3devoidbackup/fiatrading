@@ -97,7 +97,7 @@ export default function SettingsModal({ onComplete }: Profile) {
       {/* Buttons */}
       <div className="space-y-3">
         <p className="text-[10px] text-neutral-500 text-center mt-4">
-          Please do not disclose your password or Email codes codes to anyone.
+          Please do not disclose your password or Email codes to anyone.
         </p>
         <button
           onClick={handleLogOut}

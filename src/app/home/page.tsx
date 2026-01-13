@@ -19,9 +19,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { mockTokens } from "@/data/mockData";
 import PaymentOptions from "@/components/PaymentOptions";
+import { useAuth } from "@/context/AuthContext";
 
 const TokensPage = () => {
   const router = useRouter();
+  const { user } = useAuth();
   const [addFunds, setAddFunds] = useState(false);
 
   return (
@@ -33,7 +35,10 @@ const TokensPage = () => {
 
           <div className="flex justify-between items-center mt-1">
             <div className="flex space-x-1">
-              <h1 className="text-2xl font-extrabold">0</h1>
+              <h1 className="text-2xl font-extrabold">
+                {" "}
+                {user?.fiat?.usd_balance ?? 0}{" "}
+              </h1>
               <span className="text-gray-500 mt-3 font-bold text-sm">USD</span>
             </div>
             <button

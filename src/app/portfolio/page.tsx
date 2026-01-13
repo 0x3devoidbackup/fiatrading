@@ -1,22 +1,44 @@
 "use client";
-import React, { useState, useEffect } from 'react';
-import PaymentOptions from '@/components/PaymentOptions';
-import { Eye, Clock, X, Search, } from "lucide-react";
-import CryptoSearchPage from '@/components/WithdrawalModal';
-import Link from 'next/link';
-import { fiatAssets } from '@/data/mockData';
-import { useAuth } from '@/context/AuthContext';
-
-
+import React, { useState, useEffect } from "react";
+import PaymentOptions from "@/components/PaymentOptions";
+import { Eye, Clock, X, Search } from "lucide-react";
+import CryptoSearchPage from "@/components/WithdrawalModal";
+import Link from "next/link";
+import { useAuth } from "@/context/AuthContext";
 
 export default function PortfolioPage() {
-  const {user} = useAuth()
-  const [addFunds, setAddFunds] = useState(false)
-  const [withdraw, setWithdraw] = useState(false)
+  const { user } = useAuth();
+  const [addFunds, setAddFunds] = useState(false);
+  const [withdraw, setWithdraw] = useState(false);
+  const fiatAssets = [
+    {
+      _id: 1,
+      name: "USD",
+      full: "Dollar",
+      amount: user?.fiat?.usd_balance ?? 0,
+      usd: user?.fiat?.usd_balance ?? 0,
+      icon: "🟢",
+    },
+    {
+      _id: 2,
+      name: "EURO",
+      full: "EURO",
+      amount: user?.fiat?.eur_balance ?? 0,
+      usd: (user?.fiat?.eur_balance ?? 0) * 1.09,
+      icon: "🟠",
+    },
+    {
+      _id: 3,
+      name: "GBP",
+      full: "Pounds",
+      amount: user?.fiat?.gpb_balance ?? 0,
+      usd: (user?.fiat?.gpb_balance ?? 0) * 1.27,
+      icon: "🟢",
+    },
+  ];
 
   return (
     <div className="max-w-4xl mx-auto text-white px-2 py-4 pb-20 space-y-6">
-
       {/* TOP SECTION */}
       <div className="space-y-1">
         <div className="flex items-center space-x-2 text-gray-400 text-sm">
@@ -24,7 +46,10 @@ export default function PortfolioPage() {
           <Eye className="w-4 h-4" />
         </div>
 
-        <h1 className="text-3xl font-bold">0 <span className="text-gray-400 text-sm">USD</span></h1>
+        <h1 className="text-3xl font-bold">
+          {user?.fiat?.usd_balance ?? 0}{" "}
+          <span className="text-gray-400 text-sm">USD</span>
+        </h1>
         {/* <p className="text-gray-500 text-sm">≈ 0 USD</p> */}
 
         <div className="flex items-center space-x-2 text-sm text-white mt-2">
@@ -58,13 +83,9 @@ export default function PortfolioPage() {
         </Link>
       </div>
 
-
-
       {/* ASSETS LIST HEADER */}
       <div className="flex items-center justify-between mt-4">
         <h2 className="text-lg font-bold">Assets List</h2>
-
-
       </div>
 
       {/* FILTERS */}
@@ -74,8 +95,6 @@ export default function PortfolioPage() {
             <input type="checkbox" className="form-checkbox" />
             <span>Hide small balances</span>
           </label>
-
-
         </div>
 
         <Search className="w-5 h-5 text-gray-400" />
@@ -114,13 +133,10 @@ export default function PortfolioPage() {
         ))}
       </div>
 
-
-
       {addFunds && (
         <div
           className="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center
                  md:items-center z-50"
-
         >
           <div
             className="
@@ -132,16 +148,18 @@ export default function PortfolioPage() {
                     "
             onClick={(e) => e.stopPropagation()}
           >
-            <div className='flex justify-between items-center'>
+            <div className="flex justify-between items-center">
               <div></div>
-              <h2 className='text-center font-extrabold'>Please Select Deposit Method</h2>
-              <X className="w-5 h-5 text-white cursor-pointer" onClick={(() => setAddFunds(!addFunds))} />
-
+              <h2 className="text-center font-extrabold">
+                Please Select Deposit Method
+              </h2>
+              <X
+                className="w-5 h-5 text-white cursor-pointer"
+                onClick={() => setAddFunds(!addFunds)}
+              />
             </div>
 
-
             <PaymentOptions />
-
           </div>
         </div>
       )}
@@ -149,7 +167,6 @@ export default function PortfolioPage() {
       {withdraw && (
         <div className="fixed inset-0 z-[999] bg-black/80 backdrop-blur-sm overflow-y-auto">
           <div className="max-w-md mx-auto p-4 pt-4">
-
             {/* Close Button */}
             <div className="flex items-center justify-end mb-4">
               <X
