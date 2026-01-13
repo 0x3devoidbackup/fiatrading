@@ -1,6 +1,5 @@
 export interface User {
-  _id: string;
-  id: string;
+  uid: string;
   email: string;
   emailVerified: boolean;
   referralId?: string | null;
@@ -68,9 +67,14 @@ export interface IFiatTransaction {
 
 export interface IUserTransaction {
   _id: string;
-
-  sender_id: string;
-  receiver_id?: string;
+  sender_id: {
+    _id: string;
+    email: string;
+  };
+  receiver_id?: {
+    _id: string;
+    email: string;
+  };
 
   action: ITransactionAction;
 

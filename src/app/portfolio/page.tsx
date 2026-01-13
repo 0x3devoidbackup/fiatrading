@@ -5,6 +5,7 @@ import { Eye, Clock, X, Search } from "lucide-react";
 import CryptoSearchPage from "@/components/WithdrawalModal";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
+import { handleFormat } from "@/utils/useableComponents";
 
 export default function PortfolioPage() {
   const { user } = useAuth();
@@ -47,10 +48,9 @@ export default function PortfolioPage() {
         </div>
 
         <h1 className="text-3xl font-bold">
-          {user?.fiat?.usd_balance ?? 0}{" "}
+          {handleFormat(user?.fiat?.usd_balance ?? 0)}{" "}
           <span className="text-gray-400 text-sm">USD</span>
         </h1>
-        {/* <p className="text-gray-500 text-sm">≈ 0 USD</p> */}
 
         <div className="flex items-center space-x-2 text-sm text-white mt-2">
           <div className="bg-[#141519] px-3 py-2 rounded-lg flex items-center space-x-2">
@@ -109,7 +109,13 @@ export default function PortfolioPage() {
           >
             {/* LEFT */}
             <div className="flex items-center space-x-2">
-              <div className="text-3xl">{asset.icon}</div>
+              <div className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center">
+                <img
+                  src={`https://www.mintfiat.finance/images/${asset.name.toLowerCase()}.png`}
+                  alt={asset.name}
+                  className="w-full h-full object-cover"
+                />
+              </div>
 
               <div>
                 <p className="font-semibold">{asset.name}</p>
@@ -119,8 +125,12 @@ export default function PortfolioPage() {
 
             {/* RIGHT */}
             <div className="text-right">
-              <p className="font-semibold text-sm">{asset.amount}</p>
-              <p className="text-gray-500 text-xs">≈ {asset.usd} USD</p>
+              <p className="font-semibold text-sm">
+                {handleFormat(asset.amount)}
+              </p>
+              <p className="text-gray-500 text-xs">
+                ≈ {handleFormat(asset.usd)} USD
+              </p>
             </div>
 
             {/* TRADE BUTTON */}

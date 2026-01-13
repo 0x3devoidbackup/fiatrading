@@ -4,7 +4,7 @@ const server = "https://api.mintfiat.finance";
 const local = "http://localhost:5000"
 
 export const api = axios.create({
-  baseURL: server,
+  baseURL: local,
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",

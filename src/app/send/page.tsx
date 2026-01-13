@@ -59,7 +59,7 @@ export default function SendPage() {
     try {
       setLoading(true);
       const payload = {
-        recipientUID,
+        receiverId: recipientUID,
         currency,
         amount: quantity,
       };

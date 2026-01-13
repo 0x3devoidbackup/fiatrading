@@ -68,7 +68,7 @@ export default function SettingsModal({ onComplete }: Profile) {
       {/* User */}
       <div className="mb-6">
         <div className="text-sm text-neutral-400">{user?.email}</div>
-        <div className="text-xs text-neutral-500">UID: {user?.id || user?._id}</div>
+        <div className="text-xs text-neutral-500">UID: {user?.uid}</div>
       </div>
 
       {/* Menu List */}

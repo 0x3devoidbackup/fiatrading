@@ -22,6 +22,17 @@ export function formatMarketCap(value: number) {
   }
 }
 
+export function handleFormat(value: number | string): string {
+  if (value === null || value === undefined || value === "") return "0";
+
+  const num = typeof value === "string" ? Number(value) : value;
+
+  if (isNaN(num)) return "0";
+
+  return new Intl.NumberFormat("en-US").format(num);
+}
+
+
 
 export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ message }) => (
   <div className="text-center">
@@ -196,13 +207,13 @@ export function formatNumber(num: number) {
   // Handle numbers >= 1
   if (absNum >= 1) {
     if (absNum >= 1_000_000_000) {
-      return (num / 1_000_000_000).toFixed(2) + "B";
+      return (num / 1_000_000_000).toFixed(2);
     }
     if (absNum >= 1_000_000) {
-      return (num / 1_000_000).toFixed(2) + "M";
+      return (num / 1_000_000).toFixed(2) ;
     }
     if (absNum >= 1_000) {
-      return (num / 1_000).toFixed(2) + "K";
+      return (num / 1_000).toFixed(2) ;
     }
     return num.toFixed(2);
   }

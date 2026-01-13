@@ -4,38 +4,48 @@ import { useRouter } from "next/navigation";
 import { ArrowLeft, X } from "lucide-react";
 import { api } from "@/api/axios";
 import { IUserTransaction } from "@/types";
-
+import { useAuth } from "@/context/AuthContext";
 
 const isSpotTransaction = (tx: IUserTransaction) =>
   tx.action.action_type === "BUY" || tx.action.action_type === "SELL";
 
-const isDepWithTransaction = (tx: IUserTransaction) =>
-  tx.action.action_type === "DEPOSIT" ||
-  tx.action.action_type === "WITHDRAW";
+const isDepWithTransaction = (tx: IUserTransaction, userEmail?: string) => {
+  // Only include transactions that involve the current user
+  return (
+    (tx.receiver_id?.email === userEmail || tx.sender_id?.email === userEmail) &&
+    (tx.action.action_type === "DEPOSIT" || tx.action.action_type === "WITHDRAW")
+  );
+};
 
 const formatDate = (date: string | Date) =>
   new Date(date).toLocaleString();
 
-
-const TransactionCard = ({ tx }: { tx: IUserTransaction }) => {
+const TransactionCard = ({
+  tx,
+  userEmail,
+}: {
+  tx: IUserTransaction;
+  userEmail?: string;
+}) => {
   const fiat = tx.transaction_type.fiat;
   const token = tx.transaction_type.token;
+
+  // Determine if it's a deposit or withdraw for the current user
+  let typeLabel = tx.action.action_type;
+  if (tx.sender_id?.email === userEmail) typeLabel = "WITHDRAW";
+  if (tx.receiver_id?.email === userEmail) typeLabel = "DEPOSIT";
 
   return (
     <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4 mb-4">
       <div className="flex justify-between">
-        <span className="font-semibold">
-          {tx.action.action_type}
-        </span>
-
+        <span className="font-semibold">{typeLabel}</span>
         <span className="text-xs text-neutral-400">
           {fiat?.fiat_type || token?.token_type}
         </span>
       </div>
 
       <p className="text-sm mt-1">
-        Amount:{" "}
-        {fiat?.fiat_amount ?? token?.token_amount}
+        Amount: {fiat?.fiat_amount ?? token?.token_amount}
       </p>
 
       <p
@@ -50,9 +60,7 @@ const TransactionCard = ({ tx }: { tx: IUserTransaction }) => {
         Status: {tx.status}
       </p>
 
-      <p className="text-xs text-neutral-500 mt-1">
-        {formatDate(tx.updatedAt)}
-      </p>
+      <p className="text-xs text-neutral-500 mt-1">{formatDate(tx.updatedAt)}</p>
     </div>
   );
 };
@@ -93,9 +101,9 @@ const Modal = ({
   </div>
 );
 
-
 const Transactions = () => {
   const router = useRouter();
+  const { user } = useAuth();
 
   const [transactions, setTransactions] = useState<IUserTransaction[]>([]);
   const [view, setView] = useState<"ALL" | "SPOT" | "DEPWITH" | null>(null);
@@ -106,24 +114,25 @@ const Transactions = () => {
 
   async function fetchTransactions() {
     try {
-      const res = await api.get<IUserTransaction[]>(
-        "/users/assets/transactions"
-      );
+      const res = await api.get<IUserTransaction[]>("/users/assets/transactions");
       setTransactions(res.data);
+      console.log(res.data)
     } catch (err) {
       console.error(err);
     }
   }
 
   const filteredTransactions = useMemo(() => {
+    if (!user?.email) return [];
+
     if (view === "SPOT") {
       return transactions.filter(isSpotTransaction);
     }
     if (view === "DEPWITH") {
-      return transactions.filter(isDepWithTransaction);
+      return transactions.filter((tx) => isDepWithTransaction(tx, user.email));
     }
     return transactions;
-  }, [transactions, view]);
+  }, [transactions, view, user?.email]);
 
   return (
     <div className="text-white px-4 pb-20 max-w-xl mx-auto">
@@ -162,7 +171,7 @@ const Transactions = () => {
           )}
 
           {filteredTransactions.map((tx) => (
-            <TransactionCard key={tx._id} tx={tx} />
+            <TransactionCard key={tx._id} tx={tx} userEmail={user?.email} />
           ))}
         </Modal>
       )}
