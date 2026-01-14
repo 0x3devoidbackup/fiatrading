@@ -51,7 +51,7 @@ export default function SendPage() {
       case "EUR":
         setAvailable(user.fiat.eur_balance ?? 0);
         break;
-      case "GBP":
+      case "GPB":
         setAvailable(user.fiat.gpb_balance ?? 0);
         break;
       default:
