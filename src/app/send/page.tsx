@@ -78,7 +78,7 @@ export default function SendPage() {
       const payload = {
         receiverId: recipientUID,
         currency,
-        amount: quantity,
+        amount,
       };
 
       const res = await api.post("/users/assets/send/fiat", payload);
