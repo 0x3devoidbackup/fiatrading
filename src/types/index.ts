@@ -37,7 +37,7 @@ export interface IUserSession {
   active: boolean;
 }
 
-export type FiatCurrency = "USD" | "EUR" | "GBP";
+export type FiatCurrency = "USD" | "EUR" | "GPB";
 export type TokenCurrency = "BTC" | "ETH" | "USDT";
 
 export type TransactionActionType = "BUY" | "SELL" | "WITHDRAW" | "DEPOSIT";

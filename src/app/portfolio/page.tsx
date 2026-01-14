@@ -30,7 +30,7 @@ export default function PortfolioPage() {
     },
     {
       _id: 3,
-      name: "GBP",
+      name: "GPB",
       full: "Pounds",
       amount: user?.fiat?.gpb_balance ?? 0,
       usd: (user?.fiat?.gpb_balance ?? 0) * 1.27,

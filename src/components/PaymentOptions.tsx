@@ -23,7 +23,7 @@ const PaymentOptions = () => {
 
   // Form state
   const [amount, setAmount] = useState<string>("");
-  const [currency, setCurrency] = useState<"USD" | "EUR" | "GBP">("USD");
+  const [currency, setCurrency] = useState<"USD" | "EUR" | "GPB">("USD");
 
   // Handle deposit
   async function handleDeposit(opt: PaymentOpt) {
@@ -137,13 +137,13 @@ const PaymentOptions = () => {
           <select
             value={currency}
             onChange={(e) =>
-              setCurrency(e.target.value as "USD" | "EUR" | "GBP")
+              setCurrency(e.target.value as "USD" | "EUR" | "GPB")
             }
             className="w-full bg-[#111318] border border-[#1f232d] rounded px-4 py-2 text-white focus:outline-none"
           >
             <option value="USD">USD</option>
             <option value="EUR">EUR</option>
-            <option value="GBP">GBP</option>
+            <option value="GBP">GPB</option>
           </select>
         </div>
 
