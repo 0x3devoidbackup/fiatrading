@@ -143,7 +143,7 @@ const PaymentOptions = () => {
           >
             <option value="USD">USD</option>
             <option value="EUR">EUR</option>
-            <option value="GBP">GPB</option>
+            <option value="GPB">GPB</option>
           </select>
         </div>
 
